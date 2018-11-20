@@ -57,6 +57,8 @@ void Game::readCommand()
         std::cin.clear();
     }
     
+    std::cin >> input;
+    
     if (mult < 0)
     {
         std::cerr << "Multiplier of '" << mult << "' is invalid, must be at least 0" << std::endl;
@@ -64,8 +66,6 @@ void Game::readCommand()
     }
     
     std::cout << mult << "x ";
-    
-    std::cin >> input;
     
     try
     {
