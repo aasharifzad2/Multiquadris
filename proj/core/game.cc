@@ -1,10 +1,9 @@
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <map>
 #include "game.h"
-#include "invalid_command.h"
+#include "../excp/invalid_command.h"
 
 
 void Game::play()

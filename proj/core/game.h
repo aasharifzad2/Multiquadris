@@ -55,7 +55,7 @@ class Game {
     void readCommand();
     Command getCommand(std::string);
     
-public:
+    public:
     void play();
 };
 
