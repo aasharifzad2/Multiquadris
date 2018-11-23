@@ -1,3 +1,5 @@
 *.o
 *.d
 biquadris
+proj/Biquadris.xcodeproj/xcuserdata/
+proj/Biquadris.xcodeproj/project.xcworkspace/xcuserdata/
