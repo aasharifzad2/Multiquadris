@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D5CDB1021A7851500CE28BD /* fallingBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB0A21A7851500CE28BD /* fallingBlock.cc */; };
+		5D5CDB1121A7851500CE28BD /* placedBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB0D21A7851500CE28BD /* placedBlock.cc */; };
+		5D5CDB1221A7851500CE28BD /* block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB0E21A7851500CE28BD /* block.cc */; };
+		5D5CDB2321A7852100CE28BD /* tBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1421A7852100CE28BD /* tBlock.cc */; };
+		5D5CDB2421A7852100CE28BD /* oneByOneBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1521A7852100CE28BD /* oneByOneBlock.cc */; };
+		5D5CDB2521A7852100CE28BD /* zBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1721A7852100CE28BD /* zBlock.cc */; };
+		5D5CDB2621A7852100CE28BD /* oBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1921A7852100CE28BD /* oBlock.cc */; };
+		5D5CDB2721A7852100CE28BD /* sBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1A21A7852100CE28BD /* sBlock.cc */; };
+		5D5CDB2821A7852100CE28BD /* jBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1B21A7852100CE28BD /* jBlock.cc */; };
+		5D5CDB2921A7852100CE28BD /* lBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1D21A7852100CE28BD /* lBlock.cc */; };
+		5D5CDB2A21A7852100CE28BD /* iBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB2021A7852100CE28BD /* iBlock.cc */; };
+		5D5CDB2E21A7853A00CE28BD /* cell.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB2D21A7853A00CE28BD /* cell.cc */; };
+		5D5CDB3121A7858300CE28BD /* not_implemented.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB2F21A7858300CE28BD /* not_implemented.cc */; };
 		5DE0709521A680D9003D00BF /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709321A680D9003D00BF /* main.cc */; };
 		5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709721A68108003D00BF /* invalid_command.cc */; };
 		5DE0709C21A68109003D00BF /* base_exception.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709821A68108003D00BF /* base_exception.cc */; };
@@ -26,7 +39,34 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5DE0707D21A67EE4003D00BF /* Biquadris */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = Biquadris; path = "/Users/walker/School/UW2A/CS246/CS246-Biquadris/proj/build/Debug/Biquadris"; sourceTree = "<absolute>"; };
+		5D5CDB0721A7849A00CE28BD /* Biquadris */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Biquadris; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D5CDB0A21A7851500CE28BD /* fallingBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fallingBlock.cc; path = core/block/fallingBlock.cc; sourceTree = "<group>"; };
+		5D5CDB0B21A7851500CE28BD /* block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = block.h; path = core/block/block.h; sourceTree = "<group>"; };
+		5D5CDB0C21A7851500CE28BD /* fallingBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fallingBlock.h; path = core/block/fallingBlock.h; sourceTree = "<group>"; };
+		5D5CDB0D21A7851500CE28BD /* placedBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = placedBlock.cc; path = core/block/placedBlock.cc; sourceTree = "<group>"; };
+		5D5CDB0E21A7851500CE28BD /* block.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block.cc; path = core/block/block.cc; sourceTree = "<group>"; };
+		5D5CDB0F21A7851500CE28BD /* placedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = placedBlock.h; path = core/block/placedBlock.h; sourceTree = "<group>"; };
+		5D5CDB1321A7852100CE28BD /* lBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lBlock.h; path = core/block/shape/lBlock.h; sourceTree = "<group>"; };
+		5D5CDB1421A7852100CE28BD /* tBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tBlock.cc; path = core/block/shape/tBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1521A7852100CE28BD /* oneByOneBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = oneByOneBlock.cc; path = core/block/shape/oneByOneBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1621A7852100CE28BD /* tBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tBlock.h; path = core/block/shape/tBlock.h; sourceTree = "<group>"; };
+		5D5CDB1721A7852100CE28BD /* zBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zBlock.cc; path = core/block/shape/zBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1821A7852100CE28BD /* jBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jBlock.h; path = core/block/shape/jBlock.h; sourceTree = "<group>"; };
+		5D5CDB1921A7852100CE28BD /* oBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = oBlock.cc; path = core/block/shape/oBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1A21A7852100CE28BD /* sBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sBlock.cc; path = core/block/shape/sBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1B21A7852100CE28BD /* jBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jBlock.cc; path = core/block/shape/jBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1C21A7852100CE28BD /* sBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sBlock.h; path = core/block/shape/sBlock.h; sourceTree = "<group>"; };
+		5D5CDB1D21A7852100CE28BD /* lBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lBlock.cc; path = core/block/shape/lBlock.cc; sourceTree = "<group>"; };
+		5D5CDB1E21A7852100CE28BD /* zBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zBlock.h; path = core/block/shape/zBlock.h; sourceTree = "<group>"; };
+		5D5CDB1F21A7852100CE28BD /* oBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oBlock.h; path = core/block/shape/oBlock.h; sourceTree = "<group>"; };
+		5D5CDB2021A7852100CE28BD /* iBlock.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iBlock.cc; path = core/block/shape/iBlock.cc; sourceTree = "<group>"; };
+		5D5CDB2121A7852100CE28BD /* iBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iBlock.h; path = core/block/shape/iBlock.h; sourceTree = "<group>"; };
+		5D5CDB2221A7852100CE28BD /* oneByOneBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oneByOneBlock.h; path = core/block/shape/oneByOneBlock.h; sourceTree = "<group>"; };
+		5D5CDB2B21A7853A00CE28BD /* cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cell.h; path = core/cell.h; sourceTree = "<group>"; };
+		5D5CDB2C21A7853A00CE28BD /* colour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = colour.h; path = core/colour.h; sourceTree = "<group>"; };
+		5D5CDB2D21A7853A00CE28BD /* cell.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cell.cc; path = core/cell.cc; sourceTree = "<group>"; };
+		5D5CDB2F21A7858300CE28BD /* not_implemented.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = not_implemented.cc; path = excp/not_implemented.cc; sourceTree = "<group>"; };
+		5D5CDB3021A7858300CE28BD /* not_implemented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = not_implemented.h; path = excp/not_implemented.h; sourceTree = "<group>"; };
 		5DE0709321A680D9003D00BF /* main.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
 		5DE0709721A68108003D00BF /* invalid_command.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = invalid_command.cc; path = excp/invalid_command.cc; sourceTree = "<group>"; };
 		5DE0709821A68108003D00BF /* base_exception.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = base_exception.cc; path = excp/base_exception.cc; sourceTree = "<group>"; };
@@ -47,16 +87,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D5CDB0821A784F200CE28BD /* block */ = {
+			isa = PBXGroup;
+			children = (
+				5D5CDB0921A784FC00CE28BD /* shape */,
+				5D5CDB2C21A7853A00CE28BD /* colour.h */,
+				5D5CDB0E21A7851500CE28BD /* block.cc */,
+				5D5CDB0B21A7851500CE28BD /* block.h */,
+				5D5CDB0A21A7851500CE28BD /* fallingBlock.cc */,
+				5D5CDB0C21A7851500CE28BD /* fallingBlock.h */,
+				5D5CDB0D21A7851500CE28BD /* placedBlock.cc */,
+				5D5CDB0F21A7851500CE28BD /* placedBlock.h */,
+			);
+			name = block;
+			sourceTree = "<group>";
+		};
+		5D5CDB0921A784FC00CE28BD /* shape */ = {
+			isa = PBXGroup;
+			children = (
+				5D5CDB2021A7852100CE28BD /* iBlock.cc */,
+				5D5CDB2121A7852100CE28BD /* iBlock.h */,
+				5D5CDB1B21A7852100CE28BD /* jBlock.cc */,
+				5D5CDB1821A7852100CE28BD /* jBlock.h */,
+				5D5CDB1D21A7852100CE28BD /* lBlock.cc */,
+				5D5CDB1321A7852100CE28BD /* lBlock.h */,
+				5D5CDB1921A7852100CE28BD /* oBlock.cc */,
+				5D5CDB1F21A7852100CE28BD /* oBlock.h */,
+				5D5CDB1521A7852100CE28BD /* oneByOneBlock.cc */,
+				5D5CDB2221A7852100CE28BD /* oneByOneBlock.h */,
+				5D5CDB1A21A7852100CE28BD /* sBlock.cc */,
+				5D5CDB1C21A7852100CE28BD /* sBlock.h */,
+				5D5CDB1421A7852100CE28BD /* tBlock.cc */,
+				5D5CDB1621A7852100CE28BD /* tBlock.h */,
+				5D5CDB1721A7852100CE28BD /* zBlock.cc */,
+				5D5CDB1E21A7852100CE28BD /* zBlock.h */,
+			);
+			name = shape;
+			sourceTree = "<group>";
+		};
 		5DE0706A21A67E89003D00BF = {
 			isa = PBXGroup;
 			children = (
 				5DE070A021A6815A003D00BF /* Biquadris */,
+				5D5CDB0721A7849A00CE28BD /* Biquadris */,
 			);
 			sourceTree = "<group>";
 		};
 		5DE0709021A680CB003D00BF /* core */ = {
 			isa = PBXGroup;
 			children = (
+				5D5CDB0821A784F200CE28BD /* block */,
+				5D5CDB2D21A7853A00CE28BD /* cell.cc */,
+				5D5CDB2B21A7853A00CE28BD /* cell.h */,
 				5DE0709E21A6813B003D00BF /* game.cc */,
 				5DE0709D21A6813B003D00BF /* game.h */,
 			);
@@ -68,6 +150,8 @@
 			children = (
 				5DE0709821A68108003D00BF /* base_exception.cc */,
 				5DE0709921A68108003D00BF /* base_exception.h */,
+				5D5CDB2F21A7858300CE28BD /* not_implemented.cc */,
+				5D5CDB3021A7858300CE28BD /* not_implemented.h */,
 				5DE0709721A68108003D00BF /* invalid_command.cc */,
 				5DE0709A21A68109003D00BF /* invalid_command.h */,
 			);
@@ -101,7 +185,7 @@
 			);
 			name = Biquadris;
 			productName = Biquadris;
-			productReference = 5DE0707D21A67EE4003D00BF /* Biquadris */;
+			productReference = 5D5CDB0721A7849A00CE28BD /* Biquadris */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -140,10 +224,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D5CDB2821A7852100CE28BD /* jBlock.cc in Sources */,
+				5D5CDB1021A7851500CE28BD /* fallingBlock.cc in Sources */,
+				5D5CDB1221A7851500CE28BD /* block.cc in Sources */,
+				5D5CDB2A21A7852100CE28BD /* iBlock.cc in Sources */,
+				5D5CDB2421A7852100CE28BD /* oneByOneBlock.cc in Sources */,
 				5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */,
+				5D5CDB2521A7852100CE28BD /* zBlock.cc in Sources */,
+				5D5CDB1121A7851500CE28BD /* placedBlock.cc in Sources */,
+				5D5CDB2321A7852100CE28BD /* tBlock.cc in Sources */,
+				5D5CDB2921A7852100CE28BD /* lBlock.cc in Sources */,
 				5DE0709F21A6813B003D00BF /* game.cc in Sources */,
+				5D5CDB2E21A7853A00CE28BD /* cell.cc in Sources */,
+				5D5CDB2621A7852100CE28BD /* oBlock.cc in Sources */,
+				5D5CDB3121A7858300CE28BD /* not_implemented.cc in Sources */,
 				5DE0709521A680D9003D00BF /* main.cc in Sources */,
 				5DE0709C21A68109003D00BF /* base_exception.cc in Sources */,
+				5D5CDB2721A7852100CE28BD /* sBlock.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
