@@ -5,31 +5,37 @@
 #include <string>
 #include "game.h"
 
-using namespace std;
 
-const string
-    DEFAULT_SEED        = "Sir Mix-a-Lot",
+const std::string
     DEFAULT_SCRIPTFILE1 = "sequence1.txt",
     DEFAULT_SCRIPTFILE2 = "sequence2.txt";
 
 const int
-    DEFAULT_STARTLEVEL  = 1;
+    DEFAULT_STARTLEVEL  = 1,
+    DEFAULT_SEED        = 19990113;
+
 
 
 int main(int argc, char* argv[])
 {
-    string execName = argv[0];
+    
+#ifdef DEBUG
+    std::cout << "This is a debug run.." << std::endl;
+    srand(DEFAULT_SEED);
+#endif
+    
+    std::string execName = argv[0];
     bool textOnly = false;
-    string seed = DEFAULT_SEED;
-    ifstream scriptFile1 = ifstream(DEFAULT_SCRIPTFILE1);
-    ifstream scriptFile2 = ifstream(DEFAULT_SCRIPTFILE2);
+    int seed = DEFAULT_SEED;
+    std::ifstream scriptFile1 = std::ifstream(DEFAULT_SCRIPTFILE1);
+    std::ifstream scriptFile2 = std::ifstream(DEFAULT_SCRIPTFILE2);
     int startLevel = DEFAULT_STARTLEVEL;
     
-    string usageMessage = "Usage: " + execName + " [-text] [-seed xxx] [-scriptfile1 xxx] [-scriptfile2 xxx] [-startlevel n]";
+    std::string usageMessage = "Usage: " + execName + " [-text] [-seed xxx] [-scriptfile1 xxx] [-scriptfile2 xxx] [-startlevel n]";
     
     for (int i = 1; i < argc; ++i)
     {
-        string option = argv[i];
+        std::string option = argv[i];
         if (option == "-text")
         {
             textOnly = true;
@@ -40,44 +46,41 @@ int main(int argc, char* argv[])
         ++i;
         if (i >= argc)
         {
-            cerr << usageMessage << endl;
+            std::cerr << usageMessage << std::endl;
             break;
         }
-        string value = argv[i];
+        std::string value = argv[i];
         
         // All these need a value
         if (option == "-seed")
         {
-            seed = value;
+            seed = std::stoi(value);
         }
         else if (option == "-scriptfile1")
         {
-            scriptFile1 = ifstream(value);
+            scriptFile1 = std::ifstream(value);
         }
         else if (option == "-scriptfile2")
         {
-            scriptFile2 = ifstream(value);
+            scriptFile2 = std::ifstream(value);
         }
         else if (option == "-startlevel")
         {
             try
             {
-                startLevel = stoi(value);
+                startLevel = std::stoi(value);
             }
-            catch (invalid_argument)
+            catch (std::invalid_argument)
             {
-                cerr << "'-startLevel' must be followed by an integer" << endl;
+                std::cerr << "'-startLevel' must be followed by an integer" << std::endl;
             }
             
             // TO DO: Have a constant for the number of levels
             if (startLevel < 0 || startLevel > 4)
             {
-                cerr << "'-startLevel' must be followed by an integer between " << 0 << " and " << 4 << endl;
+                std::cerr << "'-startLevel' must be followed by an integer between " << 0 << " and " << 4 << std::endl;
                 startLevel = 0;
             }
         }
     }
-    
-    Game g;
-    g.play();
 }
