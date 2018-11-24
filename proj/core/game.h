@@ -1,5 +1,5 @@
-#ifndef __GAME_H__
-#define __GAME_H__
+#ifndef _game_h_
+#define _game_h_
 
 
 #include <string>

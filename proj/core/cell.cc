@@ -3,8 +3,8 @@
 #include "../excp/not_implemented.h"
 
 
-Cell::Cell(int x, int y, PlacedBlock *parent):
-    x{x}, y{y}, parent{parent} {}
+Cell::Cell(int x, int y, PlacedBlock *parent) :
+    x(x), y(y), parent(parent) {}
 
 void Cell::setWindow(Xwindow *window)
 {
