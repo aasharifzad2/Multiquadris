@@ -1,6 +1,6 @@
 
-#ifndef __BASE_EXCEPTION_H__
-#define __BASE_EXCEPTION_H__
+#ifndef _base_exception_h_
+#define _base_exception_h_
 
 #include <string>
 
@@ -8,10 +8,6 @@
 class base_exception
 {
     virtual std::string message() const noexcept = 0;
-
-    public:
-    base_exception();
-    ~base_exception();
 };
 
 #endif

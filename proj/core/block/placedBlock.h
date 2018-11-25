@@ -3,12 +3,14 @@
 
 
 #include "block.h"
+class Cell;
 
 class PlacedBlock : public Block
 {
     public:
     ~PlacedBlock() override;
-    void cellCleared();
+    int numCells() const;
+    void cellCleared(const Cell *);
 };
 
 

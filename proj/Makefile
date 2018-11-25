@@ -7,7 +7,7 @@ SHELL = bash
 EXEC = biquadris
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -Werror=vla
-CCFILES = $(wildcard *.cc ./excp/*.cc ./core/*.cc)
+CCFILES = $(shell find . -type f -name '*.cc')
 OBJECTS = ${CCFILES:.cc=.o}
 DEPENDS = ${CCFILES:.cc=.d}
 

@@ -1,6 +1,6 @@
+#ifndef _invalid_command_h_
+#define _invalid_command_h_
 
-#ifndef __INVALID_COMMAND_H__
-#define __INVALID_COMMAND_H__
 
 #include <vector>
 #include <string>
@@ -15,5 +15,6 @@ class invalid_command : base_exception
     invalid_command(std::string command, std::vector<std::string> matchingCommands);
     std::string message() const noexcept override;
 };
+
 
 #endif

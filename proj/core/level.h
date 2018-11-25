@@ -3,20 +3,24 @@
 
 
 #include <vector>
+#include <memory>
 #include "effect.h"
+#include "block/stream/blockStream.h"
 
 class FallingBlock;
 
 class Level
 {
-    protected:
+    private:
     int number;
+    BlockStream *blockstream;
     std::vector<Effect> activeEffects;
-    Level(int);
+    
     
     public:
-    virtual FallingBlock getBlock() = 0;
-    bool hasEffect(Effect);
+    Level(int, BlockStream *);
+    std::unique_ptr<FallingBlock> getBlock() const;
+    bool hasEffect(Effect) const;
 };
 
 

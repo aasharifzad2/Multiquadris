@@ -3,7 +3,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "game.h"
+
+#ifdef DEBUG
+#include "core/board.h"
+#include "core/level.h"
+#include "core/block/stream/blockStream.h"
+#include "core/block/stream/randomBlockStream.h"
+#endif
 
 
 const std::string
@@ -22,6 +28,12 @@ int main(int argc, char* argv[])
 #ifdef DEBUG
     std::cout << "This is a debug run.." << std::endl;
     srand(DEFAULT_SEED);
+    Board b = Board(8, 4);
+    RandomBlockStream blockstream = RandomBlockStream({{IShape, 3}, {JShape, 4}, {OShape, 3}});
+    
+    Level l = Level(1, &blockstream);
+    std::cout << b.blockFits(l.getBlock().get()) << std::endl;
+    
 #endif
     
     std::string execName = argv[0];

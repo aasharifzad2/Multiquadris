@@ -1,15 +1,13 @@
-#ifndef _invalid_command_h_
-#define _invalid_command_h_
-
+#ifndef _invalid_block_placement_h_
+#define _invalid_block_placement_h_
 
 #include <string>
 #include "base_exception.h"
 
-class not_implemented : base_exception
+class invalid_block_placement : base_exception
 {
     public:
     std::string message() const noexcept override;
 };
-
 
 #endif

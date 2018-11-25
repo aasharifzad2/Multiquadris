@@ -3,7 +3,7 @@
 
 
 #include "colour.h"
-#include "placedBlock.h"
+#include "block/placedBlock.h"
 
 class Xwindow;
 
@@ -12,16 +12,25 @@ class Cell
     static Xwindow *window;
     
     bool filled;
-    int x, y;
+    int row, col;
     Colour colour;
     PlacedBlock *parent;
     
     public:
-    Cell(int, int, PlacedBlock *);
     static void setWindow(Xwindow *);
-    bool isEmpty();
-    bool isFilled();
-    void notifyCleared();
+    
+    Cell(int row, int col, PlacedBlock *);
+    
+    int getRow() const;
+    int getCol() const;
+    bool isEmpty() const;
+    bool isFilled() const;
+    
+    void setRow(int);
+    void setCol(int);
+    void setCoords(int, int);
+    
+    void notifyCleared() const;
     void draw();
 };
 

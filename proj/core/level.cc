@@ -1,10 +1,16 @@
 
 #include "level.h"
 
-Level::Level(int level) :
-    number(level) {}
 
-bool Level::hasEffect(Effect e)
+Level::Level(int level, BlockStream *bs) :
+    number(level), blockstream(bs) {}
+
+std::unique_ptr<FallingBlock> Level::getBlock() const
+{
+    return blockstream->getBlock();
+}
+
+bool Level::hasEffect(Effect e) const
 {
     for (Effect curEffect : activeEffects)
     {

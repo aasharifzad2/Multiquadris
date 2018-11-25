@@ -21,4 +21,5 @@ class FallingBlock : public Block
     PlacedBlock *toPlacedBlock() const;
 };
 
+
 #endif
