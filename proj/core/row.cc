@@ -1,12 +1,12 @@
 
 #include "row.h"
-
+#include "cell.h"
 
 Row::Row(int rowNum, int numCells) : rowNum(rowNum)
 {
     for (int i = 0; i < numCells; i++)
     {
-        cells.emplace_back(std::make_shared<Cell>(Cell(rowNum, i, nullptr)));
+        cells.emplace_back(std::make_shared<Cell>(Cell(rowNum, i)));
     }
 }
 

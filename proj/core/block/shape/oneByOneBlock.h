@@ -2,11 +2,12 @@
 #define _one_by_one_block_h_
 
 
-#include "../placedBlock.h"
+#include "../block.h"
 
-class OneByOneBlock : public PlacedBlock
+class OneByOneBlock : public Block
 {
     public:
+    ~OneByOneBlock() override;
     OneByOneBlock(int, int);
 };
 

@@ -2,13 +2,13 @@
 #define _j_block_h_
 
 
-#include "../fallingBlock.h"
+#include "../block.h"
 
-class JBlock : public FallingBlock
+class JBlock : public Block
 {
     public:
-    JBlock();
     ~JBlock() override;
+    JBlock();
 };
 
 

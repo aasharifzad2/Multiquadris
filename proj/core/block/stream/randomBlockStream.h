@@ -6,7 +6,7 @@
 #include <map>
 #include "blockStream.h"
 #include "../blockShape.h"
-class FallingBlock;
+class Block;
 
 class RandomBlockStream : public BlockStream
 {
@@ -14,7 +14,7 @@ class RandomBlockStream : public BlockStream
     
     public:
     RandomBlockStream(std::map<BlockShape, int>);
-    std::unique_ptr<FallingBlock> getBlock() override;
+    std::unique_ptr<Block> getBlock() override;
 };
 
 

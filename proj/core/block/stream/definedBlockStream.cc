@@ -1,14 +1,14 @@
 
 #include <memory>
 #include "definedBlockStream.h"
-#include "../fallingBlock.h"
+#include "../block.h"
 #include "../../../excp/invalid_block_sequence.h"
 
 
 DefinedBlockStream::DefinedBlockStream(std::ifstream &sequence) :
     sequence(sequence) {}
 
-std::unique_ptr<FallingBlock> DefinedBlockStream::getBlock()
+std::unique_ptr<Block> DefinedBlockStream::getBlock()
 {
     if (sequence.eof())
     {
@@ -22,19 +22,19 @@ std::unique_ptr<FallingBlock> DefinedBlockStream::getBlock()
     switch (blockType)
     {
         case 'I':
-            return std::unique_ptr<FallingBlock>(new IBlock());
+            return std::unique_ptr<Block>(new IBlock());
         case 'J':
-            return std::unique_ptr<FallingBlock>(new JBlock());
+            return std::unique_ptr<Block>(new JBlock());
         case 'L':
-            return std::unique_ptr<FallingBlock>(new LBlock());
+            return std::unique_ptr<Block>(new LBlock());
         case 'O':
-            return std::unique_ptr<FallingBlock>(new OBlock());
+            return std::unique_ptr<Block>(new OBlock());
         case 'S':
-            return std::unique_ptr<FallingBlock>(new SBlock());
+            return std::unique_ptr<Block>(new SBlock());
         case 'Z':
-            return std::unique_ptr<FallingBlock>(new ZBlock());
+            return std::unique_ptr<Block>(new ZBlock());
         case 'T':
-            return std::unique_ptr<FallingBlock>(new TBlock());
+            return std::unique_ptr<Block>(new TBlock());
         default:
             throw invalid_block_sequence(blockType);
     }

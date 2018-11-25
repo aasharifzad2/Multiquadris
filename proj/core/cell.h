@@ -1,25 +1,26 @@
-#ifndef cell_h
-#define cell_h
+#ifndef _cell_h_
+#define _cell_h_
 
 
 #include "colour.h"
-#include "block/placedBlock.h"
 
 class Xwindow;
+class Block;
 
 class Cell
 {
+    protected:
     static Xwindow *window;
     
+    Block *parent;
     bool filled;
     int row, col;
     Colour colour;
-    PlacedBlock *parent;
     
     public:
     static void setWindow(Xwindow *);
     
-    Cell(int row, int col, PlacedBlock *);
+    Cell(int row, int col, Block * = nullptr);
     
     int getRow() const;
     int getCol() const;
@@ -31,7 +32,6 @@ class Cell
     void setCoords(int, int);
     
     void notifyCleared() const;
-    void draw();
 };
 
 

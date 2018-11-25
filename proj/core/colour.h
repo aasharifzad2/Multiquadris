@@ -10,7 +10,9 @@ enum Colour
     Orange,
     Green,
     Magenta,
-    Red
+    Red,
+    Black,
+    Brown
 };
 
 

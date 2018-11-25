@@ -2,13 +2,13 @@
 #define _l_block_h_
 
 
-#include "../fallingBlock.h"
+#include "../block.h"
 
-class LBlock : public FallingBlock
+class LBlock : public Block
 {
     public:
-    LBlock();
     ~LBlock() override;
+    LBlock();
 };
 
 

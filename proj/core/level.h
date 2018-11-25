@@ -7,7 +7,7 @@
 #include "effect.h"
 #include "block/stream/blockStream.h"
 
-class FallingBlock;
+class Block;
 
 class Level
 {
@@ -19,7 +19,7 @@ class Level
     
     public:
     Level(int, BlockStream *);
-    std::unique_ptr<FallingBlock> getBlock() const;
+    std::unique_ptr<Block> getBlock() const;
     bool hasEffect(Effect) const;
 };
 
