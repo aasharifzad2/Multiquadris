@@ -67,38 +67,87 @@ void Block::cellCleared(Cell const * const cellptr)
     }
 }
 
-// Movement : right
+// Movement: right
 void Block::moveRight()
 {
-    throw not_implemented();
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        c->setCol(c->getCol() + 1);
+    }
 }
 
-// Movement : left
+// Movement: left
 void Block::moveLeft()
 {
-    throw not_implemented();
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        c->setCol(c->getCol() - 1);
+    }
 }
 
-// Movement : up
+// Movement: up
 void Block::moveUp()
 {
-    throw not_implemented();
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        c->setRow(c->getRow() - 1);
+    }
 }
 
-// Movement : down
+// Movement: down
 void Block::moveDown()
 {
-    throw not_implemented();
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        c->setRow(c->getRow() + 1);
+    }
 }
 
-// Movement : clockwise rotation
+// Movement: roate clockwise
 void Block::rotateCW()
 {
-    throw not_implemented();
+    int leftMostX, rightMostX, highestY, lowestY;
+    
+    getBounds(leftMostX, rightMostX, highestY, lowestY);
+    
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        c->setCol((leftMostX + (lowestY - c->getRow())));
+        c->setRow(lowestY - (rightMostX - c->getCol()));
+    }
 }
 
-// Movement : counter clockwise rotation
+// Movement: rotate counter clockwise
 void Block::rotateCCW()
 {
-    throw not_implemented();
+    int leftMostX, rightMostX, highestY, lowestY;
+    
+    getBounds(leftMostX, rightMostX, highestY, lowestY);
+    
+    int width = leftMostX - rightMostX;
+    
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        c->setCol(leftMostX + c->getRow() - highestY);
+        c->setRow(lowestY - (width - (rightMostX - c->getCol()) - 1));
+    }
+}
+
+void Block::getBounds(int &leftMostX, int &rightMostX, int &highestY, int &lowestY)
+{
+    leftMostX = INT_MAX;
+    rightMostX = INT_MIN;
+    highestY = INT_MAX;
+    lowestY = INT_MIN;
+    
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        int row = c->getRow();
+        int col = c->getCol();
+        
+        leftMostX = std::min(leftMostX, col);
+        rightMostX = std::max(rightMostX, col);
+        highestY = std::min(highestY, row);
+        lowestY = std::min(highestY, row);
+    }
 }

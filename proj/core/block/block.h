@@ -35,6 +35,9 @@ class Block
     void moveDown();
     void rotateCW();
     void rotateCCW();
+    
+    private:
+    void getBounds(int &, int &, int &, int &);
 };
 
 
