@@ -1,11 +1,11 @@
 
 #include "board.h"
-#include "cell.h"
 #include "row.h"
-#include "block/fallingBlock.h"
+#include "cell.h"
+#include "block/block.h"
 #include "../excp/invalid_block_placement.h"
 
-std::vector<PlacedBlock> blocks;
+std::vector<Block> blocks;
 std::vector<Row> rows;
 
 Board::Board(int numRows, int numCols) : numRows(numRows), numCols(numCols)
@@ -15,18 +15,18 @@ Board::Board(int numRows, int numCols) : numRows(numRows), numCols(numCols)
 
 bool Board::blockFits(Block *block)
 {
-    auto cellCoords = block->getCellCoords();
-    for (auto coord : cellCoords)
+    auto cells = block->getCells();
+    for (auto cell : cells)
     {
-        int cellRow = coord.first;
-        int cellCol = coord.second;
+        int row = cell->getRow();
+        int col = cell->getCol();
         if
         (
-            cellRow < 0 ||
-            cellCol < 0 ||
-            cellRow >= numRows ||
-            cellCol >= numCols ||
-            cellAt(cellRow, cellCol)->isFilled()
+            row < 0 ||
+            col < 0 ||
+            row >= numRows ||
+            col >= numCols ||
+            cellAt(row, col)->isFilled()
         )
         {
             return false;
@@ -36,7 +36,7 @@ bool Board::blockFits(Block *block)
     return true;
 }
 
-void Board::addBlock(PlacedBlock block)
+void Board::addBlock(Block block)
 {
     // Ensure that the block fits before trying to add it
     if (!blockFits(&block)) throw invalid_block_placement();
@@ -44,7 +44,8 @@ void Board::addBlock(PlacedBlock block)
     for (auto cell : block.getCells())
     {
         // Set the cell in the board to the one in the block
-        *rows.at(cell->getRow()).getCell(cell->getRow()) = *cell;
+        Row cellRow = rows.at(cell->getRow());
+        *cellRow.getCell(cell->getCol()) = *cell;
     }
 }
 

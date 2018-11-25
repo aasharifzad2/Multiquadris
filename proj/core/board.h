@@ -5,14 +5,14 @@
 #include <vector>
 #include <memory>
 #include "row.h"
-#include "block/placedBlock.h"
+#include "block.h"
 class Cell;
-class FallingBlock;
+class Block;
 
 class Board
 {
     int numRows, numCols;
-    std::vector<PlacedBlock> blocks;
+    std::vector<Block> blocks;
     std::vector<Row> rows;
     
     void addEmptyRows(int = 1);
@@ -22,7 +22,7 @@ class Board
     public:
     Board(int numRows, int numCols);
     bool blockFits(Block *);
-    void addBlock(PlacedBlock);
+    void addBlock(Block);
     void clearFilledRows();
 };
 

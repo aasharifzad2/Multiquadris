@@ -2,13 +2,13 @@
 #define _t_block_h_
 
 
-#include "../fallingBlock.h"
+#include "../block.h"
 
-class TBlock : public FallingBlock
+class TBlock : public Block
 {
     public:
-    TBlock();
     ~TBlock() override;
+    TBlock();
 };
 
 

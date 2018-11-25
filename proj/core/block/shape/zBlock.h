@@ -2,13 +2,13 @@
 #define _z_block_h_
 
 
-#include "../fallingBlock.h"
+#include "../block.h"
 
-class ZBlock : public FallingBlock
+class ZBlock : public Block
 {
     public:
-    ZBlock();
     ~ZBlock() override;
+    ZBlock();
 };
 
 

@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <memory>
-#include "cell.h"
+class Cell;
 
 class Row
 {
@@ -18,5 +18,6 @@ class Row
     bool isFilled();
     void clear();
 };
+
 
 #endif

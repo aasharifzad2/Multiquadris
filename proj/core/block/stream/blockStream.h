@@ -3,7 +3,6 @@
 
 
 #include <memory>
-#include "../fallingBlock.h"
 #include "../shape/iBlock.h"
 #include "../shape/jBlock.h"
 #include "../shape/lBlock.h"
@@ -12,12 +11,12 @@
 #include "../shape/zBlock.h"
 #include "../shape/tBlock.h"
 
-class FallingBlock;
+class Block;
 
 class BlockStream
 {
     public:
-    virtual std::unique_ptr<FallingBlock> getBlock() = 0;
+    virtual std::unique_ptr<Block> getBlock() = 0;
 };
 
 

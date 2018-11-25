@@ -6,7 +6,7 @@
 #include <fstream>
 #include "blockStream.h"
 
-class FallingBlock;
+class Block;
 
 class DefinedBlockStream : public BlockStream
 {
@@ -14,7 +14,7 @@ class DefinedBlockStream : public BlockStream
     
     public:
     DefinedBlockStream(std::ifstream &);
-    std::unique_ptr<FallingBlock> getBlock() override;
+    std::unique_ptr<Block> getBlock() override;
 };
 
 
