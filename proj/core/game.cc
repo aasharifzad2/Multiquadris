@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include "game.h"
+#include "../display/display.h"
 #include "../excp/invalid_command.h"
 
 
@@ -137,4 +138,10 @@ void Game::readCommand()
             std::cout << "force T" << std::endl;
             break;
     }
+}
+
+// Visitor Pattern : visit a display
+void Game::display(Display &d)
+{
+    d.accept(this);
 }

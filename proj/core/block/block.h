@@ -12,22 +12,24 @@ class Block
     protected:
     static int initialX, initialY;
     int levelGenerated;
+    char symbol;
     Colour colour;
     std::vector<std::shared_ptr<Cell>> cells;
     
     public:
     virtual ~Block() = 0;
-    Block(Colour);
+    Block(char, Colour);
 
     void setLevelGenerated(int);
     
     int numCells() const;
+    char getSymbol() const;
     Colour getColour() const;
     Cell *getCell(int) const;
     std::vector<Cell *> getCells() const;
     
     // Observer Pattern : Called by subject (Cell) to notify cell being cleared
-    void cellCleared(Cell const * const);
+    void cellCleared(const Cell *);
     // Movement methods
     void moveRight();
     void moveLeft();

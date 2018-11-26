@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */; };
 		5D27C5DF21AB262400AE3C2B /* cell.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5DD21AB262400AE3C2B /* cell.cc */; };
+		5D27C5E821AB660900AE3C2B /* textDisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5E321AB660900AE3C2B /* textDisplay.cc */; };
+		5D27C5E921AB660900AE3C2B /* graphicDisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5E421AB660900AE3C2B /* graphicDisplay.cc */; };
 		5D5CDB1221A7851500CE28BD /* block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB0E21A7851500CE28BD /* block.cc */; };
 		5D5CDB2321A7852100CE28BD /* tBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1421A7852100CE28BD /* tBlock.cc */; };
 		5D5CDB2421A7852100CE28BD /* oneByOneBlock.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB1521A7852100CE28BD /* oneByOneBlock.cc */; };
@@ -48,6 +50,11 @@
 		5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = no_parent_block.cc; path = excp/no_parent_block.cc; sourceTree = "<group>"; };
 		5D27C5DD21AB262400AE3C2B /* cell.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cell.cc; path = core/cell.cc; sourceTree = "<group>"; };
 		5D27C5DE21AB262400AE3C2B /* cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cell.h; path = core/cell.h; sourceTree = "<group>"; };
+		5D27C5E221AB660900AE3C2B /* graphicDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graphicDisplay.h; path = display/graphicDisplay.h; sourceTree = "<group>"; };
+		5D27C5E321AB660900AE3C2B /* textDisplay.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = textDisplay.cc; path = display/textDisplay.cc; sourceTree = "<group>"; };
+		5D27C5E421AB660900AE3C2B /* graphicDisplay.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graphicDisplay.cc; path = display/graphicDisplay.cc; sourceTree = "<group>"; };
+		5D27C5E621AB660900AE3C2B /* textDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = textDisplay.h; path = display/textDisplay.h; sourceTree = "<group>"; };
+		5D27C5E721AB660900AE3C2B /* display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = display.h; path = display/display.h; sourceTree = "<group>"; };
 		5D5CDB0721A7849A00CE28BD /* Biquadris */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Biquadris; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D5CDB0B21A7851500CE28BD /* block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = block.h; path = core/block/block.h; sourceTree = "<group>"; };
 		5D5CDB0E21A7851500CE28BD /* block.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block.cc; path = core/block/block.cc; sourceTree = "<group>"; };
@@ -106,6 +113,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D27C5E121AB654E00AE3C2B /* display */ = {
+			isa = PBXGroup;
+			children = (
+				5D27C5E721AB660900AE3C2B /* display.h */,
+				5D27C5E421AB660900AE3C2B /* graphicDisplay.cc */,
+				5D27C5E321AB660900AE3C2B /* textDisplay.cc */,
+				5D27C5E221AB660900AE3C2B /* graphicDisplay.h */,
+				5D27C5E621AB660900AE3C2B /* textDisplay.h */,
+			);
+			name = display;
+			sourceTree = "<group>";
+		};
 		5D5CDB0821A784F200CE28BD /* block */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				5DE0709321A680D9003D00BF /* main.cc */,
+				5D27C5E121AB654E00AE3C2B /* display */,
 				5DE0709621A680E5003D00BF /* excp */,
 				5DE0709021A680CB003D00BF /* core */,
 			);
@@ -269,10 +289,12 @@
 				5D5CDB2821A7852100CE28BD /* jBlock.cc in Sources */,
 				5D5CDB1221A7851500CE28BD /* block.cc in Sources */,
 				5D5CDB2A21A7852100CE28BD /* iBlock.cc in Sources */,
+				5D27C5E821AB660900AE3C2B /* textDisplay.cc in Sources */,
 				5D5CDB2421A7852100CE28BD /* oneByOneBlock.cc in Sources */,
 				5D27C5DF21AB262400AE3C2B /* cell.cc in Sources */,
 				5D5CDB5F21A897CB00CE28BD /* invalid_block_sequence.cc in Sources */,
 				5D5CDB5C21A896DF00CE28BD /* level.cc in Sources */,
+				5D27C5E921AB660900AE3C2B /* graphicDisplay.cc in Sources */,
 				5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */,
 				5D5CDB2521A7852100CE28BD /* zBlock.cc in Sources */,
 				5D5CDB2321A7852100CE28BD /* tBlock.cc in Sources */,

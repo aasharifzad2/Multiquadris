@@ -5,7 +5,7 @@
 
 TBlock::~TBlock() {}
 
-TBlock::TBlock() : Block(Colour::Magenta)
+TBlock::TBlock() : Block('T', Colour::Magenta)
 {
     for (int i = 0; i < 3; i++)
     {

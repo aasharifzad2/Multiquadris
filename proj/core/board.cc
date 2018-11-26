@@ -1,16 +1,26 @@
 
 #include "board.h"
+#include <vector>
 #include "row.h"
 #include "cell.h"
 #include "block/block.h"
+#include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
-
-std::vector<Block> blocks;
-std::vector<Row> rows;
 
 Board::Board(int numRows, int numCols) : numRows(numRows), numCols(numCols)
 {
     addEmptyRows(numRows);
+}
+
+std::vector<const Row *> Board::getRows() const
+{
+    std::vector<const Row *> rowptrs;
+    for (unsigned int i = 0; i < rows.size(); i++)
+    {
+        rowptrs.emplace_back(&rows[i]);
+    }
+    
+    return rowptrs;
 }
 
 bool Board::blockFits(Block *block)
@@ -45,10 +55,9 @@ void Board::addBlock(Block block)
     {
         // Set the cell in the board to the one in the block
         Row cellRow = rows.at(cell->getRow());
-        *cellRow.getCell(cell->getCol()) = *cell;
+        cellRow.setCell(cell->getCol(), cell);
     }
 }
-
 
 void Board::clearFilledRows()
 {
@@ -88,7 +97,7 @@ void Board::clearFilledRows()
     }
 }
 
-const std::shared_ptr<Cell> Board::cellAt(int row, int col) const
+const Cell *Board::cellAt(int row, int col) const
 {
     return rows.at(row).getCell(col);
 }
@@ -99,4 +108,10 @@ void Board::addEmptyRows(int numToAdd)
     {
         rows.insert(rows.begin(), Row(rowNum, numCols));
     }
+}
+
+// Visitor Pattern : visit a display
+void Board::display(Display &d)
+{
+    d.accept(this);
 }

@@ -16,14 +16,18 @@ class Board
     std::vector<Row> rows;
     
     void addEmptyRows(int = 1);
-    //TODO: lookup what a 'const shared_ptr' means
-    const std::shared_ptr<Cell> cellAt(int row, int col) const;
+    const Cell *cellAt(int row, int col) const;
     
     public:
     Board(int numRows, int numCols);
+    
+    std::vector<const Row *> getRows() const;
+
     bool blockFits(Block *);
     void addBlock(Block);
     void clearFilledRows();
+    // Visitor Pattern : visit(Display)
+    void display(Display &);
 };
 
 

@@ -12,8 +12,8 @@ int Block::initialY = 4;
 Block::~Block() {}
 
 // Constructor
-Block::Block(Colour colour) :
-    colour(colour)
+Block::Block(char symbol, Colour colour) :
+    symbol(symbol), colour(colour)
 {}
 
 // Setter : levelGenerated
@@ -26,6 +26,12 @@ void Block::setLevelGenerated(int lvl)
 int Block::numCells() const
 {
     return (int)cells.size();
+}
+
+// Getter : symbol
+char Block::getSymbol() const
+{
+    return symbol;
 }
 
 // Getter : colour
@@ -54,7 +60,7 @@ std::vector<Cell *> Block::getCells() const
 
 // Observer Pattern : called by subject (Cell) when the cell is cleared
 //   Tells the block to remove the cleared cell from it's list
-void Block::cellCleared(Cell const * const cellptr)
+void Block::cellCleared(const Cell * cellptr)
 {
     for (auto itr = cells.begin(); itr != cells.end(); )
     {

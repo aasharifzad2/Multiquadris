@@ -5,6 +5,7 @@
 #include <string>
 
 #ifdef DEBUG
+#include "display/textDisplay.h"
 #include "core/board.h"
 #include "core/level.h"
 #include "core/block/stream/blockStream.h"
@@ -31,6 +32,8 @@ int main(int argc, char* argv[])
     Board b = Board(8, 4);
     RandomBlockStream blockstream = RandomBlockStream({{IShape, 3}, {JShape, 4}, {OShape, 3}});
     
+    TextDisplay d{std::cout};
+    b.display(d);
     Level l = Level(1, &blockstream);
     std::cout << b.blockFits(l.getBlock().get()) << std::endl;
     

@@ -5,7 +5,7 @@
 
 IBlock::~IBlock() {}
 
-IBlock::IBlock() : Block(Colour::Cyan)
+IBlock::IBlock() : Block('I', Colour::Cyan)
 {
     for (int i = 0; i < 4; i++)
     {

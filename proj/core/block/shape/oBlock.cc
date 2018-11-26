@@ -5,7 +5,7 @@
 
 OBlock::~OBlock() {}
 
-OBlock::OBlock() : Block(Colour::Yellow)
+OBlock::OBlock() : Block('O', Colour::Yellow)
 {
     for (int i = 0; i < 2; i++)
     {

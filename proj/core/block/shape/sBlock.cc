@@ -5,7 +5,7 @@
 
 SBlock::~SBlock() {}
 
-SBlock::SBlock() : Block(Colour::Green)
+SBlock::SBlock() : Block('S', Colour::Green)
 {
     for (int i = 1; i < 3; i++)
     {

@@ -3,9 +3,10 @@
 #include "../../cell.h"
 
 
+
 LBlock::~LBlock() {}
 
-LBlock::LBlock() : Block(Colour::Orange)
+LBlock::LBlock() : Block('L', Colour::Orange)
 {
     for (int i = 0; i < 3; i++)
     {
