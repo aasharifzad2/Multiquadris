@@ -5,6 +5,8 @@
 #include "../cell.h"
 #include "../../excp/not_implemented.h"
 
+int Block::initialX = 4;
+int Block::initialY = 4;
 
 // Destructor
 Block::~Block() {}
