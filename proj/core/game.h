@@ -4,6 +4,7 @@
 
 #include <string>
 #include <map>
+class Display;
 
 enum Command
 {
@@ -57,6 +58,8 @@ class Game {
     
     public:
     void play();
+    // Visitor Pattern : visit(Display)
+    void display(Display &);
 };
 
 

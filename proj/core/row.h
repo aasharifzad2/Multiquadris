@@ -5,6 +5,8 @@
 #include <vector>
 #include <memory>
 class Cell;
+class Display;
+
 
 class Row
 {
@@ -13,10 +15,18 @@ class Row
     
     public:
     Row(int rowNum, int numCells);
+    
     void setRowNum(int);
-    const std::shared_ptr<Cell> getCell(int) const;
+    void setCell(Cell *);
+    void setCell(int, Cell *);
+    
+    Cell const * getCell(int) const;
+    std::vector<const Cell *> getCells() const;
+    
     bool isFilled();
     void clear();
+    // Visitor Pattern : visit(Display)
+    void display(Display &);
 };
 
 

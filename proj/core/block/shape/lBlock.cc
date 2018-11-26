@@ -1,9 +1,10 @@
 
 #include "lBlock.h"
 
+
 LBlock::~LBlock() {}
 
-LBlock::LBlock() : Block(Colour::Orange)
+LBlock::LBlock() : Block('L', Colour::Orange)
 {
     
 }

@@ -4,7 +4,7 @@
 
 JBlock::~JBlock() {}
 
-JBlock::JBlock() : Block(Colour::Blue)
+JBlock::JBlock() : Block('J', Colour::Blue)
 {
     
 }

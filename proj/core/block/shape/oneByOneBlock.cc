@@ -5,7 +5,7 @@
 OneByOneBlock::~OneByOneBlock() { }
 
 OneByOneBlock::OneByOneBlock(int x, int y) :
-    Block(Colour::Brown)
+    Block('*', Colour::Brown)
 {
     
 }

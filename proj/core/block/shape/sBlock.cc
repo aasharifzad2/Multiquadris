@@ -4,7 +4,7 @@
 
 SBlock::~SBlock() {}
 
-SBlock::SBlock() : Block(Colour::Green)
+SBlock::SBlock() : Block('S', Colour::Green)
 {
     
 }

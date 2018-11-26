@@ -4,7 +4,7 @@
 
 ZBlock::~ZBlock() {}
 
-ZBlock::ZBlock() : Block(Colour::Red)
+ZBlock::ZBlock() : Block('Z', Colour::Red)
 {
     
 }

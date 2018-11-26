@@ -4,7 +4,7 @@
 
 IBlock::~IBlock() {}
 
-IBlock::IBlock() : Block(Colour::Cyan)
+IBlock::IBlock() : Block('I', Colour::Cyan)
 {
     
 }

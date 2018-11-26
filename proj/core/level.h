@@ -11,11 +11,9 @@ class Block;
 
 class Level
 {
-    private:
     int number;
     BlockStream *blockstream;
     std::vector<Effect> activeEffects;
-    
     
     public:
     Level(int, BlockStream *);

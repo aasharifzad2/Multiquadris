@@ -4,7 +4,7 @@
 
 OBlock::~OBlock() {}
 
-OBlock::OBlock() : Block(Colour::Yellow)
+OBlock::OBlock() : Block('O', Colour::Yellow)
 {
     
 }

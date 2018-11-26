@@ -4,7 +4,7 @@
 
 TBlock::~TBlock() { }
 
-TBlock::TBlock() : Block(Colour::Magenta)
+TBlock::TBlock() : Block('T', Colour::Magenta)
 {
     
 }
