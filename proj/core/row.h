@@ -17,11 +17,11 @@ class Row
     Row(int rowNum, int numCells);
     
     void setRowNum(int);
-    void setCell(Cell *);
-    void setCell(int, Cell *);
+    void setCell(std::shared_ptr<Cell>);
+    void setCell(int, std::shared_ptr<Cell>);
     
-    Cell const * getCell(int) const;
-    std::vector<const Cell *> getCells() const;
+    std::shared_ptr<Cell> getCell(int) const;
+    std::vector<std::shared_ptr<Cell>> getCells() const;
     
     bool isFilled();
     void clear();

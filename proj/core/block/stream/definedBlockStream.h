@@ -14,7 +14,7 @@ class DefinedBlockStream : public BlockStream
     
     public:
     DefinedBlockStream(std::ifstream &);
-    std::unique_ptr<Block> getBlock() override;
+    std::shared_ptr<Block> getBlock() override;
 };
 
 

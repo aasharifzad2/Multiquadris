@@ -23,7 +23,7 @@ std::vector<const Row *> Board::getRows() const
     return rowptrs;
 }
 
-bool Board::blockFits(Block *block)
+bool Board::blockFits(std::shared_ptr<Block> block)
 {
     auto cells = block->getCells();
     for (auto cell : cells)
@@ -36,7 +36,7 @@ bool Board::blockFits(Block *block)
             col < 0 ||
             row >= numRows ||
             col >= numCols ||
-            cellAt(row, col)->isFilled()
+            getCell(row, col)->isFilled()
         )
         {
             return false;
@@ -46,16 +46,15 @@ bool Board::blockFits(Block *block)
     return true;
 }
 
-void Board::addBlock(Block block)
+void Board::addBlock(std::shared_ptr<Block> block)
 {
     // Ensure that the block fits before trying to add it
-    if (!blockFits(&block)) throw invalid_block_placement();
+    if (!blockFits(block)) throw invalid_block_placement();
     
-    for (auto cell : block.getCells())
+    for (auto cell : block->getCells())
     {
         // Set the cell in the board to the one in the block
-        Row cellRow = rows.at(cell->getRow());
-        cellRow.setCell(cell->getCol(), cell);
+        rows.at(cell->getRow()).setCell(cell->getCol(), cell);
     }
 }
 
@@ -97,7 +96,7 @@ void Board::clearFilledRows()
     }
 }
 
-const Cell *Board::cellAt(int row, int col) const
+std::shared_ptr<Cell> Board::getCell(int row, int col) const
 {
     return rows.at(row).getCell(col);
 }

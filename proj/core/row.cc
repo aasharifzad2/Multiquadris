@@ -20,33 +20,27 @@ void Row::setRowNum(int rowNum)
 }
 
 // Setter : cell at cell coordinate
-void Row::setCell(Cell *cellptr)
+void Row::setCell(std::shared_ptr<Cell> cell)
 {
-    setCell(cellptr->getCol(), cellptr);
+    setCell(cell->getCol(), cell);
 }
 
 // Setter : cell at index
-void Row::setCell(int index, Cell *cellptr)
+void Row::setCell(int index, std::shared_ptr<Cell> cell)
 {
-    std::shared_ptr<Cell> shrd{cellptr};
-    cells[index].swap(shrd);
+    cells[index] = cell;
 }
 
 // Getter : cell at index
-Cell const * Row::getCell(int index) const
+std::shared_ptr<Cell> Row::getCell(int index) const
 {
-    return cells.at(index).get();
+    return cells.at(index);
 }
 
 // Getter : cells
-std::vector<const Cell *> Row::getCells() const
+std::vector<std::shared_ptr<Cell>> Row::getCells() const
 {
-    std::vector<const Cell *> cellptrs;
-    for (auto cell : cells)
-    {
-        cellptrs.push_back(cell.get());
-    }
-    return cellptrs;
+    return cells;
 }
 
 // Returns true if all of the cells in the row are 'filled'

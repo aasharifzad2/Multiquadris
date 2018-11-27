@@ -14,7 +14,7 @@ class RandomBlockStream : public BlockStream
     
     public:
     RandomBlockStream(std::map<BlockShape, int>);
-    std::unique_ptr<Block> getBlock() override;
+    std::shared_ptr<Block> getBlock() override;
 };
 
 

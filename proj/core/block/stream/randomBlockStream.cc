@@ -17,24 +17,24 @@ RandomBlockStream::RandomBlockStream(std::map<BlockShape, int> frequencies)
     
 }
 
-std::unique_ptr<Block> RandomBlockStream::getBlock()
+std::shared_ptr<Block> RandomBlockStream::getBlock()
 {
     BlockShape blockType = blockList[rand() % blockList.size()];
     switch (blockType)
     {
         case IShape:
-            return std::unique_ptr<Block>(new IBlock());
+            return std::make_shared<IBlock>();
         case JShape:
-            return std::unique_ptr<Block>(new JBlock());
+            return std::make_shared<JBlock>();
         case LShape:
-            return std::unique_ptr<Block>(new LBlock());
+            return std::make_shared<LBlock>();
         case OShape:
-            return std::unique_ptr<Block>(new OBlock());
+            return std::make_shared<OBlock>();
         case SShape:
-            return std::unique_ptr<Block>(new SBlock());
+            return std::make_shared<SBlock>();
         case ZShape:
-            return std::unique_ptr<Block>(new ZBlock());
+            return std::make_shared<ZBlock>();
         case TShape:
-            return std::unique_ptr<Block>(new TBlock());
+            return std::make_shared<TBlock>();
     }
 }

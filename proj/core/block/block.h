@@ -25,8 +25,8 @@ class Block
     int numCells() const;
     char getSymbol() const;
     Colour getColour() const;
-    Cell *getCell(int) const;
-    std::vector<Cell *> getCells() const;
+    std::shared_ptr<Cell> getCell(int) const;
+    std::vector<std::shared_ptr<Cell>> getCells() const;
     
     // Observer Pattern : Called by subject (Cell) to notify cell being cleared
     void cellCleared(const Cell *);

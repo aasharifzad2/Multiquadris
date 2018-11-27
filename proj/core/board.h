@@ -16,15 +16,15 @@ class Board
     std::vector<Row> rows;
     
     void addEmptyRows(int = 1);
-    const Cell *cellAt(int row, int col) const;
+    std::shared_ptr<Cell> getCell(int row, int col) const;
     
     public:
     Board(int numRows, int numCols);
     
     std::vector<const Row *> getRows() const;
 
-    bool blockFits(Block *);
-    void addBlock(Block);
+    bool blockFits(std::shared_ptr<Block>);
+    void addBlock(std::shared_ptr<Block>);
     void clearFilledRows();
     // Visitor Pattern : visit(Display)
     void display(Display &);

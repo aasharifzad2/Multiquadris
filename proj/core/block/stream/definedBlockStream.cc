@@ -8,7 +8,7 @@
 DefinedBlockStream::DefinedBlockStream(std::ifstream &sequence) :
     sequence(sequence) {}
 
-std::unique_ptr<Block> DefinedBlockStream::getBlock()
+std::shared_ptr<Block> DefinedBlockStream::getBlock()
 {
     if (sequence.eof())
     {
@@ -22,19 +22,19 @@ std::unique_ptr<Block> DefinedBlockStream::getBlock()
     switch (blockType)
     {
         case 'I':
-            return std::unique_ptr<Block>(new IBlock());
+            return std::make_shared<IBlock>();
         case 'J':
-            return std::unique_ptr<Block>(new JBlock());
+            return std::make_shared<JBlock>();
         case 'L':
-            return std::unique_ptr<Block>(new LBlock());
+            return std::make_shared<LBlock>();
         case 'O':
-            return std::unique_ptr<Block>(new OBlock());
+            return std::make_shared<OBlock>();
         case 'S':
-            return std::unique_ptr<Block>(new SBlock());
+            return std::make_shared<SBlock>();
         case 'Z':
-            return std::unique_ptr<Block>(new ZBlock());
+            return std::make_shared<ZBlock>();
         case 'T':
-            return std::unique_ptr<Block>(new TBlock());
+            return std::make_shared<TBlock>();
         default:
             throw invalid_block_sequence(blockType);
     }

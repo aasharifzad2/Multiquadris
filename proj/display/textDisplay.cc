@@ -27,7 +27,7 @@ void TextDisplay::accept(const Row *row)
 {
     for (auto cell : row->getCells())
     {
-        accept(cell);
+        accept(cell.get());
     }
 }
 

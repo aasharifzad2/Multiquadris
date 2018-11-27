@@ -7,10 +7,11 @@ IBlock::~IBlock() {}
 
 IBlock::IBlock() : Block('I', Colour::Cyan)
 {
-    for (int i = 0; i < 4; i++)
-    {
-        cells.emplace_back(std::make_shared<Cell>(
-            initialY, initialX + i, this)
-        );
-    }
+    cells =
+        {
+            std::make_shared<Cell>(initialY, initialX, this),
+            std::make_shared<Cell>(initialY, initialX + 1, this),
+            std::make_shared<Cell>(initialY, initialX + 2, this),
+            std::make_shared<Cell>(initialY, initialX + 3, this)
+        };
 }

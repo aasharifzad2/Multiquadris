@@ -7,17 +7,11 @@ SBlock::~SBlock() {}
 
 SBlock::SBlock() : Block('S', Colour::Green)
 {
-    for (int i = 1; i < 3; i++)
+    cells =
     {
-        cells.emplace_back(std::make_shared<Cell>(
-            initialY, initialX + i, this)
-        );
-    }
-    
-    for (int i = 0; i < 2; i++)
-    {
-        cells.emplace_back(std::make_shared<Cell>(
-            initialY - 1, initialX + i, this)
-        );
-    }
+        std::make_shared<Cell>(initialY, initialX, this),
+        std::make_shared<Cell>(initialY, initialX + 1, this),
+        std::make_shared<Cell>(initialY - 1, initialX + 1, this),
+        std::make_shared<Cell>(initialY - 1, initialX + 2, this)
+    };
 }

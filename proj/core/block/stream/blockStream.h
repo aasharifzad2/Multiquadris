@@ -16,7 +16,7 @@ class Block;
 class BlockStream
 {
     public:
-    virtual std::unique_ptr<Block> getBlock() = 0;
+    virtual std::shared_ptr<Block> getBlock() = 0;
 };
 
 

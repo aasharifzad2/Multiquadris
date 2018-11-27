@@ -5,8 +5,8 @@
 #include "../cell.h"
 #include "../../excp/not_implemented.h"
 
-int Block::initialX = 4;
-int Block::initialY = 4;
+int Block::initialX = 0;
+int Block::initialY = 1;
 
 // Destructor
 Block::~Block() {}
@@ -41,21 +41,14 @@ Colour Block::getColour() const
 }
 
 // Getter : a cell
-Cell *Block::getCell(int index) const
+std::shared_ptr<Cell> Block::getCell(int index) const
 {
-    return cells.at(index).get();
+    return cells.at(index);
 }
 
 // Getter : cells
-std::vector<Cell *> Block::getCells() const
-{
-    std::vector<Cell *> cellptrs;
-    for (auto cell : cells)
-    {
-        cellptrs.emplace_back(cell.get());
-    }
-    
-    return cellptrs;
+std::vector<std::shared_ptr<Cell>> Block::getCells() const{
+    return cells;
 }
 
 // Observer Pattern : called by subject (Cell) when the cell is cleared

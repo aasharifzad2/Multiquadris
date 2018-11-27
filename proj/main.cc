@@ -5,6 +5,7 @@
 #include <string>
 
 #ifdef DEBUG
+#include <ctime>
 #include "display/textDisplay.h"
 #include "core/board.h"
 #include "core/level.h"
@@ -28,14 +29,27 @@ int main(int argc, char* argv[])
     
 #ifdef DEBUG
     std::cout << "This is a debug run.." << std::endl;
-    srand(DEFAULT_SEED);
-    Board b = Board(8, 4);
-    RandomBlockStream blockstream = RandomBlockStream({{IShape, 3}, {JShape, 4}, {OShape, 3}});
+    srand((unsigned int)time(NULL));
+    Board b = Board(8, 8);
+    RandomBlockStream blockstream = RandomBlockStream(
+        {
+            {IShape, 1},
+            {JShape, 0},
+            {LShape, 0},
+            {OShape, 0},
+            {SShape, 0},
+            {ZShape, 0},
+            {TShape, 0},
+        }
+    );
+    Level lvl = Level(1, &blockstream);
+
     
+    std::shared_ptr<Block> blockptr = lvl.getBlock();
+    b.addBlock(blockptr);
     TextDisplay d{std::cout};
     b.display(d);
-    Level l = Level(1, &blockstream);
-    std::cout << b.blockFits(l.getBlock().get()) << std::endl;
+    std::cout << b.blockFits(blockptr) << std::endl;
     
 #endif
     

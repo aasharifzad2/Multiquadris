@@ -17,7 +17,7 @@ class Level
     
     public:
     Level(int, BlockStream *);
-    std::unique_ptr<Block> getBlock() const;
+    std::shared_ptr<Block> getBlock() const;
     bool hasEffect(Effect) const;
 };
 

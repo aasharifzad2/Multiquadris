@@ -7,17 +7,11 @@ OBlock::~OBlock() {}
 
 OBlock::OBlock() : Block('O', Colour::Yellow)
 {
-    for (int i = 0; i < 2; i++)
-    {
-        for (int j = 0; j < 2; j++)
+    cells =
         {
-            cells.emplace_back(std::make_shared<Cell>(
-                initialY + i, initialX + j, this)
-            );
-        }
-    }
-    
-    cells.emplace_back(std::make_shared<Cell>(
-        initialY - 1, initialX)
-    );
+            std::make_shared<Cell>(initialY, initialX, this),
+            std::make_shared<Cell>(initialY, initialX + 1, this),
+            std::make_shared<Cell>(initialY - 1, initialX, this),
+            std::make_shared<Cell>(initialY - 1, initialX + 1, this)
+        };
 }

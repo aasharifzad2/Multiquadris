@@ -7,14 +7,11 @@ JBlock::~JBlock() {}
 
 JBlock::JBlock() : Block('J', Colour::Blue)
 {
-    for (int i = 0; i < 3; i++)
-    {
-        cells.emplace_back(std::make_shared<Cell>(
-            initialY, initialX + i, this)
-        );
-    }
-    
-    cells.emplace_back(std::make_shared<Cell>(
-        initialY - 1, initialX)
-    );
+    cells =
+        {
+            std::make_shared<Cell>(initialY - 1, initialX, this),
+            std::make_shared<Cell>(initialY, initialX, this),
+            std::make_shared<Cell>(initialY, initialX + 1, this),
+            std::make_shared<Cell>(initialY, initialX + 2, this)
+        };
 }

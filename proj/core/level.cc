@@ -5,7 +5,7 @@
 Level::Level(int level, BlockStream *bs) :
     number(level), blockstream(bs) {}
 
-std::unique_ptr<Block> Level::getBlock() const
+std::shared_ptr<Block> Level::getBlock() const
 {
     return blockstream->getBlock();
 }

@@ -7,14 +7,11 @@ TBlock::~TBlock() {}
 
 TBlock::TBlock() : Block('T', Colour::Magenta)
 {
-    for (int i = 0; i < 3; i++)
+    cells =
     {
-        cells.emplace_back(std::make_shared<Cell>(
-            initialY - 1, initialX + i, this)
-        );
-    }
-    
-    cells.emplace_back(std::make_shared<Cell>(
-        initialY, initialX + 1)
-    );
+        std::make_shared<Cell>(initialY - 1, initialX, this),
+        std::make_shared<Cell>(initialY - 1, initialX + 1, this),
+        std::make_shared<Cell>(initialY - 1, initialX + 2, this),
+        std::make_shared<Cell>(initialY, initialX + 1, this)
+    };
 }
