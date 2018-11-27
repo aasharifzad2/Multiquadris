@@ -19,6 +19,7 @@ class Level
     Level(int, BlockStream *);
     std::shared_ptr<Block> getBlock() const;
     bool hasEffect(Effect) const;
+    int getCurLevel();
 };
 
 

@@ -19,3 +19,10 @@ bool Level::hasEffect(Effect e) const
     
     return false;
 }
+
+// Getter: level number
+int Level::getCurLevel()
+{
+    return number;
+}
+

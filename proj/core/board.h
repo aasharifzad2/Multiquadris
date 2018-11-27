@@ -12,7 +12,7 @@ class Block;
 class Board
 {
     int numRows, numCols;
-    std::vector<Block> blocks;
+    std::vector<Block *> blocks;
     std::vector<Row> rows;
     
     void addEmptyRows(int = 1);

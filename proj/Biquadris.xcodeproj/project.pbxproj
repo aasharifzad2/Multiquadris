@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DB923F021ABBA4C00A1AF56 /* player.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3DB923EE21ABBA4C00A1AF56 /* player.cc */; };
 		5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */; };
 		5D27C5DF21AB262400AE3C2B /* cell.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5DD21AB262400AE3C2B /* cell.cc */; };
 		5D27C5E821AB660900AE3C2B /* textDisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5E321AB660900AE3C2B /* textDisplay.cc */; };
@@ -46,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3DB923EE21ABBA4C00A1AF56 /* player.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = player.cc; path = core/player.cc; sourceTree = "<group>"; };
+		3DB923EF21ABBA4C00A1AF56 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = core/player.h; sourceTree = "<group>"; };
 		5D27C5D021AA5E7200AE3C2B /* no_parent_block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = no_parent_block.h; path = excp/no_parent_block.h; sourceTree = "<group>"; };
 		5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = no_parent_block.cc; path = excp/no_parent_block.cc; sourceTree = "<group>"; };
 		5D27C5DD21AB262400AE3C2B /* cell.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cell.cc; path = core/cell.cc; sourceTree = "<group>"; };
@@ -188,11 +191,13 @@
 				5D5CDB2C21A7853A00CE28BD /* colour.h */,
 				5D27C5DD21AB262400AE3C2B /* cell.cc */,
 				5DE0709E21A6813B003D00BF /* game.cc */,
+				3DB923EE21ABBA4C00A1AF56 /* player.cc */,
 				5D5CDB5B21A896DF00CE28BD /* level.cc */,
 				5D5CDB6421A9C22B00CE28BD /* board.cc */,
 				5D5CDB7921AA0EF000CE28BD /* row.cc */,
 				5D27C5DE21AB262400AE3C2B /* cell.h */,
 				5DE0709D21A6813B003D00BF /* game.h */,
+				3DB923EF21ABBA4C00A1AF56 /* player.h */,
 				5D5CDB5A21A896DF00CE28BD /* level.h */,
 				5D5CDB6221A9BD5600CE28BD /* board.h */,
 				5D5CDB7A21AA0EF000CE28BD /* row.h */,
@@ -306,6 +311,7 @@
 				5DE0709521A680D9003D00BF /* main.cc in Sources */,
 				5D5CDB7B21AA0EF000CE28BD /* row.cc in Sources */,
 				5D5CDB6521A9C22B00CE28BD /* board.cc in Sources */,
+				3DB923F021ABBA4C00A1AF56 /* player.cc in Sources */,
 				5D5CDB2721A7852100CE28BD /* sBlock.cc in Sources */,
 				5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */,
 				5D5CDB7E21AA347F00CE28BD /* invalid_block_placement.cc in Sources */,

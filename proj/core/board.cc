@@ -86,7 +86,7 @@ void Board::clearFilledRows()
     // Remove placed blocks that are all gone
     for (auto itr = blocks.begin(); itr != blocks.end(); )
     {
-        if (itr->numCells() == 0)
+        if ((*itr)->numCells() == 0)
         {
             itr = blocks.erase(itr);
         }
