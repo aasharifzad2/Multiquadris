@@ -11,7 +11,6 @@ class GraphicDisplay : public Display
     void accept(const Game *) override;
     void accept(const Player *) override;
     void accept(const Board *) override;
-    void accept(const Row *) override;
     void accept(const Cell *) override;
 };
 

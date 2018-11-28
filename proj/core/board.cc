@@ -1,32 +1,43 @@
 
 #include "board.h"
 #include <vector>
-#include "row.h"
 #include "cell.h"
 #include "block/block.h"
 #include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
 
-Board::Board(int numRows, int numCols) : numRows(numRows), numCols(numCols)
+Board::Board(int numRows, int numCols) :
+    numRows(numRows),
+    numCols(numCols)
 {
-    addEmptyRows(numRows);
+    fillBoard();
 }
 
-std::vector<const Row *> Board::getRows() const
+
+// Return a 2D vector of pointers to the cells
+std::vector<std::vector<Cell *>> Board::getCells() const
 {
-    std::vector<const Row *> rowptrs;
-    for (unsigned int i = 0; i < rows.size(); i++)
+    std::vector<std::vector<Cell *>> cellptrs;
+    for (auto row : cells)
     {
-        rowptrs.emplace_back(&rows[i]);
+        std::vector<Cell *> rowToAdd;
+        for (auto cell : row)
+        {
+            rowToAdd.emplace_back(cell.get());
+        }
+        
+        cellptrs.emplace_back(rowToAdd);
     }
     
-    return rowptrs;
+    return cellptrs;
 }
 
+
+// Returns true if the block does not go off the side of the board or clip other cells
 bool Board::blockFits(std::shared_ptr<Block> block)
 {
-    auto cells = block->getCells();
-    for (auto cell : cells)
+    auto blockCells = block->getCells();
+    for (auto cell : blockCells)
     {
         int row = cell->getRow();
         int col = cell->getCol();
@@ -36,7 +47,7 @@ bool Board::blockFits(std::shared_ptr<Block> block)
             col < 0 ||
             row >= numRows ||
             col >= numCols ||
-            getCell(row, col)->isFilled()
+            cells.at(row).at(col)->isFilled()
         )
         {
             return false;
@@ -46,6 +57,7 @@ bool Board::blockFits(std::shared_ptr<Block> block)
     return true;
 }
 
+
 void Board::addBlock(std::shared_ptr<Block> block)
 {
     // Ensure that the block fits before trying to add it
@@ -53,20 +65,37 @@ void Board::addBlock(std::shared_ptr<Block> block)
     
     for (auto cell : block->getCells())
     {
-        // Set the cell in the board to the one in the block
-        rows.at(cell->getRow()).setCell(cell->getCol(), cell);
+        cells[cell->getRow()][cell->getCol()] = cell;
     }
+    
+    // Add the whole block to the board
+    blocks.emplace_back(block);
 }
+
 
 void Board::clearFilledRows()
 {
-    // Erase filled rows
-    for (auto row = rows.begin(); row != rows.end(); )
+    // Erase all of the filled rows
+    for (auto row = cells.begin(); row != cells.end(); )
     {
-        if (row->isFilled())
+        // Check if the row needs to be cleared
+        bool rowIsFilled = true;
+        for (auto cell : *row)
         {
-            row->clear();
-            row = rows.erase(row);
+            if (cell->isEmpty())
+            {
+                rowIsFilled = false;
+                break;
+            }
+        }
+        
+        if (rowIsFilled)
+        {
+            for (auto cell : *row)
+            {
+                cell->notifyCleared();
+            }
+            row = cells.erase(row);
         }
         else
         {
@@ -74,13 +103,15 @@ void Board::clearFilledRows()
         }
     }
     
-    // Add rows at the top to replace the one's we removed
-    addEmptyRows(numRows - (int)rows.size());
+    fillBoard();
     
-    // Change the coords of the cells in the shifted rows
-    for (int i = 0; i < rows.size(); i++)
+    // Reset the coords of the cells
+    for (int rowIndex = 0; rowIndex < numRows; ++rowIndex)
     {
-        rows[i].setRowNum(i);
+        for (int colIndex = 0; colIndex < numCols; ++colIndex)
+        {
+            cells.at(rowIndex).at(colIndex)->setCoords(rowIndex, colIndex);
+        }
     }
     
     // Remove placed blocks that are all gone
@@ -96,21 +127,27 @@ void Board::clearFilledRows()
     }
 }
 
-std::shared_ptr<Cell> Board::getCell(int row, int col) const
-{
-    return rows.at(row).getCell(col);
-}
-
-void Board::addEmptyRows(int numToAdd)
-{
-    for (int rowNum = numToAdd-1; rowNum >= 0; rowNum--)
-    {
-        rows.insert(rows.begin(), Row(rowNum, numCols));
-    }
-}
 
 // Visitor Pattern : visit a display
 void Board::display(Display &d)
 {
     d.accept(this);
+}
+
+
+// Fills the 2D vector of cells with empty cells
+void Board::fillBoard()
+{
+    while (numRows != cells.size())
+    {
+        int rowNum = numRows - (int)cells.size() - 1;
+        std::vector<std::shared_ptr<Cell>> row;
+        
+        for (int i = 0; i < numCols; i++)
+        {
+            row.insert(row.end(), std::make_shared<Cell>(rowNum, i));
+        }
+        
+        cells.insert(cells.begin(), row);
+    }
 }

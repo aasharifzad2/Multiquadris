@@ -27,7 +27,6 @@
 		5D5CDB5C21A896DF00CE28BD /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5B21A896DF00CE28BD /* level.cc */; };
 		5D5CDB5F21A897CB00CE28BD /* invalid_block_sequence.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5D21A897CB00CE28BD /* invalid_block_sequence.cc */; };
 		5D5CDB6521A9C22B00CE28BD /* board.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB6421A9C22B00CE28BD /* board.cc */; };
-		5D5CDB7B21AA0EF000CE28BD /* row.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB7921AA0EF000CE28BD /* row.cc */; };
 		5D5CDB7E21AA347F00CE28BD /* invalid_block_placement.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB7D21AA347F00CE28BD /* invalid_block_placement.cc */; };
 		5DE0709521A680D9003D00BF /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709321A680D9003D00BF /* main.cc */; };
 		5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709721A68108003D00BF /* invalid_command.cc */; };
@@ -93,8 +92,6 @@
 		5D5CDB6021A89DF200CE28BD /* blockShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = blockShape.h; path = core/block/blockShape.h; sourceTree = "<group>"; };
 		5D5CDB6221A9BD5600CE28BD /* board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = board.h; path = core/board.h; sourceTree = "<group>"; };
 		5D5CDB6421A9C22B00CE28BD /* board.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = board.cc; path = core/board.cc; sourceTree = "<group>"; };
-		5D5CDB7921AA0EF000CE28BD /* row.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row.cc; path = core/row.cc; sourceTree = "<group>"; };
-		5D5CDB7A21AA0EF000CE28BD /* row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = row.h; path = core/row.h; sourceTree = "<group>"; };
 		5D5CDB7C21AA347F00CE28BD /* invalid_block_placement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = invalid_block_placement.h; path = excp/invalid_block_placement.h; sourceTree = "<group>"; };
 		5D5CDB7D21AA347F00CE28BD /* invalid_block_placement.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = invalid_block_placement.cc; path = excp/invalid_block_placement.cc; sourceTree = "<group>"; };
 		5DE0709321A680D9003D00BF /* main.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
@@ -194,13 +191,11 @@
 				3DB923EE21ABBA4C00A1AF56 /* player.cc */,
 				5D5CDB5B21A896DF00CE28BD /* level.cc */,
 				5D5CDB6421A9C22B00CE28BD /* board.cc */,
-				5D5CDB7921AA0EF000CE28BD /* row.cc */,
 				5D27C5DE21AB262400AE3C2B /* cell.h */,
 				5DE0709D21A6813B003D00BF /* game.h */,
 				3DB923EF21ABBA4C00A1AF56 /* player.h */,
 				5D5CDB5A21A896DF00CE28BD /* level.h */,
 				5D5CDB6221A9BD5600CE28BD /* board.h */,
-				5D5CDB7A21AA0EF000CE28BD /* row.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -309,7 +304,6 @@
 				5D5CDB2621A7852100CE28BD /* oBlock.cc in Sources */,
 				5D5CDB3121A7858300CE28BD /* not_implemented.cc in Sources */,
 				5DE0709521A680D9003D00BF /* main.cc in Sources */,
-				5D5CDB7B21AA0EF000CE28BD /* row.cc in Sources */,
 				5D5CDB6521A9C22B00CE28BD /* board.cc in Sources */,
 				3DB923F021ABBA4C00A1AF56 /* player.cc in Sources */,
 				5D5CDB2721A7852100CE28BD /* sBlock.cc in Sources */,

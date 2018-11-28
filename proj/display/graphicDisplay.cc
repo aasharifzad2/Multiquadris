@@ -17,11 +17,6 @@ void GraphicDisplay::accept(const Board *board)
     
 }
 
-void GraphicDisplay::accept(const Row *row)
-{
-    
-}
-
 void GraphicDisplay::accept(const Cell *cell)
 {
     

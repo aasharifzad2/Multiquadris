@@ -16,18 +16,13 @@ void TextDisplay::accept(const Player *player)
 
 void TextDisplay::accept(const Board *board)
 {
-    for (auto row : board->getRows())
+    for (auto row : board->getCells())
     {
-        accept(row);
+        for (auto cell : row)
+        {
+            accept(cell);
+        }
         out << std::endl;
-    }
-}
-
-void TextDisplay::accept(const Row *row)
-{
-    for (auto cell : row->getCells())
-    {
-        accept(cell.get());
     }
 }
 

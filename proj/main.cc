@@ -26,20 +26,19 @@ const int
 
 int main(int argc, char* argv[])
 {
-    
 #ifdef DEBUG
     std::cout << "This is a debug run.." << std::endl;
-    srand((unsigned int)time(NULL));
-    Board b = Board(8, 8);
+    srand(DEFAULT_SEED);
+    Board b = Board(4, 5);
     RandomBlockStream blockstream = RandomBlockStream(
         {
             {IShape, 1},
-            {JShape, 0},
-            {LShape, 0},
-            {OShape, 0},
-            {SShape, 0},
-            {ZShape, 0},
-            {TShape, 0},
+            {JShape, 1},
+            {LShape, 1},
+            {OShape, 1},
+            {SShape, 1},
+            {ZShape, 1},
+            {TShape, 1},
         }
     );
     Level lvl = Level(1, &blockstream);

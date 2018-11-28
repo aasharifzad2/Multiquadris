@@ -6,7 +6,7 @@ CORRECT = a4q1-exec
 SHELL = bash
 EXEC = biquadris
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -MMD -Werror=vla
+CXXFLAGS = -std=c++14 -Wall -MMD -Werror=vla -DDEBUG
 CCFILES = $(shell find . -type f -name '*.cc')
 OBJECTS = ${CCFILES:.cc=.o}
 DEPENDS = ${CCFILES:.cc=.d}
