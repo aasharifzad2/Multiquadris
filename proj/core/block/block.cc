@@ -23,9 +23,15 @@ void Block::setLevelGenerated(int lvl)
 }
 
 // Getter : number of cells
-int Block::numCells() const
+int Block::getNumCells() const
 {
     return (int)cells.size();
+}
+
+// Getter : level generatd
+int Block::getLevelGenerated() const
+{
+    return levelGenerated;
 }
 
 // Getter : symbol
@@ -47,7 +53,8 @@ std::shared_ptr<Cell> Block::getCell(int index) const
 }
 
 // Getter : cells
-std::vector<std::shared_ptr<Cell>> Block::getCells() const{
+std::vector<std::shared_ptr<Cell>> Block::getCells() const
+{
     return cells;
 }
 

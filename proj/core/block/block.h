@@ -22,7 +22,8 @@ class Block
 
     void setLevelGenerated(int);
     
-    int numCells() const;
+    int getNumCells() const;
+    int getLevelGenerated() const;
     char getSymbol() const;
     Colour getColour() const;
     std::shared_ptr<Cell> getCell(int) const;

@@ -4,8 +4,8 @@
 #include "../excp/invalid_block_placement.h"
 
 
-Player::Player(Board board, Level level):
-board{board}, level{level} {}
+Player::Player(Board board, Level lvl):
+board{board}, lvl{lvl} {}
 
 void Player::drop()
 {
@@ -154,4 +154,25 @@ void Player::rotateCCW(int mult)
     {
         curBlock->rotateCW();
     }
+}
+
+
+// Point function (Observer Pattern)
+void Player::rowsCleared(int numRows)
+{
+    int points = lvl.getCurLevel() + numRows;
+    score += points*points;
+    updateHighscore();
+}
+
+// Point function (Observer Pattern)
+void Player::blockCleared(int lvlGenerated)
+{
+    score += lvlGenerated * lvlGenerated;
+    updateHighscore();
+}
+
+void Player::updateHighscore()
+{
+    if (score > highscore) highscore = score;
 }

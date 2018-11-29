@@ -2,11 +2,13 @@
 #include "board.h"
 #include <vector>
 #include "cell.h"
+#include "player.h"
 #include "block/block.h"
 #include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
 
-Board::Board(int numRows, int numCols) :
+Board::Board(int numRows, int numCols, Player *player) :
+    player(player),
     numRows(numRows),
     numCols(numCols)
 {
@@ -75,6 +77,8 @@ void Board::addBlock(std::shared_ptr<Block> block)
 
 void Board::clearFilledRows()
 {
+    int numRowsCleared = 0;
+    
     // Erase all of the filled rows
     for (auto row = cells.begin(); row != cells.end(); )
     {
@@ -95,13 +99,31 @@ void Board::clearFilledRows()
             {
                 cell->notifyCleared();
             }
+            
             row = cells.erase(row);
+            ++numRowsCleared;
         }
         else
         {
             ++row;
         }
     }
+    
+    // Remove placed blocks that are all gone
+    for (auto itr = blocks.begin(); itr != blocks.end(); )
+    {
+        if ((*itr)->getNumCells() == 0)
+        {
+            player->blockCleared((*itr)->getLevelGenerated());
+            itr = blocks.erase(itr);
+        }
+        {
+            ++itr;
+        }
+    }
+    
+    // Calculate points for rows cleared
+    player->rowsCleared(numRowsCleared);
     
     fillBoard();
     
@@ -111,18 +133,6 @@ void Board::clearFilledRows()
         for (int colIndex = 0; colIndex < numCols; ++colIndex)
         {
             cells.at(rowIndex).at(colIndex)->setCoords(rowIndex, colIndex);
-        }
-    }
-    
-    // Remove placed blocks that are all gone
-    for (auto itr = blocks.begin(); itr != blocks.end(); )
-    {
-        if ((*itr)->numCells() == 0)
-        {
-            itr = blocks.erase(itr);
-        }
-        {
-            ++itr;
         }
     }
 }

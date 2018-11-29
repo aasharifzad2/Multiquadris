@@ -8,10 +8,12 @@
 class Cell;
 class Block;
 class Display;
+class Player;
 
 class Board
 {
     int numRows, numCols;
+    Player *player;
     std::vector<std::shared_ptr<Block>> blocks;
     std::vector<std::vector<std::shared_ptr<Cell>>> cells;
     
@@ -21,7 +23,7 @@ class Board
     
     
     public:
-    Board(int numRows, int numCols);
+    Board(int numRows, int numCols, Player *);
 
     std::vector<std::vector<Cell *>> getCells() const;
     

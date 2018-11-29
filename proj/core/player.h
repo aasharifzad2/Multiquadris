@@ -13,9 +13,12 @@ class Player {
     int highscore;
     std::string name;
     Board board;
-    Level level;
+    Level lvl;
     std::shared_ptr<Block> curBlock;
     Game *game;
+    
+    void updateHighscore();
+    
     
     public:
     Player(Board, Level);
@@ -34,6 +37,10 @@ class Player {
     void moveDown(int);
     void rotateCW(int);
     void rotateCCW(int);
+    
+    // Point functions (Observer)
+    void rowsCleared(int);
+    void blockCleared(int lvlGenerated);
 };
 
 #endif

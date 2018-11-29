@@ -8,6 +8,7 @@
 #include <ctime>
 #include "display/textDisplay.h"
 #include "core/board.h"
+#include "core/player.h"
 #include "core/level.h"
 #include "core/block/stream/blockStream.h"
 #include "core/block/stream/randomBlockStream.h"
@@ -29,7 +30,9 @@ int main(int argc, char* argv[])
 #ifdef DEBUG
     std::cout << "This is a debug run.." << std::endl;
     srand(DEFAULT_SEED);
-    Board b = Board(4, 5);
+    
+    
+    Board b = Board(4, 5, nullptr);
     RandomBlockStream blockstream = RandomBlockStream(
         {
             {IShape, 1},
