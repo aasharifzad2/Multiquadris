@@ -16,15 +16,17 @@ void TextDisplay::accept(const Game *game) const
 
 void TextDisplay::accept(const Player *player) const
 {
+    std::string horizontalBorder;
+    for (int i = 0; i < player->getBoard()->getNumCols(); i++)
+    {
+        topBorder += '-';
+    }
+    
     out << "Score: " << player->getScore() << std::endl;
     out << "High Score: " << player->getHighScore() << std::endl;
     out << "Level:  " << player->getCurLevel() << std::endl;
     
-    for (int i = 0; i < player->getBoard()->getNumCols(); i++)
-    {
-        out << '-';
-    }
-    out << std::endl;
+    out << horizontalBorder << std::endl;
     
     for (auto row : player->getBoard()->getCells())
     {
@@ -36,6 +38,7 @@ void TextDisplay::accept(const Player *player) const
         ;
         out << std::endl;
     }
+    out << horizontalBorder << std::endl;
 }
 
 void TextDisplay::accept(const Board *board) const
@@ -62,7 +65,11 @@ void TextDisplay::printRow(std::vector<Cell *> row, bool isBlind, Block *falling
     {
         Cell *curCell;
         curCell = fallingBlock->getMatchingCell(cell);
-        if (curCell)
+        if (isBlind && cell->isInBlindZone())
+        {
+            out << '?';
+        }
+        else if (curCell)
         {
             accept(curCell);
         }

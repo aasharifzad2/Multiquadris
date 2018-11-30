@@ -21,6 +21,11 @@ int Cell::getCol() const { return col; }
 bool Cell::isEmpty() const { return !filled; }
 bool Cell::isFilled() const { return filled; }
 
+bool Cell::isInBlindZone() const
+{
+    return ((col >= 3 && col <= 9) || (row >= 3 && row <= 12));
+}
+
 char Cell::getSymbol() const
 {
     return parent ? parent->getSymbol() : ' ';

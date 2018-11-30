@@ -21,6 +21,7 @@ class Cell
     int getCol() const;
     bool isEmpty() const;
     bool isFilled() const;
+    bool isInBlindZone() const;
     char getSymbol() const;
     Colour getColour() const;
 
