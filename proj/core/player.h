@@ -19,6 +19,7 @@ class Player
     std::unique_ptr<Board> board;
     std::shared_ptr<Block> fallingBlock;
     std::vector<Level> levels;
+    std::vector<Effect> effects;
     Game *game;
     
     
@@ -30,6 +31,7 @@ class Player
     int getHighScore() const;
     int getCurLevel() const;
     Board *getBoard() const;
+    Block *getFallingBlock() const;
     
     void drop();
     void levelUp(int);
@@ -37,6 +39,7 @@ class Player
     void noRandom(std::ifstream &);
     void random();
     void forceBlock(BlockShape);
+    bool hasEffect(Effect) const;
     
     // Movement and rotation functions
     void moveRight(int = 1);

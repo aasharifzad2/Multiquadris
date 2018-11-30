@@ -3,15 +3,18 @@
 #include <iomanip>
 #include "../excp/not_implemented.h"
 
+// Mark: - Static
 
+// Mark: - Constructors & Destructor
 TextDisplay::TextDisplay(std::ostream &out) : out(out) {}
 
-void TextDisplay::accept(const Game *game)
+// Mark: - Visitors
+void TextDisplay::accept(const Game *game) const
 {
     throw not_implemented();
 }
 
-void TextDisplay::accept(const Player *player)
+void TextDisplay::accept(const Player *player) const
 {
     out << "Score: " << player->getScore() << std::endl;
     out << "High Score: " << player->getHighScore() << std::endl;
@@ -23,10 +26,19 @@ void TextDisplay::accept(const Player *player)
     }
     out << std::endl;
     
-    accept(player->getBoard());
+    for (auto row : player->getBoard()->getCells())
+    {
+        printRow
+        (
+                 row,
+                 player->hasEffect(Effect::Blind),
+                 player->getFallingBlock())
+        ;
+        out << std::endl;
+    }
 }
 
-void TextDisplay::accept(const Board *board)
+void TextDisplay::accept(const Board *board) const
 {
     for (auto row : board->getCells())
     {
@@ -38,7 +50,25 @@ void TextDisplay::accept(const Board *board)
     }
 }
 
-void TextDisplay::accept(const Cell *cell)
+void TextDisplay::accept(const Cell *cell) const
 {
     out << cell->getSymbol();
+}
+
+// MARK: - Private Functions
+void TextDisplay::printRow(std::vector<Cell *> row, bool isBlind, Block *fallingBlock) const
+{
+    for (auto cell : row)
+    {
+        Cell *curCell;
+        curCell = fallingBlock->getMatchingCell(cell);
+        if (curCell)
+        {
+            accept(curCell);
+        }
+        else
+        {
+            accept(cell);
+        }
+    }
 }

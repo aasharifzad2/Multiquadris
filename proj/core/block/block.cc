@@ -46,6 +46,21 @@ std::vector<std::shared_ptr<Cell>> Block::getCells() const
     return cells;
 }
 
+Cell *Block::getMatchingCell(Cell *c)
+{
+    for (auto cell : cells)
+    {
+        if
+        (
+            cell->getRow() == c->getRow() &&
+            cell->getCol() == c->getCol()
+        )
+        {
+            return cell.get();
+        }
+    }
+    return nullptr;
+}
 
 // MARK: - Public Functions
 void Block::cellCleared(const Cell * cellptr)

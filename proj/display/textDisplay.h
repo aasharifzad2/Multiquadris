@@ -7,15 +7,18 @@
 
 class TextDisplay : public Display
 {
-    std::ostream &out;
-    
-    public:
+public:
     TextDisplay(std::ostream &);
     
-    void accept(const Game *) override;
-    void accept(const Player *) override;
-    void accept(const Board *) override;
-    void accept(const Cell *) override;
+    // Visitor Pattern : Visit different classes
+    void accept(const Game *) const override;
+    void accept(const Player *) const override;
+    void accept(const Board *) const override;
+    void accept(const Cell *) const override;
+    
+private:
+    std::ostream &out;
+    void printRow(std::vector<Cell *>, bool, Block *) const;
 };
 
 

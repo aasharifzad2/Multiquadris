@@ -31,6 +31,8 @@ int Player::getCurLevel() const { return curLevel; }
 
 Board *Player::getBoard() const { return board.get(); }
 
+Block *Player::getFallingBlock() const { return fallingBlock.get(); }
+
 
 // MARK: - Public Functions
 void Player::drop()
@@ -73,10 +75,18 @@ void Player::random()
     throw not_implemented();
 }
 
-
 void Player::forceBlock(BlockShape shape)
 {
     throw not_implemented();
+}
+
+bool Player::hasEffect(Effect effect) const
+{
+    for (auto e : effects)
+    {
+        if (e == effect) return true;
+    }
+    return false;
 }
 
 // MARK: Movement Functions

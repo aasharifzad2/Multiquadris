@@ -48,7 +48,7 @@ void Cell::notifyCleared() const
     parent->cellCleared(this);
 }
 
-// Visitor Pattern : visit a display
+// Visitor Pattern : Visit a display
 void Cell::display(Display &d)
 {
     d.accept(this);

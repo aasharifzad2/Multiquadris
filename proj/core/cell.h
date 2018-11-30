@@ -29,6 +29,7 @@ class Cell
     void setCoords(int, int);
     
     void notifyCleared() const;
+    
     // Visitor Pattern : visit(Display)
     void display(Display &);
 };

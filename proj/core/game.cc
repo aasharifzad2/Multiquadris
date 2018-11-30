@@ -140,7 +140,7 @@ void Game::readCommand()
     }
 }
 
-// Visitor Pattern : visit a display
+// Visitor Pattern : Visit a display
 void Game::display(Display &d)
 {
     d.accept(this);

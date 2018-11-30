@@ -141,7 +141,7 @@ void Board::clearFilledRows()
 }
 
 
-// Visitor Pattern : visit a display
+// Visitor Pattern : Visit a display
 void Board::display(Display &d)
 {
     d.accept(this);

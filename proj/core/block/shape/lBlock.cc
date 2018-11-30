@@ -3,7 +3,6 @@
 #include "../../cell.h"
 
 
-
 LBlock::~LBlock() {}
 
 LBlock::LBlock() : Block('L', Colour::Orange)

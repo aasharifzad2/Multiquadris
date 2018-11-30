@@ -36,6 +36,7 @@ class Board
     bool blockFits(std::shared_ptr<Block>);
     void addBlock(std::shared_ptr<Block>);
     void clearFilledRows();
+    
     // Visitor Pattern : visit(Display)
     void display(Display &);
 };

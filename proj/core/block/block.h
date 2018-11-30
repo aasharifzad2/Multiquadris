@@ -32,6 +32,7 @@ public:
     int getNumCells() const;
     std::shared_ptr<Cell> getCell(int) const;
     std::vector<std::shared_ptr<Cell>> getCells() const;
+    Cell *getMatchingCell(Cell *);
     
     // Observer Pattern : cell notifies block that the cell has been cleared
     void cellCleared(const Cell *);

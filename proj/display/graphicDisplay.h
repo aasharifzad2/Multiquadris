@@ -7,11 +7,13 @@ class XWindow;
 
 class GraphicDisplay : public Display
 {
-    public:
-    void accept(const Game *) override;
-    void accept(const Player *) override;
-    void accept(const Board *) override;
-    void accept(const Cell *) override;
+public:
+    
+    // Visitor Pattern : Visit different classes
+    void accept(const Game *) const override;
+    void accept(const Player *) const override;
+    void accept(const Board *) const override;
+    void accept(const Cell *) const override;
 };
 
 
