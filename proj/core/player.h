@@ -28,9 +28,6 @@ class Player
     int getHighScore() const;
     Board *getBoard() const;
     
-    // Setters
-    void setName(std::string);
-    
     void drop();
     void levelUp(int);
     void levelDown(int);

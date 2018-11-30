@@ -27,9 +27,8 @@ class Board
     
     
     public:
-
     Board(Player *, int numRows = DEFAULT_NUM_ROWS, int numCols = DEFAULT_NUM_COLS);
-
+  
     // Getters
     std::vector<std::vector<Cell *>> getCells() const;
     int getNumCols() const;
