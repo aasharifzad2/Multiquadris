@@ -8,27 +8,24 @@
 #include "game.h"
 #include "block/blockShape.h"
 
-class Display;
 
-class Player {
-    int score = 0; int highscore = 0;
-    std::string name;
-    Board * board;
-    Level lvl;
+class Player
+{
+    int score = 0, highscore = 0, curLevel = 0;
+    std::unique_ptr<Board> board;
+    std::vector<Level> levels;
     std::shared_ptr<Block> curBlock;
     Game *game;
     
     void updateHighscore();
     
-    
     public:
-    Player(Board *, Level);
-    // Getters and setters
+    Player(std::ifstream &);
+    
+    // Getters
     int getScore() const;
     int getHighScore() const;
-    std::string getName() const;
     Board *getBoard() const;
-    void setName(std::string);
     
     void drop();
     void levelUp(int);

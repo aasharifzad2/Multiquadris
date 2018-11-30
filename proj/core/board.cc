@@ -7,7 +7,7 @@
 #include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
 
-Board::Board(int numRows, int numCols, Player *player) :
+Board::Board(Player *player, int numRows, int numCols) :
     player(player),
     numRows(numRows),
     numCols(numCols)

@@ -1,30 +1,24 @@
 
 #include "player.h"
+#include "level.h"
 #include "../excp/not_implemented.h"
 #include "../excp/invalid_block_placement.h"
 #include "../display/display.h"
 #include "level.h"
 
 
-Player::Player(Board *board, Level lvl):
-    board(board),
-    lvl(lvl)
+Player::Player(std::ifstream &level0input) :
+    board(std::make_unique<Board>(this)),
+    levels(Level::initLevels(level0input))
 {}
 
-// Getter: score
+// Getters (start)
 int Player::getScore() const { return score; }
 
-// Getter: highscore
 int Player::getHighScore() const { return highscore; }
 
-// Getter: name
-std::string Player::getName() const { return name; }
-
-// Getter: board
-Board *Player::getBoard() const { return board; }
-
-// Setter: name
-void Player::setName(std::string newName) { name = newName; }
+Board *Player::getBoard() const { return board.get(); }
+// Getters (end)
 
 void Player::drop()
 {
@@ -179,7 +173,7 @@ void Player::rotateCCW(int mult)
 // Point function (Observer Pattern)
 void Player::rowsCleared(int numRows)
 {
-    int points = lvl.getCurLevel() + numRows;
+    int points = curLevel + numRows;
     score += points*points;
     updateHighscore();
 }

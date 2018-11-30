@@ -10,10 +10,14 @@ class Block;
 class Display;
 class Player;
 
+const int
+    DEFAULT_NUM_ROWS = 18,
+    DEFAULT_NUM_COLS = 11;
+
 class Board
 {
-    int numRows, numCols;
     Player *player;
+    int numRows, numCols;
     std::vector<std::shared_ptr<Block>> blocks;
     std::vector<std::vector<std::shared_ptr<Cell>>> cells;
     
@@ -23,8 +27,8 @@ class Board
     
     
     public:
-    Board(int numRows, int numCols, Player *);
-    
+    Board(Player *, int numRows = DEFAULT_NUM_ROWS, int numCols = DEFAULT_NUM_COLS);
+  
     // Getters
     std::vector<std::vector<Cell *>> getCells() const;
     int getNumCols() const;
