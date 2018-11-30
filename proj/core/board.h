@@ -11,7 +11,7 @@ class Display;
 class Player;
 
 const int
-    DEFAULT_NUM_ROWS = 15,
+    DEFAULT_NUM_ROWS = 18,
     DEFAULT_NUM_COLS = 11;
 
 class Board

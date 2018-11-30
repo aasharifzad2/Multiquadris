@@ -18,7 +18,6 @@ class Player
     Game *game;
     
     void updateHighscore();
-    void initLevels();
     
     public:
     Player(std::ifstream &);
