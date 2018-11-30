@@ -4,7 +4,10 @@
 
 #include <string>
 #include <map>
-class Display;
+#include "player.h"
+#include "../display/textDisplay.h"
+#include "../display/display.h"
+
 
 enum Command
 {
@@ -30,7 +33,10 @@ enum Command
 };
 
 
-class Game {
+class Game
+{
+    Player *player;
+    TextDisplay tDisplay;
     std::map<std::string, Command> commands =
         {
             {"left", Command::Left},
@@ -57,6 +63,7 @@ class Game {
     Command getCommand(std::string);
     
     public:
+    Game();
     void play();
     // Visitor Pattern : visit(Display)
     void display(Display &);

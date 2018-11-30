@@ -10,6 +10,7 @@
 #include "core/board.h"
 #include "core/player.h"
 #include "core/level.h"
+#include "core/game.h"
 #include "core/block/stream/blockStream.h"
 #include "core/block/stream/randomBlockStream.h"
 #endif
@@ -88,19 +89,8 @@ int main(int argc, char* argv[])
     }
     
 #ifdef DEBUG
-    TextDisplay textDisplay = TextDisplay(std::cout);
-    
-    Player p = Player(scriptFile1);
-    p.drop();
-    p.display(textDisplay);
-    p.moveRight(4);
-    p.drop();
-    p.display(textDisplay);
-    p.moveRight(8);
-    p.drop();
-    p.display(textDisplay);
-    p.drop();
-    p.display(textDisplay);
+    Game g{};
+    g.play();
 #endif
     
 }

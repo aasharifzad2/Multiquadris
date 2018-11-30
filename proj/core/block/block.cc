@@ -126,6 +126,21 @@ void Block::rotateCW()
     }
 }
 
+void Block::rotateCCW()
+{
+    int leftist, rightist, highest, lowest;
+    
+    getBounds(leftist, rightist, highest, lowest);
+    
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        int col = c->getCol();
+        int row = c->getRow();
+        c->setCol(leftist + row - highest);
+        c->setRow(lowest - col + leftist);
+    }
+}
+
 
 // MARK: - Private Functions
 void Block::getBounds
@@ -149,6 +164,6 @@ void Block::getBounds
         leftist = std::min(leftist, col);
         rightest = std::max(rightest, col);
         highest = std::min(highest, row);
-        lowest = std::max(highest, row);
+        lowest = std::max(lowest, row);
     }
 }

@@ -5,9 +5,8 @@
 #include "level.h"
 #include "block/block.h"
 #include "board.h"
-#include "game.h"
 #include "block/blockShape.h"
-
+class Game;
 
 class Player
 {
@@ -24,6 +23,7 @@ class Player
     
     
     public:
+    Player();
     Player(std::ifstream &);
     
     // Getters

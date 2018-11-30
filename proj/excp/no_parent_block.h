@@ -5,7 +5,7 @@
 #include <string>
 #include "base_exception.h"
 
-class no_parent_block : base_exception
+class no_parent_block : public base_exception
 {
     public:
     std::string message() const noexcept override;

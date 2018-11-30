@@ -80,7 +80,7 @@ void Board::addBlock(std::shared_ptr<Block> block)
 
 void Board::clearFilledRows()
 {
-    int numRowsCleared = 0;
+    int rowsCleared = 0;
     
     // Erase all of the filled rows
     for (auto row = cells.begin(); row != cells.end(); )
@@ -104,7 +104,7 @@ void Board::clearFilledRows()
             }
             
             row = cells.erase(row);
-            ++numRowsCleared;
+            ++rowsCleared;
         }
         else
         {
@@ -126,7 +126,10 @@ void Board::clearFilledRows()
     }
     
     // Calculate points for rows cleared
-    player->rowsCleared(numRowsCleared);
+    if (rowsCleared > 0)
+    {
+        player->rowsCleared(rowsCleared);
+    }
     
     fillBoard();
     

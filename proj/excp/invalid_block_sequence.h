@@ -4,7 +4,7 @@
 #include <string>
 #include "base_exception.h"
 
-class invalid_block_sequence : base_exception
+class invalid_block_sequence : public base_exception
 {
     char invalidCharacter;
     

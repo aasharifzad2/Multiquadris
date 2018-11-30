@@ -4,7 +4,7 @@
 #include <string>
 #include "base_exception.h"
 
-class invalid_block_placement : base_exception
+class invalid_block_placement : public base_exception
 {
     public:
     std::string message() const noexcept override;

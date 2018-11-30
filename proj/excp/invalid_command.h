@@ -6,7 +6,7 @@
 #include <string>
 #include "base_exception.h"
 
-class invalid_command : base_exception
+class invalid_command : public base_exception
 {
     std::string command;
     std::vector<std::string> matchingCommands;

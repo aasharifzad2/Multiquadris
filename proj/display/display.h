@@ -2,10 +2,11 @@
 #define _display_h_
 
 
-#include "../core/game.h"
 #include "../core/player.h"
 #include "../core/board.h"
 #include "../core/cell.h"
+
+class Game;
 
 class Display
 {

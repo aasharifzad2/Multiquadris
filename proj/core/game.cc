@@ -5,8 +5,19 @@
 #include <map>
 #include "game.h"
 #include "../display/display.h"
+#include "../display/textDisplay.h"
 #include "../excp/invalid_command.h"
+#include "../excp/not_implemented.h"
 
+#ifdef DEBUG
+#include <fstream>
+Game::Game() :
+    tDisplay(std::cout)
+{
+    std::ifstream infile = std::ifstream("debug");
+    player = new Player(infile);
+}
+#endif
 
 void Game::play()
 {
@@ -66,8 +77,6 @@ void Game::readCommand()
         return;
     }
     
-    std::cout << mult << "x ";
-    
     try
     {
         cmd = getCommand(input);
@@ -77,67 +86,68 @@ void Game::readCommand()
         std::cerr << e.message() << std::endl;
         return;
     }
-    
+
     switch (cmd)
     {
         case Left:
-            std::cout << "move left" << std::endl;
+            player->moveLeft(mult);
             break;
         case Right:
-            std::cout << "move right" << std::endl;
+            player->moveRight(mult);
             break;
         case Down:
-            std::cout << "move down" << std::endl;
+            player->moveDown(mult);
             break;
         case RotateCW:
-            std::cout << "rotate cw" << std::endl;
+            player->rotateCW(mult);
             break;
         case RotateCCW:
-            std::cout << "rotate ccw" << std::endl;
+            player->rotateCCW(mult);
             break;
         case Drop:
-            std::cout << "drop block" << std::endl;
+            player->drop();
             break;
         case LevelUp:
-            std::cout << "increase difficulty" << std::endl;
+            player->levelUp(mult);
             break;
         case LevelDown:
-            std::cout << "decrease difficulty" << std::endl;
+            player->levelDown(mult);
             break;
         case NoRandom:
-            std::cout << "no random" << std::endl;
-            break;
+            throw not_implemented();
         case Random:
-            std::cout << "randomize" << std::endl;
+            throw not_implemented();
             break;
         case Sequence:
-            std::cout << "sequence" << std::endl;
+            throw not_implemented();
             break;
         case Restart:
-            std::cout << "restart" << std::endl;
+            throw not_implemented();
             break;
         case IBlock:
-            std::cout << "force I" << std::endl;
+            throw not_implemented();
             break;
         case JBlock:
-            std::cout << "force J" << std::endl;
+            throw not_implemented();
             break;
         case LBlock:
-            std::cout << "force L" << std::endl;
+            throw not_implemented();
             break;
         case OBlock:
-            std::cout << "force O" << std::endl;
+            throw not_implemented();
             break;
         case SBlock:
-            std::cout << "force S" << std::endl;
+            throw not_implemented();
             break;
         case ZBlock:
-            std::cout << "force Z" << std::endl;
+            throw not_implemented();
             break;
         case TBlock:
-            std::cout << "force T" << std::endl;
+            throw not_implemented();
             break;
     }
+    
+    player->display(tDisplay);
 }
 
 // Visitor Pattern : Visit a display

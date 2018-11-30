@@ -11,6 +11,8 @@
 
 
 // MARK: - Constructors & Destructor
+Player::Player() {}
+
 Player::Player(std::ifstream &level0input) :
     board(std::make_unique<Board>(this)),
     levels(Level::initLevels(level0input))
@@ -162,13 +164,24 @@ void Player::rotateCW(int mult)
     
     while (!board->blockFits(fallingBlock))
     {
-        rotateCCW();
+        fallingBlock->rotateCCW();
     }
 }
 
 void Player::rotateCCW(int mult)
 {
-    rotateCW(mult * 3);
+    assertBlockFits();
+    
+    mult = mult % 4;
+    for (int i = 0; i < mult; i++)
+    {
+        fallingBlock->rotateCCW();
+    }
+    
+    while (!board->blockFits(fallingBlock))
+    {
+        fallingBlock->rotateCW();
+    }
 }
 
 // MARK: Points Functions
