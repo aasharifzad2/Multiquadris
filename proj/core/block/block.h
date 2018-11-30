@@ -7,30 +7,35 @@
 #include "../colour.h"
 class Cell;
 
+
 class Block
 {
-    protected:
+protected:
     static int initialX, initialY;
+    
     int levelGenerated;
     char symbol;
     Colour colour;
     std::vector<std::shared_ptr<Cell>> cells;
     
-    public:
-    virtual ~Block() = 0;
+public:
     Block(char, Colour);
+    virtual ~Block() = 0;
 
+    // Setters
     void setLevelGenerated(int);
     
-    int getNumCells() const;
+    // Getters
     int getLevelGenerated() const;
     char getSymbol() const;
     Colour getColour() const;
+    int getNumCells() const;
     std::shared_ptr<Cell> getCell(int) const;
     std::vector<std::shared_ptr<Cell>> getCells() const;
     
-    // Observer Pattern : Called by subject (Cell) to notify cell being cleared
+    // Observer Pattern : cell notifies block that the cell has been cleared
     void cellCleared(const Cell *);
+    
     // Movement methods
     void moveRight();
     void moveLeft();
@@ -39,7 +44,8 @@ class Block
     void rotateCW();
     void rotateCCW();
     
-    private:
+private:
+    // Calculates the extreme row and col values of the block
     void getBounds(int &, int &, int &, int &);
 };
 

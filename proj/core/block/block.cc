@@ -5,61 +5,49 @@
 #include "../cell.h"
 #include "../../excp/not_implemented.h"
 
+
+// MARK: - Static
 int Block::initialX = 0;
 int Block::initialY = 1;
 
-// Destructor
-Block::~Block() {}
 
-// Constructor
+// MARK: - Constructors & Destructor
 Block::Block(char symbol, Colour colour) :
-    symbol(symbol), colour(colour)
+    symbol(symbol),
+    colour(colour)
 {}
 
-// Setter : levelGenerated
-void Block::setLevelGenerated(int lvl)
-{
-    levelGenerated = lvl;
-}
+Block::~Block() {}
 
-// Getter : number of cells
+
+// MARK: - Setters
+void Block::setLevelGenerated(int lvl) { levelGenerated = lvl; }
+
+
+// MARK: - Getters
+int Block::getLevelGenerated() const { return levelGenerated; }
+
+char Block::getSymbol() const { return symbol; }
+
+Colour Block::getColour() const { return colour; }
+
 int Block::getNumCells() const
 {
     return (int)cells.size();
 }
 
-// Getter : level generatd
-int Block::getLevelGenerated() const
-{
-    return levelGenerated;
-}
-
-// Getter : symbol
-char Block::getSymbol() const
-{
-    return symbol;
-}
-
-// Getter : colour
-Colour Block::getColour() const
-{
-    return colour;
-}
-
-// Getter : a cell
 std::shared_ptr<Cell> Block::getCell(int index) const
 {
     return cells.at(index);
 }
 
-// Getter : cells
 std::vector<std::shared_ptr<Cell>> Block::getCells() const
 {
     return cells;
 }
 
-// Observer Pattern : called by subject (Cell) when the cell is cleared
-//   Tells the block to remove the cleared cell from it's list
+
+// MARK: - Public Functions
 void Block::cellCleared(const Cell * cellptr)
 {
     for (auto itr = cells.begin(); itr != cells.end(); )
@@ -75,7 +63,7 @@ void Block::cellCleared(const Cell * cellptr)
     }
 }
 
-// Movement: right
+// MARK: Movement Functions
 void Block::moveRight()
 {
     for (std::shared_ptr<Cell> c : cells)
@@ -84,7 +72,6 @@ void Block::moveRight()
     }
 }
 
-// Movement: left
 void Block::moveLeft()
 {
     for (std::shared_ptr<Cell> c : cells)
@@ -93,7 +80,6 @@ void Block::moveLeft()
     }
 }
 
-// Movement: up
 void Block::moveUp()
 {
     for (std::shared_ptr<Cell> c : cells)
@@ -102,7 +88,6 @@ void Block::moveUp()
     }
 }
 
-// Movement: down
 void Block::moveDown()
 {
     for (std::shared_ptr<Cell> c : cells)
@@ -111,7 +96,6 @@ void Block::moveDown()
     }
 }
 
-// Movement: roate clockwise
 void Block::rotateCW()
 {
     int leftMostX, rightMostX, highestY, lowestY;
@@ -125,7 +109,6 @@ void Block::rotateCW()
     }
 }
 
-// Movement: rotate counter clockwise
 void Block::rotateCCW()
 {
     int leftMostX, rightMostX, highestY, lowestY;
@@ -141,10 +124,18 @@ void Block::rotateCCW()
     }
 }
 
-void Block::getBounds(int &leftMostX, int &rightMostX, int &highestY, int &lowestY)
+
+// MARK: - Private Functions
+void Block::getBounds
+(
+    int &leftmostX,
+    int &rightmostX,
+    int &highestY,
+    int &lowestY
+)
 {
-    leftMostX = INT_MAX;
-    rightMostX = INT_MIN;
+    leftmostX = INT_MAX;
+    rightmostX = INT_MIN;
     highestY = INT_MAX;
     lowestY = INT_MIN;
     
@@ -153,8 +144,8 @@ void Block::getBounds(int &leftMostX, int &rightMostX, int &highestY, int &lowes
         int row = c->getRow();
         int col = c->getCol();
         
-        leftMostX = std::min(leftMostX, col);
-        rightMostX = std::max(rightMostX, col);
+        leftmostX = std::min(leftmostX, col);
+        rightmostX = std::max(rightmostX, col);
         highestY = std::min(highestY, row);
         lowestY = std::min(highestY, row);
     }
