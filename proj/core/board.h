@@ -24,8 +24,10 @@ class Board
     
     public:
     Board(int numRows, int numCols, Player *);
-
+    
+    // Getters
     std::vector<std::vector<Cell *>> getCells() const;
+    int getNumCols() const;
     
     bool blockFits(std::shared_ptr<Block>);
     void addBlock(std::shared_ptr<Block>);

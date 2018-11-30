@@ -34,6 +34,9 @@ std::vector<std::vector<Cell *>> Board::getCells() const
     return cellptrs;
 }
 
+// Getter: numCols
+int Board::getNumCols() const { return numCols; }
+
 
 // Returns true if the block does not go off the side of the board or clip other cells
 bool Board::blockFits(std::shared_ptr<Block> block)

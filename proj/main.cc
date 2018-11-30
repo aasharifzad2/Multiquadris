@@ -53,6 +53,13 @@ int main(int argc, char* argv[])
     b.display(d);
     std::cout << b.blockFits(blockptr) << std::endl;
     
+    
+    Board *boardptr2 = new Board(4, 5, nullptr);
+    boardptr2->addBlock(blockptr);
+    Player p1 = Player(boardptr2, lvl);
+    p1.display(d);
+    
+    
 #endif
     
     std::string execName = argv[0];
