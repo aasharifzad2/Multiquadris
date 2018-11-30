@@ -7,7 +7,7 @@
 #include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
 
-Board::Board(int numRows, int numCols, Player *player) :
+Board::Board(Player *player, int numRows, int numCols) :
     player(player),
     numRows(numRows),
     numCols(numCols)
@@ -33,6 +33,9 @@ std::vector<std::vector<Cell *>> Board::getCells() const
     
     return cellptrs;
 }
+
+// Getter: numCols
+int Board::getNumCols() const { return numCols; }
 
 
 // Returns true if the block does not go off the side of the board or clip other cells

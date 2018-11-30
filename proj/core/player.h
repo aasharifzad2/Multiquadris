@@ -8,20 +8,28 @@
 #include "game.h"
 #include "block/blockShape.h"
 
-class Player {
-    int score;
-    int highscore;
-    std::string name;
-    Board board;
-    Level lvl;
+
+class Player
+{
+    int score = 0, highscore = 0, curLevel = 0;
+    std::unique_ptr<Board> board;
+    std::vector<Level> levels;
     std::shared_ptr<Block> curBlock;
     Game *game;
     
     void updateHighscore();
-    
+    void initLevels();
     
     public:
-    Player(Board, Level);
+    Player(std::ifstream &);
+    
+    // Getters
+    int getScore() const;
+    int getHighScore() const;
+    Board *getBoard() const;
+    
+    // Setters
+    void setName(std::string);
     
     void drop();
     void levelUp(int);
@@ -41,6 +49,10 @@ class Player {
     // Point functions (Observer)
     void rowsCleared(int);
     void blockCleared(int lvlGenerated);
+    
+    // Visitor Pattern : visit a display
+    void display(Display &);
+    
 };
 
 #endif

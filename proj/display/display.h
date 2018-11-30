@@ -3,7 +3,7 @@
 
 
 #include "../core/game.h"
-class Player;
+#include "../core/player.h"
 #include "../core/board.h"
 #include "../core/cell.h"
 

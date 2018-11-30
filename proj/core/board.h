@@ -10,6 +10,10 @@ class Block;
 class Display;
 class Player;
 
+const int
+    DEFAULT_NUM_ROWS = 15,
+    DEFAULT_NUM_COLS = 11;
+
 class Board
 {
     int numRows, numCols;
@@ -23,9 +27,12 @@ class Board
     
     
     public:
-    Board(int numRows, int numCols, Player *);
 
+    Board(Player *, int numRows = DEFAULT_NUM_ROWS, int numCols = DEFAULT_NUM_COLS);
+
+    // Getters
     std::vector<std::vector<Cell *>> getCells() const;
+    int getNumCols() const;
     
     bool blockFits(std::shared_ptr<Block>);
     void addBlock(std::shared_ptr<Block>);

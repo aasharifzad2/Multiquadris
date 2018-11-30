@@ -27,34 +27,6 @@ const int
 
 int main(int argc, char* argv[])
 {
-#ifdef DEBUG
-    std::cout << "This is a debug run.." << std::endl;
-    srand(DEFAULT_SEED);
-    
-    
-    Board b = Board(4, 5, nullptr);
-    RandomBlockStream blockstream = RandomBlockStream(
-        {
-            {IShape, 1},
-            {JShape, 1},
-            {LShape, 1},
-            {OShape, 1},
-            {SShape, 1},
-            {ZShape, 1},
-            {TShape, 1},
-        }
-    );
-    Level lvl = Level(1, &blockstream);
-
-    
-    std::shared_ptr<Block> blockptr = lvl.getBlock();
-    b.addBlock(blockptr);
-    TextDisplay d{std::cout};
-    b.display(d);
-    std::cout << b.blockFits(blockptr) << std::endl;
-    
-#endif
-    
     std::string execName = argv[0];
     bool textOnly = false;
     int seed = DEFAULT_SEED;
@@ -114,4 +86,9 @@ int main(int argc, char* argv[])
             }
         }
     }
+    
+#ifdef DEBUG
+    Player p = Player(scriptFile1);
+#endif
+    
 }
