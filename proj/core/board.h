@@ -16,8 +16,8 @@ const int
 
 class Board
 {
-    int numRows, numCols;
     Player *player;
+    int numRows, numCols;
     std::vector<std::shared_ptr<Block>> blocks;
     std::vector<std::vector<std::shared_ptr<Cell>>> cells;
     
