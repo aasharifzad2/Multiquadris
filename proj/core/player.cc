@@ -49,16 +49,18 @@ void Player::drop()
         // TO DO: Game over
         throw not_implemented();
     }
+    
+    board->clearFilledRows();
 }
 
 void Player::levelUp(int mult)
 {
-    throw not_implemented();
+    setLevel(curLevel + mult);
 }
 
 void Player::levelDown(int mult)
 {
-    throw not_implemented();
+    setLevel(curLevel - mult);
 }
 
 void Player::noRandom(std::ifstream &stream)
@@ -169,7 +171,8 @@ void Player::rowsCleared(int numRows)
 
 void Player::blockCleared(int lvlGenerated)
 {
-    score += lvlGenerated * lvlGenerated;
+    int points = lvlGenerated + 1;
+    score += points * points;
     updateHighscore();
 }
 
@@ -191,5 +194,22 @@ void Player::assertBlockFits()
     if (!board->blockFits(fallingBlock))
     {
         throw invalid_block_placement();
+    }
+}
+
+void Player::setLevel(int lvl)
+{
+    if (lvl > LEVEL_MAX)
+    {
+        curLevel = (int)levels.size() - 1;
+        
+    }
+    else if (lvl < LEVEL_MIN)
+    {
+        curLevel = 0;
+    }
+    else
+    {
+        curLevel = lvl;
     }
 }

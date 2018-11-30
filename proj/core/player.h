@@ -58,6 +58,8 @@ private:
     void updateHighscore();
     // throws an exception if fallingBlock does not fit the board
     void assertBlockFits();
+    // sets the level, going to the max/min level if trying to set out of bounds
+    void setLevel(int);
 };
 
 #endif
