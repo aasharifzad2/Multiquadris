@@ -11,13 +11,16 @@
 
 class Player
 {
+#if DEBUG
+    int score = 0, highscore = 0, curLevel = 2;
+#else
     int score = 0, highscore = 0, curLevel = 0;
+#endif
     std::unique_ptr<Board> board;
+    std::shared_ptr<Block> fallingBlock;
     std::vector<Level> levels;
-    std::shared_ptr<Block> curBlock;
     Game *game;
     
-    void updateHighscore();
     
     public:
     Player(std::ifstream &);
@@ -25,6 +28,7 @@ class Player
     // Getters
     int getScore() const;
     int getHighScore() const;
+    int getCurLevel() const;
     Board *getBoard() const;
     
     void drop();
@@ -35,20 +39,25 @@ class Player
     void forceBlock(BlockShape);
     
     // Movement and rotation functions
-    void moveRight(int);
-    void moveLeft(int);
-    void moveUp(int);
-    void moveDown(int);
-    void rotateCW(int);
-    void rotateCCW(int);
+    void moveRight(int = 1);
+    void moveLeft(int = 1);
+    void moveUp(int = 1);
+    void moveDown(int = 1);
+    void rotateCW(int = 1);
+    void rotateCCW(int = 1);
     
-    // Point functions (Observer)
+    // Observer Pattern : Board notifies Player that they've scored points
     void rowsCleared(int);
     void blockCleared(int lvlGenerated);
     
-    // Visitor Pattern : visit a display
+    // Visitor Pattern : Visit a display
     void display(Display &);
     
+private:
+    // updates the highscore if it is broken
+    void updateHighscore();
+    // throws an exception if fallingBlock does not fit the board
+    void assertBlockFits();
 };
 
 #endif

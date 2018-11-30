@@ -7,34 +7,58 @@
 #include "level.h"
 
 
+// MARK: - Static
+
+
+// MARK: - Constructors & Destructor
 Player::Player(std::ifstream &level0input) :
     board(std::make_unique<Board>(this)),
     levels(Level::initLevels(level0input))
-{}
+{
+    fallingBlock = levels[curLevel].getBlock();
+}
 
-// Getters (start)
+
+// MARK: - Setters
+
+
+// MARK: - Getters
 int Player::getScore() const { return score; }
 
 int Player::getHighScore() const { return highscore; }
 
-Board *Player::getBoard() const { return board.get(); }
-// Getters (end)
+int Player::getCurLevel() const { return curLevel; }
 
+Board *Player::getBoard() const { return board.get(); }
+
+
+// MARK: - Public Functions
 void Player::drop()
 {
-    throw not_implemented();
+    assertBlockFits();
+    
+    // Move block down until it is resting on a block
+    while(board->blockFits(fallingBlock)) fallingBlock->moveDown();
+    fallingBlock->moveUp();
+    
+    board->addBlock(fallingBlock);
+    fallingBlock = levels[curLevel].getBlock();
+    
+    if (!board->blockFits(fallingBlock))
+    {
+        // TO DO: Game over
+        throw not_implemented();
+    }
 }
 
 void Player::levelUp(int mult)
 {
     throw not_implemented();
-    //int newLevel = level.curLevel() + mult;
 }
 
 void Player::levelDown(int mult)
 {
     throw not_implemented();
-    //int newLevel = level.curLevel() - mult;
 }
 
 void Player::noRandom(std::ifstream &stream)
@@ -53,124 +77,89 @@ void Player::forceBlock(BlockShape shape)
     throw not_implemented();
 }
 
-// Movement: right
+// MARK: Movement Functions
 void Player::moveRight(int mult)
 {
-    if (!board->blockFits(curBlock))
-    {
-        throw invalid_block_placement();
-    }
+    assertBlockFits();
     
     for (int i = 0; i < mult; i++)
     {
-        curBlock->moveRight();
+        fallingBlock->moveRight();
     }
     
-    while (!board->blockFits(curBlock))
+    while (!board->blockFits(fallingBlock))
     {
-        curBlock->moveLeft();
+        fallingBlock->moveLeft();
     }
 }
 
-// Movement: left
 void Player::moveLeft(int mult)
 {
-    if (!board->blockFits(curBlock))
-    {
-        throw invalid_block_placement();
-    }
+    assertBlockFits();
     
     for (int i = 0; i < mult; i++)
     {
-        curBlock->moveLeft();
+        fallingBlock->moveLeft();
     }
     
-    while (!board->blockFits(curBlock))
+    while (!board->blockFits(fallingBlock))
     {
-        curBlock->moveRight();
+        fallingBlock->moveRight();
     }
 }
 
-// Movement: up
 void Player::moveUp(int mult)
 {
-    if (!board->blockFits(curBlock))
-    {
-        throw invalid_block_placement();
-    }
+    assertBlockFits();
     
     for (int i = 0; i < mult; i++)
     {
-        curBlock->moveUp();
+        fallingBlock->moveUp();
     }
     
-    while (!board->blockFits(curBlock))
+    while (!board->blockFits(fallingBlock))
     {
-        curBlock->moveDown();
+        fallingBlock->moveDown();
     }
 }
 
-// Movement: down
 void Player::moveDown(int mult)
 {
-    if (!board->blockFits(curBlock))
-    {
-        throw invalid_block_placement();
-    }
+    assertBlockFits();
     
     for (int i = 0; i < mult; i++)
     {
-        curBlock->moveDown();
+        fallingBlock->moveDown();
     }
     
-    while (!board->blockFits(curBlock))
+    while (!board->blockFits(fallingBlock))
     {
-        curBlock->moveUp();
+        fallingBlock->moveUp();
     }
 }
 
-// Movement: rotate clockwise
 void Player::rotateCW(int mult)
 {
-    if (!board->blockFits(curBlock))
-    {
-        throw invalid_block_placement();
-    }
+    assertBlockFits();
     
     mult = mult % 4;
     for (int i = 0; i < mult; i++)
     {
-        curBlock->rotateCW();
+        fallingBlock->rotateCW();
     }
     
-    while (!board->blockFits(curBlock))
+    while (!board->blockFits(fallingBlock))
     {
-        curBlock->rotateCCW();
+        rotateCCW();
     }
 }
 
-// Movement: rotate counter clockwise
 void Player::rotateCCW(int mult)
 {
-    if (!board->blockFits(curBlock))
-    {
-        throw invalid_block_placement();
-    }
-    
-    mult = mult % 4;
-    for (int i = 0; i < mult; i++)
-    {
-        curBlock->rotateCCW();
-    }
-    
-    while (!board->blockFits(curBlock))
-    {
-        curBlock->rotateCW();
-    }
+    rotateCW(mult * 3);
 }
 
-
-// Point function (Observer Pattern)
+// MARK: Points Functions
 void Player::rowsCleared(int numRows)
 {
     int points = curLevel + numRows;
@@ -178,20 +167,29 @@ void Player::rowsCleared(int numRows)
     updateHighscore();
 }
 
-// Point function (Observer Pattern)
 void Player::blockCleared(int lvlGenerated)
 {
     score += lvlGenerated * lvlGenerated;
     updateHighscore();
 }
 
-// Visitor Pattern : visit a display
+// MARK: Display Functions
 void Player::display(Display &d)
 {
     d.accept(this);
 }
 
+
+// MARK: - Private Functions
 void Player::updateHighscore()
 {
     if (score > highscore) highscore = score;
+}
+
+void Player::assertBlockFits()
+{
+    if (!board->blockFits(fallingBlock))
+    {
+        throw invalid_block_placement();
+    }
 }

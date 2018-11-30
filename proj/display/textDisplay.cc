@@ -15,12 +15,14 @@ void TextDisplay::accept(const Player *player)
 {
     out << "Score: " << player->getScore() << std::endl;
     out << "High Score: " << player->getHighScore() << std::endl;
-    // TODO: Output level
+    out << "Level:  " << player->getCurLevel() << std::endl;
+    
     for (int i = 0; i < player->getBoard()->getNumCols(); i++)
     {
-        out << "-";
+        out << '-';
     }
     out << std::endl;
+    
     accept(player->getBoard());
 }
 

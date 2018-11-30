@@ -42,7 +42,6 @@ public:
     void moveUp();
     void moveDown();
     void rotateCW();
-    void rotateCCW();
     
 private:
     // Calculates the extreme row and col values of the block

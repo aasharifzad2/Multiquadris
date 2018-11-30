@@ -88,7 +88,18 @@ int main(int argc, char* argv[])
     }
     
 #ifdef DEBUG
+    TextDisplay textDisplay = TextDisplay(std::cout);
+    
     Player p = Player(scriptFile1);
+    p.rotateCCW();
+    p.moveRight();
+    p.drop();
+    
+    p.rotateCCW();
+    p.drop();
+    p.drop();
+    p.drop();
+    p.display(textDisplay);
 #endif
     
 }

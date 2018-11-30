@@ -8,7 +8,7 @@
 
 // MARK: - Static
 int Block::initialX = 0;
-int Block::initialY = 1;
+int Block::initialY = 3;
 
 
 // MARK: - Constructors & Destructor
@@ -98,29 +98,16 @@ void Block::moveDown()
 
 void Block::rotateCW()
 {
-    int leftMostX, rightMostX, highestY, lowestY;
+    int leftist, rightist, highest, lowest;
     
-    getBounds(leftMostX, rightMostX, highestY, lowestY);
-    
-    for (std::shared_ptr<Cell> c : cells)
-    {
-        c->setCol((leftMostX + (lowestY - c->getRow())));
-        c->setRow(lowestY - (rightMostX - c->getCol()));
-    }
-}
-
-void Block::rotateCCW()
-{
-    int leftMostX, rightMostX, highestY, lowestY;
-    
-    getBounds(leftMostX, rightMostX, highestY, lowestY);
-    
-    int width = leftMostX - rightMostX;
+    getBounds(leftist, rightist, highest, lowest);
     
     for (std::shared_ptr<Cell> c : cells)
     {
-        c->setCol(leftMostX + c->getRow() - highestY);
-        c->setRow(lowestY - (width - (rightMostX - c->getCol()) - 1));
+        int col = c->getCol();
+        int row = c->getRow();
+        c->setCol(leftist + lowest - row);
+        c->setRow(lowest - rightist + col);
     }
 }
 
@@ -128,25 +115,25 @@ void Block::rotateCCW()
 // MARK: - Private Functions
 void Block::getBounds
 (
-    int &leftmostX,
-    int &rightmostX,
-    int &highestY,
-    int &lowestY
+    int &leftist,
+    int &rightest,
+    int &highest,
+    int &lowest
 )
 {
-    leftmostX = INT_MAX;
-    rightmostX = INT_MIN;
-    highestY = INT_MAX;
-    lowestY = INT_MIN;
+    leftist = INT_MAX;
+    rightest = INT_MIN;
+    highest = INT_MAX;
+    lowest = INT_MIN;
     
     for (std::shared_ptr<Cell> c : cells)
     {
         int row = c->getRow();
         int col = c->getCol();
         
-        leftmostX = std::min(leftmostX, col);
-        rightmostX = std::max(rightmostX, col);
-        highestY = std::min(highestY, row);
-        lowestY = std::min(highestY, row);
+        leftist = std::min(leftist, col);
+        rightest = std::max(rightest, col);
+        highest = std::min(highest, row);
+        lowest = std::max(highest, row);
     }
 }
