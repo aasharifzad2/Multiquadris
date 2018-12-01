@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <vector>
 #include <map>
 #include "game.h"
@@ -46,7 +47,7 @@ void Game::play()
 
     while (true)
     {
-        readCommand();
+        readCommand(std::cin);
     }
 }
 
@@ -102,30 +103,29 @@ void Game::printCommandInput() const
     }
 }
 
-
-void Game::readCommand()
+bool Game::readCommand(std::istream &in)
 {
     int mult;
     std::string input;
     Command cmd;
     
-    std::cin >> mult;
-    if (std::cin.eof())
+    in >> mult;
+    if (in.eof())
     {
-        exit(0);
+        return false;
     }
-    if (!std::cin)
+    if (!in)
     {
         mult = 1;
-        std::cin.clear();
+        in.clear();
     }
     
-    std::cin >> input;
+    in >> input;
     
     if (mult < 0)
     {
         std::cerr << "Multiplier of '" << mult << "' is invalid, must be at least 0" << std::endl;
-        return;
+        return false;
     }
     
     try
@@ -135,75 +135,117 @@ void Game::readCommand()
     catch (invalid_command e)
     {
         std::cerr << e.message() << std::endl;
-        return;
+        return false;
     }
 
     switch (cmd)
     {
         case Left:
-            curPlayer()->moveLeft(mult);
+        {    curPlayer()->moveLeft(mult);
             break;
+        }
         case Right:
+        {
             curPlayer()->moveRight(mult);
             break;
+        }
         case Down:
+        {
             curPlayer()->moveDown(mult);
             break;
+        }
         case RotateCW:
+        {
             curPlayer()->rotateCW(mult);
             break;
+        }
         case RotateCCW:
+        {
             curPlayer()->rotateCCW(mult);
             break;
+        }
         case Drop:
+        {
             curPlayer()->drop();
             break;
+        }
         case LevelUp:
+        {
             curPlayer()->levelUp(mult);
             break;
+        }
         case LevelDown:
+        {
             curPlayer()->levelDown(mult);
             break;
+        }
         case NoRandom:
+        {
             throw not_implemented();
+        }
         case Random:
+        {
             throw not_implemented();
             break;
+        }
         case Sequence:
-            throw not_implemented();
+        {
+            std::string filename;
+            in >> filename;
+            std::ifstream file(filename);
+            while (readCommand(file));
             break;
+        }
         case Restart:
+        {
             throw not_implemented();
             break;
+        }
         case IBlock:
+        {
             throw not_implemented();
             break;
+        }
         case JBlock:
+        {
             throw not_implemented();
             break;
+        }
         case LBlock:
+        {
             throw not_implemented();
             break;
+        }
         case OBlock:
+        {
             throw not_implemented();
             break;
+        }
         case SBlock:
+        {
             throw not_implemented();
             break;
+        }
         case ZBlock:
-            throw not_implemented();
+        {   throw not_implemented();
             break;
+        }
         case TBlock:
+        {
             throw not_implemented();
             break;
+        }
         case PrintCommandInput:
+        {
             printCommandInput();
             break;
+        }
     }
     
     commandsRead.emplace_back(std::to_string(mult) + input);
     
     display(tDisplay);
+    return true;
 }
 
 // Visitor Pattern : Visit a display

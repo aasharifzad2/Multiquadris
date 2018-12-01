@@ -87,7 +87,7 @@ private:
     Player *nextPlayer() const;
     Command getCommand(std::string);
     void printCommandInput() const;
-    void readCommand();
+    bool readCommand(std::istream &);
 };
 
 
