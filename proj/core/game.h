@@ -35,8 +35,11 @@ enum Command
 
 class Game
 {
-    Player *player;
-    TextDisplay tDisplay;
+    int playerIndex;
+    std::vector<std::unique_ptr<Player>> players;
+    
+    
+    Display &tDisplay;
     std::map<std::string, Command> commands =
         {
             {"left", Command::Left},
@@ -59,14 +62,27 @@ class Game
             {"Z", Command::ZBlock},
             {"T", Command::TBlock}
         };
-    void readCommand();
-    Command getCommand(std::string);
     
-    public:
-    Game();
+public:
+    Game(Display &);
+    
+    // Setters
+    
+    // Getters
+    std::vector<Player *> getPlayers() const;
+    
     void play();
+    void addPlayer(std::ifstream &);
+
     // Visitor Pattern : visit(Display)
     void display(Display &);
+    
+    
+private:
+    Player *curPlayer() const;
+    Player *nextPlayer() const;
+    Command getCommand(std::string);
+    void readCommand();
 };
 
 

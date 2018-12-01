@@ -10,11 +10,7 @@ class Game;
 
 class Player
 {
-#if DEBUG
-    int score = 0, highscore = 0, curLevel = 2;
-#else
-    int score = 0, highscore = 0, curLevel = 0;
-#endif
+    int score, highscore, curLevel;
     std::unique_ptr<Board> board;
     std::shared_ptr<Block> fallingBlock;
     std::vector<Level> levels;

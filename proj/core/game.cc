@@ -6,19 +6,40 @@
 #include "game.h"
 #include "../display/display.h"
 #include "../display/textDisplay.h"
+#include "../display/richTextDisplay.h"
 #include "../excp/invalid_command.h"
 #include "../excp/not_implemented.h"
 
-#ifdef DEBUG
-#include <fstream>
-Game::Game() :
-    tDisplay(std::cout)
-{
-    std::ifstream infile = std::ifstream("debug");
-    player = new Player(infile);
-}
-#endif
 
+// MARK: - Static
+
+
+// MARK: - Constructors & Destructor
+Game::Game(Display &display) :
+    playerIndex(0),
+    tDisplay(display)
+{
+    
+}
+
+
+// MARK: - Setters
+
+
+// MARK: - Getters
+std::vector<Player *> Game::getPlayers() const
+{
+    std::vector<Player *> playerPtrs;
+    for (int i = 0; i < players.size(); i++)
+    {
+        playerPtrs.emplace_back(players[i].get());
+    }
+    
+    return playerPtrs;
+}
+
+
+// MARK: - Public Functions
 void Game::play()
 {
     while (true)
@@ -27,6 +48,25 @@ void Game::play()
     }
 }
 
+void Game::addPlayer(std::ifstream &sequenceFile)
+{
+    players.emplace_back(std::make_unique<Player>(sequenceFile));
+}
+
+
+// MARK: - Private Functions
+Player *Game::curPlayer() const
+{
+    return players[playerIndex].get();
+}
+
+Player *Game::nextPlayer() const
+{
+    int index = (playerIndex + 1) % players.size();
+    return players[index].get();
+}
+
+// MARK: Command Functions
 Command Game::getCommand(std::string cmd)
 {
     // Find all of the commands that match
@@ -90,28 +130,28 @@ void Game::readCommand()
     switch (cmd)
     {
         case Left:
-            player->moveLeft(mult);
+            curPlayer()->moveLeft(mult);
             break;
         case Right:
-            player->moveRight(mult);
+            curPlayer()->moveRight(mult);
             break;
         case Down:
-            player->moveDown(mult);
+            curPlayer()->moveDown(mult);
             break;
         case RotateCW:
-            player->rotateCW(mult);
+            curPlayer()->rotateCW(mult);
             break;
         case RotateCCW:
-            player->rotateCCW(mult);
+            curPlayer()->rotateCCW(mult);
             break;
         case Drop:
-            player->drop();
+            curPlayer()->drop();
             break;
         case LevelUp:
-            player->levelUp(mult);
+            curPlayer()->levelUp(mult);
             break;
         case LevelDown:
-            player->levelDown(mult);
+            curPlayer()->levelDown(mult);
             break;
         case NoRandom:
             throw not_implemented();
@@ -147,7 +187,7 @@ void Game::readCommand()
             break;
     }
     
-    player->display(tDisplay);
+    display(tDisplay);
 }
 
 // Visitor Pattern : Visit a display

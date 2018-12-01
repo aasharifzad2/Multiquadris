@@ -1,17 +1,23 @@
 
 #include "textDisplay.h"
 #include <iomanip>
+#include "../core/game.h"
 #include "../excp/not_implemented.h"
 
 // Mark: - Static
 
+
 // Mark: - Constructors & Destructor
-TextDisplay::TextDisplay(std::ostream &out) : out(out) {}
+TextDisplay::TextDisplay(std::ostream &out) :
+    out(out)
+{}
+
 
 // Mark: - Visitors
 void TextDisplay::accept(const Game *game) const
 {
-    throw not_implemented();
+    auto players = game->getPlayers();
+    accept(players[0]);
 }
 
 void TextDisplay::accept(const Player *player) const
@@ -19,7 +25,7 @@ void TextDisplay::accept(const Player *player) const
     std::string horizontalBorder;
     for (int i = 0; i < player->getBoard()->getNumCols(); i++)
     {
-        topBorder += '-';
+        horizontalBorder += '-';
     }
     
     out << "Score: " << player->getScore() << std::endl;
@@ -32,10 +38,11 @@ void TextDisplay::accept(const Player *player) const
     {
         printRow
         (
-                 row,
-                 player->hasEffect(Effect::Blind),
-                 player->getFallingBlock())
-        ;
+            row,
+            player->hasEffect(Effect::Blind),
+            player->getFallingBlock()
+        );
+        
         out << std::endl;
     }
     out << horizontalBorder << std::endl;
@@ -47,7 +54,7 @@ void TextDisplay::accept(const Board *board) const
     {
         for (auto cell : row)
         {
-            accept(cell);
+            printPlacedCell(cell);
         }
         out << std::endl;
     }
@@ -55,27 +62,48 @@ void TextDisplay::accept(const Board *board) const
 
 void TextDisplay::accept(const Cell *cell) const
 {
-    out << cell->getSymbol();
+    printPlacedCell(cell);
 }
 
+
 // MARK: - Private Functions
-void TextDisplay::printRow(std::vector<Cell *> row, bool isBlind, Block *fallingBlock) const
+void TextDisplay::printRow
+(
+    std::vector<Cell *> row,
+    bool playerIsBlind,
+    Block *fallingBlock
+)
+const
 {
     for (auto cell : row)
     {
-        Cell *curCell;
-        curCell = fallingBlock->getMatchingCell(cell);
-        if (isBlind && cell->isInBlindZone())
+        Cell *fallingCell = fallingBlock->getMatchingCell(cell);
+        if (playerIsBlind && cell->isInBlindZone())
         {
-            out << '?';
+            printBlindCell();
         }
-        else if (curCell)
+        else if (fallingCell)
         {
-            accept(curCell);
+            printFallingCell(fallingCell);
         }
         else
         {
-            accept(cell);
+            printPlacedCell(cell);
         }
     }
+}
+
+void TextDisplay::printPlacedCell(const Cell *cell) const
+{
+    out << cell->getSymbol();
+}
+
+void TextDisplay::printFallingCell(const Cell *cell) const
+{
+    out << cell->getSymbol();
+}
+
+void TextDisplay::printBlindCell() const
+{
+    out << '?';
 }

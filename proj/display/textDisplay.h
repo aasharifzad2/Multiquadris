@@ -3,12 +3,15 @@
 
 
 #include "display.h"
-#include <ostream>
+#include <iostream>
 
 class TextDisplay : public Display
 {
+protected:
+    std::ostream &out;
+    
 public:
-    TextDisplay(std::ostream &);
+    TextDisplay(std::ostream & = std::cout);
     
     // Visitor Pattern : Visit different classes
     void accept(const Game *) const override;
@@ -16,9 +19,13 @@ public:
     void accept(const Board *) const override;
     void accept(const Cell *) const override;
     
-private:
-    std::ostream &out;
+
+protected:
+    // TODO: should printRow be private?
     void printRow(std::vector<Cell *>, bool, Block *) const;
+    virtual void printPlacedCell(const Cell *) const;
+    virtual void printFallingCell(const Cell *) const;
+    virtual void printBlindCell() const;
 };
 
 

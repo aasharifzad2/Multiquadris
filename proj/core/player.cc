@@ -14,6 +14,13 @@
 Player::Player() {}
 
 Player::Player(std::ifstream &level0input) :
+    score(0),
+    highscore(0),
+#ifdef DEBUG
+    curLevel(2),
+#else
+    curLevel(0),
+#endif
     board(std::make_unique<Board>(this)),
     levels(Level::initLevels(level0input))
 {

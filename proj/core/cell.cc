@@ -23,7 +23,7 @@ bool Cell::isFilled() const { return filled; }
 
 bool Cell::isInBlindZone() const
 {
-    return ((col >= 3 && col <= 9) || (row >= 3 && row <= 12));
+    return (col >= 2 && col <= 8 && row >= 2 && row <= 11);
 }
 
 char Cell::getSymbol() const

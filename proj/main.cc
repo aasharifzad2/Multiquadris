@@ -6,6 +6,7 @@
 
 #ifdef DEBUG
 #include <ctime>
+#include "display/richTextDisplay.h"
 #include "display/textDisplay.h"
 #include "core/board.h"
 #include "core/player.h"
@@ -89,8 +90,16 @@ int main(int argc, char* argv[])
     }
     
 #ifdef DEBUG
-    Game g{};
-    g.play();
+    
+#ifdef RICH
+    RichTextDisplay rtd = RichTextDisplay();
+#else
+    TextDisplay rtd = TextDisplay();
 #endif
     
+    Game g{rtd};
+    std::ifstream seq1{"sequence1.txt"};
+    g.addPlayer(seq1);
+    g.play();
+#endif
 }
