@@ -23,13 +23,13 @@ enum Command
     Random,
     Sequence,
     Restart,
-    IBlock,
-    JBlock,
-    LBlock,
-    OBlock,
-    SBlock,
-    ZBlock,
-    TBlock,
+    ForceIBlock,
+    ForceJBlock,
+    ForceLBlock,
+    ForceOBlock,
+    ForceSBlock,
+    ForceZBlock,
+    ForceTBlock,
     // Bonus:
     PrintCommandInput
 };
@@ -57,13 +57,13 @@ class Game
             {"random", Command::Random},
             {"sequence", Command::Sequence},
             {"restart", Command::Restart},
-            {"I", Command::IBlock},
-            {"J", Command::JBlock},
-            {"L", Command::LBlock},
-            {"O", Command::OBlock},
-            {"S", Command::SBlock},
-            {"Z", Command::ZBlock},
-            {"T", Command::TBlock},
+            {"I", Command::ForceIBlock},
+            {"J", Command::ForceJBlock},
+            {"L", Command::ForceLBlock},
+            {"O", Command::ForceOBlock},
+            {"S", Command::ForceSBlock},
+            {"Z", Command::ForceZBlock},
+            {"T", Command::ForceTBlock},
             {"precmd", Command::PrintCommandInput}
         };
     

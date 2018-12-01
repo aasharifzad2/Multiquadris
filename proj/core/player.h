@@ -34,7 +34,7 @@ class Player
     void levelDown(int);
     void noRandom(std::ifstream &);
     void random();
-    void forceBlock(BlockShape);
+    void forceBlock(std::shared_ptr<Block>);
     bool hasEffect(Effect) const;
     
     // Movement and rotation functions

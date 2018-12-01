@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <memory>
 #include <vector>
 #include <map>
 #include "game.h"
@@ -10,6 +11,15 @@
 #include "../display/richTextDisplay.h"
 #include "../excp/invalid_command.h"
 #include "../excp/not_implemented.h"
+
+#include "block/shape/iBlock.h"
+#include "block/shape/jBlock.h"
+#include "block/shape/lBlock.h"
+#include "block/shape/oBlock.h"
+#include "block/shape/sBlock.h"
+#include "block/shape/zBlock.h"
+#include "block/shape/tBlock.h"
+
 
 
 // MARK: - Static
@@ -201,38 +211,39 @@ bool Game::readCommand(std::istream &in)
             throw not_implemented();
             break;
         }
-        case IBlock:
+        case ForceIBlock:
         {
-            throw not_implemented();
+            curPlayer()->forceBlock(std::make_shared<IBlock>());
             break;
         }
-        case JBlock:
+        case ForceJBlock:
         {
-            throw not_implemented();
+            curPlayer()->forceBlock(std::make_shared<JBlock>());
             break;
         }
-        case LBlock:
+        case ForceLBlock:
         {
-            throw not_implemented();
+            curPlayer()->forceBlock(std::make_shared<LBlock>());
             break;
         }
-        case OBlock:
+        case ForceOBlock:
         {
-            throw not_implemented();
+            curPlayer()->forceBlock(std::make_shared<OBlock>());
             break;
         }
-        case SBlock:
+        case ForceSBlock:
         {
-            throw not_implemented();
+            curPlayer()->forceBlock(std::make_shared<SBlock>());
             break;
         }
-        case ZBlock:
-        {   throw not_implemented();
+        case ForceZBlock:
+        {
+            curPlayer()->forceBlock(std::make_shared<ZBlock>());
             break;
         }
-        case TBlock:
+        case ForceTBlock:
         {
-            throw not_implemented();
+            curPlayer()->forceBlock(std::make_shared<TBlock>());
             break;
         }
         case PrintCommandInput:

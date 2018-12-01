@@ -84,9 +84,9 @@ void Player::random()
     throw not_implemented();
 }
 
-void Player::forceBlock(BlockShape shape)
+void Player::forceBlock(std::shared_ptr<Block> block)
 {
-    throw not_implemented();
+    fallingBlock = block;
 }
 
 bool Player::hasEffect(Effect effect) const
