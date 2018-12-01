@@ -103,7 +103,7 @@ void Player::moveRight(int mult)
 {
     assertBlockFits();
     
-    for (int i = 0; i < mult; i++)
+    for (int i = 0; i < mult && board->blockFits(fallingBlock); i++)
     {
         fallingBlock->moveRight();
     }
@@ -118,7 +118,7 @@ void Player::moveLeft(int mult)
 {
     assertBlockFits();
     
-    for (int i = 0; i < mult; i++)
+    for (int i = 0; i < mult && board->blockFits(fallingBlock); i++)
     {
         fallingBlock->moveLeft();
     }
@@ -133,7 +133,7 @@ void Player::moveUp(int mult)
 {
     assertBlockFits();
     
-    for (int i = 0; i < mult; i++)
+    for (int i = 0; i < mult && board->blockFits(fallingBlock); i++)
     {
         fallingBlock->moveUp();
     }
@@ -148,7 +148,7 @@ void Player::moveDown(int mult)
 {
     assertBlockFits();
     
-    for (int i = 0; i < mult; i++)
+    for (int i = 0; i < mult && board->blockFits(fallingBlock); i++)
     {
         fallingBlock->moveDown();
     }
