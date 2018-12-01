@@ -29,7 +29,9 @@ enum Command
     OBlock,
     SBlock,
     ZBlock,
-    TBlock
+    TBlock,
+    // Bonus:
+    PrintCommandInput
 };
 
 
@@ -37,6 +39,7 @@ class Game
 {
     int playerIndex;
     std::vector<std::unique_ptr<Player>> players;
+    std::vector<std::string> commandsRead;
     
     
     Display &tDisplay;
@@ -60,7 +63,8 @@ class Game
             {"O", Command::OBlock},
             {"S", Command::SBlock},
             {"Z", Command::ZBlock},
-            {"T", Command::TBlock}
+            {"T", Command::TBlock},
+            {"precmd", Command::PrintCommandInput}
         };
     
 public:
@@ -82,6 +86,7 @@ private:
     Player *curPlayer() const;
     Player *nextPlayer() const;
     Command getCommand(std::string);
+    void printCommandInput() const;
     void readCommand();
 };
 

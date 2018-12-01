@@ -42,6 +42,8 @@ std::vector<Player *> Game::getPlayers() const
 // MARK: - Public Functions
 void Game::play()
 {
+    display(tDisplay);
+
     while (true)
     {
         readCommand();
@@ -91,6 +93,15 @@ Command Game::getCommand(std::string cmd)
     // Zero or multiple matching commands
     throw invalid_command(cmd, matchingStrings);
 }
+
+void Game::printCommandInput() const
+{
+    for (auto cmd : commandsRead)
+    {
+        std::cout << cmd << std::endl;
+    }
+}
+
 
 void Game::readCommand()
 {
@@ -185,7 +196,12 @@ void Game::readCommand()
         case TBlock:
             throw not_implemented();
             break;
+        case PrintCommandInput:
+            printCommandInput();
+            break;
     }
+    
+    commandsRead.emplace_back(std::to_string(mult) + input);
     
     display(tDisplay);
 }
