@@ -1,5 +1,7 @@
 
 #include "player.h"
+
+
 #include "level.h"
 #include "../excp/not_implemented.h"
 #include "../excp/invalid_block_placement.h"
@@ -11,26 +13,34 @@
 
 
 // MARK: - Constructors & Destructor
-Player::Player() {}
-
-Player::Player(std::ifstream &level0input) :
+Player::Player() :
     score(0),
     highscore(0),
-#ifdef DEBUG
-    curLevel(2),
-#else
     curLevel(0),
-#endif
     curTurn(0),
-    lastScoringTurn(0),
-    board(std::make_unique<Board>(this)),
-    levels(Level::initLevels(level0input))
+    lastScoringTurn(0)
 {
+    setBoardSize(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
+    levels = Level::initLevels();
+    
+    std::ifstream defaultBlockSequence{"./blocksq/default.bsq"};
+    setBlockSequence(std::move(defaultBlockSequence));
+    
     fallingBlock = levels[curLevel].getBlock();
 }
 
 
 // MARK: - Setters
+void Player::setBlockSequence(std::ifstream blockInput)
+{
+    blockSequence = std::make_shared<std::ifstream>(std::move(blockInput));
+    levels[0].setBlockSequence(blockSequence);
+}
+
+void Player::setBoardSize(int numRows, int numCols)
+{
+    board = std::make_unique<Board>(this, numRows, numCols);
+}
 
 
 // MARK: - Getters
@@ -89,7 +99,6 @@ void Player::random()
 void Player::forceBlock(std::shared_ptr<Block> block)
 {
     fallingBlock = block;
-    fallingBlock->setLevelGenerated(curLevel);
 }
 
 bool Player::hasEffect(Effect effect) const
@@ -194,18 +203,19 @@ void Player::rotateCCW(int mult)
     }
 }
 
-// MARK: Score Functions
+// MARK: Points Functions
 void Player::rowsCleared(int numRows)
 {
-    // Update points
     int points = curLevel + numRows;
-    increaseScore(points * points);
+    score += points*points;
+    updateHighscore();
 }
 
 void Player::blockCleared(int lvlGenerated)
 {
     int points = lvlGenerated + 1;
-    increaseScore(points * points);
+    score += points * points;
+    updateHighscore();
 }
 
 // MARK: Display Functions
@@ -214,14 +224,11 @@ void Player::display(Display &d)
     d.accept(this);
 }
 
+
 // MARK: - Private Functions
-void Player::increaseScore(int byPoints)
+void Player::updateHighscore()
 {
-    // Update score
-    score += byPoints;
     if (score > highscore) highscore = score;
-    
-    lastScoringTurn = curTurn;
 }
 
 void Player::assertBlockFits()

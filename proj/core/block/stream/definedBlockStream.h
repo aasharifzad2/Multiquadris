@@ -10,10 +10,10 @@ class Block;
 
 class DefinedBlockStream : public BlockStream
 {
-    std::ifstream &sequence;
+    std::shared_ptr<std::ifstream> sequence;
     
 public:
-    DefinedBlockStream(std::ifstream &);
+    DefinedBlockStream(std::shared_ptr<std::ifstream>);
     std::shared_ptr<Block> getBlock() override;
 };
 

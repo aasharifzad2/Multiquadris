@@ -6,20 +6,8 @@
 #include "block/stream/randomBlockStream.h"
 
 
-// STATIC FUNCTIONS
-std::vector<Level> Level::initLevels(std::ifstream &level0input)
-{
-    std::vector<Level> levels;
-    for (int i = LEVEL_MIN; i <= LEVEL_MAX; i++)
-    {
-        levels.emplace_back(initLevel(i, level0input));
-    }
-    
-    return levels;
-}
-
-
-Level Level::initLevel(int lvl, std::ifstream &levelInput)
+// MARK: - Static
+Level Level::initLevel(int lvl)
 {
     std::unique_ptr<BlockStream> bs;
     std::vector<Effect> effects;
@@ -29,7 +17,13 @@ Level Level::initLevel(int lvl, std::ifstream &levelInput)
     
     switch (lvl) {
         case 0:
-            bs = std::make_unique<DefinedBlockStream>(levelInput);
+            bs = std::make_unique<RandomBlockStream>
+            (
+                std::map<BlockShape, int>
+                {
+                    {IShape, 1}
+                }
+            );
             break;
         case 1:
             bs = std::make_unique<RandomBlockStream>
@@ -86,8 +80,21 @@ Level Level::initLevel(int lvl, std::ifstream &levelInput)
     
     return Level(lvl, std::move(bs), effects);
 }
-// STATIC FUNCTIONS (end)
 
+
+std::vector<Level> Level::initLevels()
+{
+    std::vector<Level> levels;
+    for (int i = LEVEL_MIN; i <= LEVEL_MAX; i++)
+    {
+        levels.emplace_back(initLevel(i));
+    }
+    
+    return levels;
+}
+
+
+// MARK: - Constructors & Destructor
 Level::Level
 (
     int number,
@@ -100,11 +107,30 @@ Level::Level
 {}
 
 
+// MARK: - Setters
+void Level::setBlockSequence(std::shared_ptr<std::ifstream> in)
+{
+    if (in)
+    {
+        blockstream = std::make_unique<DefinedBlockStream>(in);
+    }
+    else
+    {
+        // TODO: Check if this works
+        std::vector<Effect> effects = activeEffects;
+        *this = initLevel(number);
+        activeEffects = effects;
+    }
+}
+
+
+// MARK: - Getters
+
+
+// MARK: - Public Functions
 std::shared_ptr<Block> Level::getBlock() const
 {
-    std::shared_ptr<Block> block = blockstream->getBlock();
-    block->setLevelGenerated(number);
-    return block;
+    return blockstream->getBlock();
 }
 
 bool Level::hasEffect(Effect e) const
@@ -116,3 +142,6 @@ bool Level::hasEffect(Effect e) const
     
     return false;
 }
+
+
+// MARK: - Private Functions

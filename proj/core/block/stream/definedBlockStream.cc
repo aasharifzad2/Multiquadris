@@ -5,19 +5,24 @@
 #include "../../../excp/invalid_block_sequence.h"
 
 
-DefinedBlockStream::DefinedBlockStream(std::ifstream &sequence) :
-    sequence(sequence) {}
+DefinedBlockStream::DefinedBlockStream
+(
+    std::shared_ptr<std::ifstream> sequence
+) :
+    sequence(sequence)
+{}
 
 std::shared_ptr<Block> DefinedBlockStream::getBlock()
 {
-    if (sequence.eof())
-    {
-        sequence.clear();
-        sequence.seekg(0, sequence.beg);
-    }
-    
     char blockType;
-    sequence >> blockType;
+    *sequence >> blockType;
+    
+    if (sequence->eof())
+    {
+        sequence->clear();
+        sequence->seekg(0, sequence->beg);
+        *sequence >> blockType;
+    }
     
     switch (blockType)
     {

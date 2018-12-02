@@ -90,17 +90,12 @@ int main(int argc, char* argv[])
     }
     
 #ifdef DEBUG
+    Game g;
     
 #ifdef RICH
-    RichTextDisplay rtd = RichTextDisplay();
-#else
-    TextDisplay rtd = TextDisplay();
+    g.enableRichText();
 #endif
     
-    Game g{rtd};
-    std::ifstream seq1{"sequence1.txt"};
-    g.addPlayer(seq1);
-    g.addPlayer(seq1);
     g.play();
 #endif
 }

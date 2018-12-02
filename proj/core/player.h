@@ -2,6 +2,10 @@
 #define _player_h_
 
 
+#include <iostream>
+#include <memory>
+#include <fstream>
+#include <utility>
 #include "level.h"
 #include "block/block.h"
 #include "board.h"
@@ -10,9 +14,11 @@ class Game;
 
 class Player
 {
+
     int score, highscore;
     int curLevel;
     int curTurn, lastScoringTurn;
+    std::shared_ptr<std::ifstream> blockSequence;
     std::unique_ptr<Board> board;
     std::shared_ptr<Block> fallingBlock;
     std::vector<Level> levels;
@@ -22,7 +28,10 @@ class Player
     
 public:
     Player();
-    Player(std::ifstream &);
+    
+    // Setters
+    void setBlockSequence(std::ifstream);
+    void setBoardSize(int numCols, int numRows);
     
     // Getters
     int getScore() const;
@@ -55,7 +64,8 @@ public:
     void display(Display &);
     
 private:
-    void increaseScore(int);
+    // updates the highscore if it is broken
+    void updateHighscore();
     // throws an exception if fallingBlock does not fit the board
     void assertBlockFits();
     // sets the level, going to the max/min level if trying to set out of bounds

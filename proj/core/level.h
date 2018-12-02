@@ -20,13 +20,17 @@ class Level
     std::vector<Effect> activeEffects;
 
 public:
-    static Level initLevel(int lvl, std::ifstream &levelInput);
-    static std::vector<Level> initLevels(std::ifstream &);
-    
-    Level(int, std::unique_ptr<BlockStream>, std::vector<Effect>);
-    
+    static Level initLevel(int);
+    static std::vector<Level> initLevels();
+
+    // Setters
+    void setBlockSequence(std::shared_ptr<std::ifstream>);
+
     std::shared_ptr<Block> getBlock() const;
     bool hasEffect(Effect) const;
+
+private:
+    Level(int, std::unique_ptr<BlockStream>, std::vector<Effect>);
 };
 
 

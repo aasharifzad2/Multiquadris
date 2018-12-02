@@ -26,15 +26,64 @@
 
 
 // MARK: - Constructors & Destructor
-Game::Game(Display &display) :
-    playerIndex(0),
-    tDisplay(display)
+Game::Game() :
+    playerIndex(0)
 {
-    
+    setNumPlayers(1);
+    setRichTextEnabled(false);
+    setGraphicsEnabled(false);
 }
 
 
 // MARK: - Setters
+void Game::setNumPlayers(int numPlayers)
+{
+    if (numPlayers < MIN_NUM_PLAYERS)
+    {
+        numPlayers = MIN_NUM_PLAYERS;
+    }
+    
+    if (numPlayers > MAX_NUM_PLAYERS)
+    {
+        numPlayers = MAX_NUM_PLAYERS;
+    }
+    
+    players.clear();
+    
+    while (players.size() < numPlayers)
+    {
+        players.emplace_back(std::make_unique<Player>());
+    }
+}
+
+void Game::setSequences()
+{
+    throw not_implemented();
+}
+
+void Game::setGraphicsEnabled(bool enabled)
+{
+    if (enabled)
+    {
+        gDisplay = std::make_unique<GraphicDisplay>();
+    }
+    else
+    {
+        gDisplay = nullptr;
+    }
+}
+
+void Game::setRichTextEnabled(bool enabled)
+{
+    if (enabled)
+    {
+        tDisplay = std::make_unique<RichTextDisplay>();
+    }
+    else
+    {
+        tDisplay = std::make_unique<TextDisplay>();
+    }
+}
 
 
 // MARK: - Getters
@@ -53,7 +102,7 @@ std::vector<Player *> Game::getPlayers() const
 // MARK: - Public Functions
 void Game::play()
 {
-    display(tDisplay);
+    display();
 
     while (true)
     {
@@ -63,11 +112,16 @@ void Game::play()
 
 void Game::addPlayer(std::ifstream &sequenceFile)
 {
-    players.emplace_back(std::make_unique<Player>(sequenceFile));
+    players.emplace_back(std::make_unique<Player>());
 }
 
 
 // MARK: - Private Functions
+void Game::restart()
+{
+    throw not_implemented();
+}
+
 Player *Game::curPlayer() const
 {
     return players[playerIndex].get();
@@ -214,7 +268,7 @@ bool Game::readCommand(std::istream &in)
         }
         case Restart:
         {
-            throw not_implemented();
+            restart();
             break;
         }
         case ForceIBlock:
@@ -257,16 +311,37 @@ bool Game::readCommand(std::istream &in)
             printCommandInput();
             break;
         }
+        case EnableGraphics:
+        {
+            setGraphicsEnabled();
+            break;
+        }
+        case DisableGraphics:
+        {
+            setGraphicsEnabled(false);
+            break;
+        }
+        case EnableRichText:
+        {
+            setRichTextEnabled();
+            break;
+        }
+        case DisableRichText:
+        {
+            setRichTextEnabled(false);
+            break;
+        }
     }
     
     commandsRead.emplace_back(std::to_string(mult) + input);
     
-    display(tDisplay);
+    display();
     return true;
 }
 
 // Visitor Pattern : Visit a display
-void Game::display(Display &d)
+void Game::display()
 {
-    d.accept(this);
+    if (tDisplay) tDisplay->accept(this);
+    if (gDisplay) gDisplay->accept(this);
 }
