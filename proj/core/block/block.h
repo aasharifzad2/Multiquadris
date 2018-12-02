@@ -48,6 +48,8 @@ public:
 private:
     // Calculates the extreme row and col values of the block
     void getBounds(int &, int &, int &, int &);
+    void checkHeavyLevel();
+    void checkHeavySpecial();
 };
 
 

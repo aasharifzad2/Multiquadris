@@ -81,7 +81,6 @@ Level Level::initLevel(int lvl)
     return Level(lvl, std::move(bs), effects);
 }
 
-
 std::vector<Level> Level::initLevels()
 {
     std::vector<Level> levels;

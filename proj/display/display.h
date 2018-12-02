@@ -15,6 +15,8 @@ public:
     virtual void accept(const Player *) const = 0;
     virtual void accept(const Board *) const = 0;
     virtual void accept(const Cell *) const = 0;
+    
+    virtual ~Display() {};
 };
 
 

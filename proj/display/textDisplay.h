@@ -15,6 +15,7 @@ protected:
     
 public:
     TextDisplay(std::ostream & = std::cout);
+    ~TextDisplay() override {}
     
     // Visitor Pattern : Visit different classes
     void accept(const Game *) const override;

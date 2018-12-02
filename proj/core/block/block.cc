@@ -85,6 +85,8 @@ void Block::moveRight()
     {
         c->setCol(c->getCol() + 1);
     }
+    
+    checkHeavyLevel();
 }
 
 void Block::moveLeft()
@@ -93,6 +95,8 @@ void Block::moveLeft()
     {
         c->setCol(c->getCol() - 1);
     }
+    
+    checkHeavyLevel();
 }
 
 void Block::moveUp()
@@ -101,6 +105,8 @@ void Block::moveUp()
     {
         c->setRow(c->getRow() - 1);
     }
+    
+    checkHeavyLevel();
 }
 
 void Block::moveDown()
@@ -109,6 +115,8 @@ void Block::moveDown()
     {
         c->setRow(c->getRow() + 1);
     }
+    
+    checkHeavyLevel();
 }
 
 void Block::rotateCW()
@@ -124,6 +132,8 @@ void Block::rotateCW()
         c->setCol(leftist + lowest - row);
         c->setRow(lowest - rightist + col);
     }
+    
+    checkHeavyLevel();
 }
 
 void Block::rotateCCW()
@@ -139,6 +149,8 @@ void Block::rotateCCW()
         c->setCol(leftist + row - highest);
         c->setRow(lowest - col + leftist);
     }
+    
+    checkHeavyLevel();
 }
 
 
@@ -166,4 +178,14 @@ void Block::getBounds
         highest = std::min(highest, row);
         lowest = std::max(lowest, row);
     }
+}
+
+void Block::checkHeavyLevel()
+{
+    throw not_implemented();
+}
+
+void Block::checkHeavySpecial()
+{
+    throw not_implemented();
 }

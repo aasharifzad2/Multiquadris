@@ -14,6 +14,8 @@ public:
     void accept(const Player *) const override;
     void accept(const Board *) const override;
     void accept(const Cell *) const override;
+    
+    ~GraphicDisplay() override {};
 };
 
 

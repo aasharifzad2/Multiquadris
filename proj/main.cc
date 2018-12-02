@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
     Game g;
     
 #ifdef RICH
-    g.enableRichText();
+    g.setRichTextEnabled();
 #endif
     
     g.play();
