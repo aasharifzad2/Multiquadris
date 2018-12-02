@@ -12,7 +12,7 @@ class DefinedBlockStream : public BlockStream
 {
     std::ifstream &sequence;
     
-    public:
+public:
     DefinedBlockStream(std::ifstream &);
     std::shared_ptr<Block> getBlock() override;
 };

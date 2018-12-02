@@ -8,7 +8,7 @@ class invalid_block_sequence : public base_exception
 {
     char invalidCharacter;
     
-    public:
+public:
     invalid_block_sequence(char);
     std::string message() const noexcept override;
 };

@@ -6,7 +6,7 @@
 
 class JBlock : public Block
 {
-    public:
+public:
     ~JBlock() override;
     JBlock();
 };

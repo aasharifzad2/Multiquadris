@@ -7,7 +7,7 @@
 
 class not_implemented : public base_exception
 {
-    public:
+public:
     std::string message() const noexcept override;
 };
 

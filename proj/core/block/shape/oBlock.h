@@ -6,7 +6,7 @@
 
 class OBlock : public Block
 {
-    public:
+public:
     ~OBlock() override;
     OBlock();
 };

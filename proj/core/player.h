@@ -18,7 +18,7 @@ class Player
     Game *game;
     
     
-    public:
+public:
     Player();
     Player(std::ifstream &);
     

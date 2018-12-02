@@ -11,7 +11,7 @@ class invalid_command : public base_exception
     std::string command;
     std::vector<std::string> matchingCommands;
     
-    public:
+public:
     invalid_command(std::string command, std::vector<std::string> matchingCommands);
     std::string message() const noexcept override;
 };

@@ -19,7 +19,7 @@ class Level
     std::unique_ptr<BlockStream> blockstream;
     std::vector<Effect> activeEffects;
 
-    public:
+public:
     static Level initLevel(int lvl, std::ifstream &levelInput);
     static std::vector<Level> initLevels(std::ifstream &);
     

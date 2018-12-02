@@ -12,7 +12,7 @@ class RandomBlockStream : public BlockStream
 {
     std::map<int, BlockShape> blockList{};
     
-    public:
+public:
     RandomBlockStream(std::map<BlockShape, int>);
     std::shared_ptr<Block> getBlock() override;
 };

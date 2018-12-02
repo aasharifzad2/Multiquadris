@@ -8,13 +8,13 @@ class Display;
 
 class Cell
 {
-    protected:
+protected:
     Block *parent;
     bool filled;
     int row, col;
     Colour colour;
     
-    public:
+public:
     Cell(int row, int col, Block * = nullptr);
     
     int getRow() const;

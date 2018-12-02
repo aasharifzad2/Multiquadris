@@ -6,7 +6,7 @@
 
 class IBlock : public Block
 {
-    public:
+public:
     ~IBlock() override;
     IBlock();
 };

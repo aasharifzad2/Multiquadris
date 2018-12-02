@@ -7,6 +7,11 @@
 #include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
 
+
+// MARK: - Static
+
+
+// MARK: - Constructors & Destructor
 Board::Board(Player *player, int numRows, int numCols) :
     player(player),
     numRows(numRows),
@@ -15,6 +20,12 @@ Board::Board(Player *player, int numRows, int numCols) :
     fillBoard();
 }
 
+// MARK: - Setters
+
+
+// MARK: - Getters
+int Board::getNumRows() const { return numRows; }
+int Board::getNumCols() const { return numCols; }
 
 // Return a 2D vector of pointers to the cells
 std::vector<std::vector<Cell *>> Board::getCells() const
@@ -34,9 +45,8 @@ std::vector<std::vector<Cell *>> Board::getCells() const
     return cellptrs;
 }
 
-// Getter: numCols
-int Board::getNumCols() const { return numCols; }
 
+// MARK: - Public Functions
 
 // Returns true if the block does not go off the side of the board or clip other cells
 bool Board::blockFits(std::shared_ptr<Block> block)
@@ -62,7 +72,6 @@ bool Board::blockFits(std::shared_ptr<Block> block)
     return true;
 }
 
-
 void Board::addBlock(std::shared_ptr<Block> block)
 {
     // Ensure that the block fits before trying to add it
@@ -76,7 +85,6 @@ void Board::addBlock(std::shared_ptr<Block> block)
     // Add the whole block to the board
     blocks.emplace_back(block);
 }
-
 
 void Board::clearFilledRows()
 {
@@ -144,12 +152,14 @@ void Board::clearFilledRows()
 }
 
 
-// Visitor Pattern : Visit a display
+// MARK: Visitor Pattern
 void Board::display(Display &d)
 {
     d.accept(this);
 }
 
+
+// MARK: - Private Functions
 
 // Fills the 2D vector of cells with empty cells
 void Board::fillBoard()

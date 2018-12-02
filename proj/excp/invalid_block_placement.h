@@ -6,7 +6,7 @@
 
 class invalid_block_placement : public base_exception
 {
-    public:
+public:
     std::string message() const noexcept override;
 };
 

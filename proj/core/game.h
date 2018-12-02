@@ -85,6 +85,9 @@ public:
 private:
     Player *curPlayer() const;
     Player *nextPlayer() const;
+    void endTurn();
+    
+    // Command Functions
     Command getCommand(std::string);
     void printCommandInput() const;
     bool readCommand(std::istream &);

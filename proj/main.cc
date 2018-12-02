@@ -100,6 +100,7 @@ int main(int argc, char* argv[])
     Game g{rtd};
     std::ifstream seq1{"sequence1.txt"};
     g.addPlayer(seq1);
+    g.addPlayer(seq1);
     g.play();
 #endif
 }

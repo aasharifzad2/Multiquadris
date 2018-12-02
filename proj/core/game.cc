@@ -79,6 +79,11 @@ Player *Game::nextPlayer() const
     return players[index].get();
 }
 
+void Game::endTurn()
+{
+    playerIndex = (playerIndex + 1) % players.size();
+}
+
 // MARK: Command Functions
 Command Game::getCommand(std::string cmd)
 {
@@ -177,6 +182,7 @@ bool Game::readCommand(std::istream &in)
         case Drop:
         {
             curPlayer()->drop();
+            endTurn();
             break;
         }
         case LevelUp:

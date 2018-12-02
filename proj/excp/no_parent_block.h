@@ -7,7 +7,7 @@
 
 class no_parent_block : public base_exception
 {
-    public:
+public:
     std::string message() const noexcept override;
 };
 

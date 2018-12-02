@@ -6,7 +6,7 @@
 
 class TBlock : public Block
 {
-    public:
+public:
     ~TBlock() override;
     TBlock();
 };

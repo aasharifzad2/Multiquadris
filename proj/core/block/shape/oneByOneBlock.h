@@ -6,7 +6,7 @@
 
 class OneByOneBlock : public Block
 {
-    public:
+public:
     ~OneByOneBlock() override;
     OneByOneBlock(int, int);
 };

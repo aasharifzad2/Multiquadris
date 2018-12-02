@@ -6,7 +6,7 @@
 
 class ZBlock : public Block
 {
-    public:
+public:
     ~ZBlock() override;
     ZBlock();
 };
