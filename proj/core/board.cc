@@ -128,6 +128,7 @@ void Board::clearFilledRows()
             player->blockCleared((*itr)->getLevelGenerated());
             itr = blocks.erase(itr);
         }
+        else
         {
             ++itr;
         }
