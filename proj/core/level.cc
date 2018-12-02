@@ -84,11 +84,17 @@ Level Level::initLevel(int lvl, std::ifstream &levelInput)
             break;
     }
     
-    return Level(std::move(bs), effects);
+    return Level(lvl, std::move(bs), effects);
 }
 // STATIC FUNCTIONS (end)
 
-Level::Level(std::unique_ptr<BlockStream> bs, std::vector<Effect> effects) :
+Level::Level
+(
+    int number,
+    std::unique_ptr<BlockStream> bs,
+    std::vector<Effect> effects
+) :
+    number(number),
     blockstream(std::move(bs)),
     activeEffects(effects)
 {}
@@ -96,7 +102,9 @@ Level::Level(std::unique_ptr<BlockStream> bs, std::vector<Effect> effects) :
 
 std::shared_ptr<Block> Level::getBlock() const
 {
-    return blockstream->getBlock();
+    std::shared_ptr<Block> block = blockstream->getBlock();
+    block->setLevelGenerated(number);
+    return block;
 }
 
 bool Level::hasEffect(Effect e) const

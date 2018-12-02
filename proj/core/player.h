@@ -10,7 +10,9 @@ class Game;
 
 class Player
 {
-    int score, highscore, curLevel;
+    int score, highscore;
+    int curLevel;
+    int curTurn, lastScoringTurn;
     std::unique_ptr<Board> board;
     std::shared_ptr<Block> fallingBlock;
     std::vector<Level> levels;
@@ -53,8 +55,7 @@ public:
     void display(Display &);
     
 private:
-    // updates the highscore if it is broken
-    void updateHighscore();
+    void increaseScore(int);
     // throws an exception if fallingBlock does not fit the board
     void assertBlockFits();
     // sets the level, going to the max/min level if trying to set out of bounds

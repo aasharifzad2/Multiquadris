@@ -21,6 +21,8 @@ Player::Player(std::ifstream &level0input) :
 #else
     curLevel(0),
 #endif
+    curTurn(0),
+    lastScoringTurn(0),
     board(std::make_unique<Board>(this)),
     levels(Level::initLevels(level0input))
 {
@@ -87,6 +89,7 @@ void Player::random()
 void Player::forceBlock(std::shared_ptr<Block> block)
 {
     fallingBlock = block;
+    fallingBlock->setLevelGenerated(curLevel);
 }
 
 bool Player::hasEffect(Effect effect) const
@@ -191,19 +194,18 @@ void Player::rotateCCW(int mult)
     }
 }
 
-// MARK: Points Functions
+// MARK: Score Functions
 void Player::rowsCleared(int numRows)
 {
+    // Update points
     int points = curLevel + numRows;
-    score += points*points;
-    updateHighscore();
+    increaseScore(points * points);
 }
 
 void Player::blockCleared(int lvlGenerated)
 {
     int points = lvlGenerated + 1;
-    score += points * points;
-    updateHighscore();
+    increaseScore(points * points);
 }
 
 // MARK: Display Functions
@@ -212,11 +214,14 @@ void Player::display(Display &d)
     d.accept(this);
 }
 
-
 // MARK: - Private Functions
-void Player::updateHighscore()
+void Player::increaseScore(int byPoints)
 {
+    // Update score
+    score += byPoints;
     if (score > highscore) highscore = score;
+    
+    lastScoringTurn = curTurn;
 }
 
 void Player::assertBlockFits()

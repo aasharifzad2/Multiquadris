@@ -23,7 +23,7 @@ public:
     static Level initLevel(int lvl, std::ifstream &levelInput);
     static std::vector<Level> initLevels(std::ifstream &);
     
-    Level(std::unique_ptr<BlockStream>, std::vector<Effect>);
+    Level(int, std::unique_ptr<BlockStream>, std::vector<Effect>);
     
     std::shared_ptr<Block> getBlock() const;
     bool hasEffect(Effect) const;
