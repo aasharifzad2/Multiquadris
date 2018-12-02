@@ -18,26 +18,22 @@ Player::Player() :
     highscore(0),
     curLevel(0),
     curTurn(0),
-    lastScoringTurn(0)
+    lastScoringTurn(0),
+    defaultBlockSequence(std::make_unique<std::ifstream>("./blocksq/default.bsq"))
 {
-    setBoardSize(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
-    levels = Level::initLevels();
-    
-    std::ifstream defaultBlockSequence{"./blocksq/default.bsq"};
-    setBlockSequence(std::move(defaultBlockSequence));
-    
-    fallingBlock = levels[curLevel].getBlock();
+    setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
+    initLevels();
 }
 
 
 // MARK: - Setters
-void Player::setBlockSequence(std::ifstream blockInput)
+void Player::setDefaultBlockSequence(std::ifstream blockInput)
 {
-    blockSequence = std::make_shared<std::ifstream>(std::move(blockInput));
-    levels[0].setBlockSequence(blockSequence);
+    defaultBlockSequence = std::make_shared<std::ifstream>(std::move(blockInput));
+    pushDefaultBlockSequence();
 }
 
-void Player::setBoardSize(int numRows, int numCols)
+void Player::setBoard(int numRows, int numCols)
 {
     board = std::make_unique<Board>(this, numRows, numCols);
 }
@@ -56,6 +52,14 @@ Block *Player::getFallingBlock() const { return fallingBlock.get(); }
 
 
 // MARK: - Public Functions
+void Player::restart()
+{
+    score = 0;
+    defaultBlockSequence->seekg(0, defaultBlockSequence->beg);
+    setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
+    initLevels();
+}
+
 void Player::drop()
 {
     assertBlockFits();
@@ -226,6 +230,19 @@ void Player::display(Display &d)
 
 
 // MARK: - Private Functions
+void Player::initLevels()
+{
+    levels = Level::initLevels();
+    pushDefaultBlockSequence();
+    
+    fallingBlock = levels[curLevel].getBlock();
+}
+
+void Player::pushDefaultBlockSequence()
+{
+    levels[0].setBlockSequence(defaultBlockSequence);
+}
+
 void Player::updateHighscore()
 {
     if (score > highscore) highscore = score;

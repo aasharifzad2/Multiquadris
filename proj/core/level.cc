@@ -129,7 +129,9 @@ void Level::setBlockSequence(std::shared_ptr<std::ifstream> in)
 // MARK: - Public Functions
 std::shared_ptr<Block> Level::getBlock() const
 {
-    return blockstream->getBlock();
+    std::shared_ptr<Block> block = blockstream->getBlock();
+    block->setLevelGenerated(number);
+    return block;
 }
 
 bool Level::hasEffect(Effect e) const

@@ -18,7 +18,7 @@ class Player
     int score, highscore;
     int curLevel;
     int curTurn, lastScoringTurn;
-    std::shared_ptr<std::ifstream> blockSequence;
+    std::shared_ptr<std::ifstream> defaultBlockSequence;
     std::unique_ptr<Board> board;
     std::shared_ptr<Block> fallingBlock;
     std::vector<Level> levels;
@@ -30,8 +30,8 @@ public:
     Player();
     
     // Setters
-    void setBlockSequence(std::ifstream);
-    void setBoardSize(int numCols, int numRows);
+    void setDefaultBlockSequence(std::ifstream);
+    void setBoard(int numCols, int numRows);
     
     // Getters
     int getScore() const;
@@ -40,6 +40,7 @@ public:
     Board *getBoard() const;
     Block *getFallingBlock() const;
     
+    void restart();
     void drop();
     void levelUp(int);
     void levelDown(int);
@@ -64,6 +65,9 @@ public:
     void display(Display &);
     
 private:
+    void initLevels();
+    // updates the levels that use the default filestream with block sequence
+    void pushDefaultBlockSequence();
     // updates the highscore if it is broken
     void updateHighscore();
     // throws an exception if fallingBlock does not fit the board

@@ -182,10 +182,14 @@ void Block::getBounds
 
 void Block::checkHeavyLevel()
 {
+#ifndef DEBUG
     throw not_implemented();
+#endif
 }
 
 void Block::checkHeavySpecial()
 {
+#ifndef DEBUG
     throw not_implemented();
+#endif
 }

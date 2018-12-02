@@ -119,7 +119,10 @@ void Game::addPlayer(std::ifstream &sequenceFile)
 // MARK: - Private Functions
 void Game::restart()
 {
-    throw not_implemented();
+    for (auto &player : players)
+    {
+        player->restart();
+    }
 }
 
 Player *Game::curPlayer() const
