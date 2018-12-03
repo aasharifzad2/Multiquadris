@@ -20,7 +20,7 @@ const std::string
 class Player
 {
     int score, highscore;
-    int curLevel;
+    int levelIndex;
     int curTurn, lastScoringTurn;
     Game *game;
     std::shared_ptr<std::ifstream> defaultBlockSequence;
@@ -39,7 +39,7 @@ public:
     // Getters
     int getScore() const;
     int getHighScore() const;
-    int getCurLevel() const;
+    int getLevelIndex() const;
     Board *getBoard() const;
     Block *getFallingBlock() const;
     Block *getNextBlock() const;
@@ -69,6 +69,16 @@ public:
     void display(Display &);
     
 private:
+    // Returns the current level
+    Level &curLevel();
+    
+    // Effects
+    void applyHeavyLevel();
+    void applyHeavySpecial();
+    
+    // If possible, the block moves down, otherwise it drops
+    void moveDownOrDrop(int = 1);
+    
     // sets the falling block from level
     void getBlock();
     void initLevels();

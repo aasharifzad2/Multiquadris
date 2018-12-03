@@ -4,8 +4,7 @@
 
 enum Effect
 {
-    HeavySpecial,
-    HeavyLevel,
+    Heavy,
     Wall,
     Blind
 };

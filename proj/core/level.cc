@@ -71,7 +71,7 @@ Level Level::initLevel(int lvl)
                     {TShape, 1},
                 }
             );
-            effects.emplace_back(HeavyLevel);
+            effects.emplace_back(Heavy);
             break;
         default:
             // TODO: throw exception here

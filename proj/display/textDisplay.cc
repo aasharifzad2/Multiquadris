@@ -38,7 +38,7 @@ void TextDisplay::accept(const Player *player) const
     
     out << "Score: " << player->getScore() << std::endl;
     out << "High Score: " << player->getHighScore() << std::endl;
-    out << "Level:  " << player->getCurLevel() << std::endl;
+    out << "Level:  " << player->getLevelIndex() << std::endl;
     
     out << horizontalBorder << std::endl;
     
@@ -148,7 +148,7 @@ std::string TextDisplay::getHighScoreText(const Player *player) const
 
 std::string TextDisplay::getLevelText(const Player *player) const
 {
-    return "Level: " + std::to_string(player->getCurLevel());
+    return "Level: " + std::to_string(player->getLevelIndex());
 }
 
 std::string TextDisplay::getNextBlockText() const

@@ -14,7 +14,7 @@
 Player::Player(Game *game) :
     score(0),
     highscore(0),
-    curLevel(0),
+    levelIndex(0),
     curTurn(0),
     lastScoringTurn(0),
     game(game),
@@ -25,7 +25,7 @@ Player::Player(Game *game) :
 {
     setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
     initLevels();
-    nextBlock = levels[curLevel].getBlock();
+    nextBlock = curLevel().getBlock();
     getBlock();
 }
 
@@ -48,7 +48,7 @@ int Player::getScore() const { return score; }
 
 int Player::getHighScore() const { return highscore; }
 
-int Player::getCurLevel() const { return curLevel; }
+int Player::getLevelIndex() const { return levelIndex; }
 
 Board *Player::getBoard() const { return board.get(); }
 
@@ -92,30 +92,30 @@ void Player::drop()
 
 void Player::levelUp(int mult)
 {
-    setLevel(curLevel + mult);
+    setLevel(levelIndex + mult);
 }
 
 void Player::levelDown(int mult)
 {
-    setLevel(curLevel - mult);
+    setLevel(levelIndex - mult);
 }
 
 void Player::unrandomizeCurLevel(std::ifstream &file)
 {
     auto fstreamptr = std::make_shared<std::ifstream>(std::move(file));
-    levels[curLevel].setBlockSequence(fstreamptr);
+    curLevel().setBlockSequence(fstreamptr);
     getBlock();
 }
 
 void Player::randomizeCurLevel()
 {
-    if (curLevel == 0)
+    if (levelIndex == 0)
     {
         std::cerr << "Sorry! You can't randomize level 0." << std::endl;
         return;
     }
     
-    levels[curLevel] = Level::initLevel(curLevel);
+    curLevel() = Level::initLevel(levelIndex);
     getBlock();
 }
 
@@ -147,6 +147,9 @@ void Player::moveRight(int mult)
     {
         fallingBlock->moveLeft();
     }
+    
+    applyHeavyLevel();
+    applyHeavySpecial();
 }
 
 void Player::moveLeft(int mult)
@@ -162,6 +165,9 @@ void Player::moveLeft(int mult)
     {
         fallingBlock->moveRight();
     }
+    
+    applyHeavyLevel();
+    applyHeavySpecial();
 }
 
 void Player::moveUp(int mult)
@@ -177,6 +183,8 @@ void Player::moveUp(int mult)
     {
         fallingBlock->moveDown();
     }
+    
+    applyHeavyLevel();
 }
 
 void Player::moveDown(int mult)
@@ -192,6 +200,8 @@ void Player::moveDown(int mult)
     {
         fallingBlock->moveUp();
     }
+    
+    applyHeavyLevel();
 }
 
 void Player::rotateCW(int mult)
@@ -208,6 +218,8 @@ void Player::rotateCW(int mult)
     {
         fallingBlock->rotateCCW();
     }
+    
+    applyHeavyLevel();
 }
 
 void Player::rotateCCW(int mult)
@@ -224,12 +236,14 @@ void Player::rotateCCW(int mult)
     {
         fallingBlock->rotateCW();
     }
+    
+    applyHeavyLevel();
 }
 
 // MARK: Points Functions
 void Player::rowsCleared(int numRows)
 {
-    int points = curLevel + numRows;
+    int points = levelIndex + numRows;
     score += points*points;
     updateHighscore();
 }
@@ -249,10 +263,45 @@ void Player::display(Display &d)
 
 
 // MARK: - Private Functions
+Level &Player::curLevel()
+{
+    return levels[levelIndex];
+}
+
+void Player::applyHeavyLevel()
+{
+    if (curLevel().hasEffect(Effect::Heavy))
+    {
+        moveDownOrDrop();
+    }
+}
+
+void Player::applyHeavySpecial()
+{
+    if (hasEffect(Effect::Heavy))
+    {
+        moveDownOrDrop(2);
+    }
+}
+
+void Player::moveDownOrDrop(int mult)
+{
+    for (int i = 0; i < mult; i++)
+    {
+        fallingBlock->moveDown();
+        if (!board->blockFits(fallingBlock))
+        {
+            fallingBlock->moveUp();
+            drop();
+            return;
+        }
+    }
+}
+
 void Player::getBlock()
 {
     fallingBlock = nextBlock;
-    nextBlock = levels[curLevel].getBlock();
+    nextBlock = curLevel().getBlock();
 }
 
 void Player::initLevels()
@@ -285,14 +334,14 @@ void Player::setLevel(int lvl)
 {
     if (lvl > LEVEL_MAX)
     {
-        curLevel = (int)levels.size() - 1;
+        levelIndex = (int)levels.size() - 1;
     }
     else if (lvl < LEVEL_MIN)
     {
-        curLevel = 0;
+        levelIndex = 0;
     }
     else
     {
-        curLevel = lvl;
+        levelIndex = lvl;
     }
 }
