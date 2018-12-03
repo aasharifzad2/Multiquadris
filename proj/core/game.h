@@ -96,6 +96,7 @@ public:
     int getPlayerIndex() const;
     
     void play();
+    void over();
     void addPlayer(std::ifstream &);
 
     // Visitor Pattern : visit()

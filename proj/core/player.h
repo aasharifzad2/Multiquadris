@@ -3,6 +3,7 @@
 
 
 #include <iostream>
+#include <string>
 #include <memory>
 #include <fstream>
 #include <utility>
@@ -12,22 +13,24 @@
 #include "block/blockShape.h"
 class Game;
 
+const std::string
+    INITIAL_DEFAULT_BLOCK_SEQUENCE = "./blocksq/default.bsq";
+
+
 class Player
 {
-
     int score, highscore;
     int curLevel;
     int curTurn, lastScoringTurn;
+    Game *game;
     std::shared_ptr<std::ifstream> defaultBlockSequence;
     std::unique_ptr<Board> board;
     std::shared_ptr<Block> fallingBlock, nextBlock;
     std::vector<Level> levels;
     std::vector<Effect> effects;
-    Game *game;
-    
     
 public:
-    Player();
+    Player(Game *);
     
     // Setters
     void setDefaultBlockSequence(std::ifstream);

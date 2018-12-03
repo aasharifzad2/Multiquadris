@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <memory>
-#include "block.h"
+#include "block/block.h"
 class Cell;
 class Block;
 class Display;

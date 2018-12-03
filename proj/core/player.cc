@@ -1,25 +1,27 @@
 
 #include "player.h"
-
-
 #include "level.h"
+#include "game.h"
 #include "../excp/not_implemented.h"
 #include "../excp/invalid_block_placement.h"
 #include "../display/display.h"
-#include "level.h"
 
 
 // MARK: - Static
 
 
 // MARK: - Constructors & Destructor
-Player::Player() :
+Player::Player(Game *game) :
     score(0),
     highscore(0),
     curLevel(0),
     curTurn(0),
     lastScoringTurn(0),
-    defaultBlockSequence(std::make_unique<std::ifstream>("./blocksq/default.bsq"))
+    game(game),
+    defaultBlockSequence
+    (
+        std::make_unique<std::ifstream>(INITIAL_DEFAULT_BLOCK_SEQUENCE)
+    )
 {
     setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
     initLevels();
@@ -69,19 +71,23 @@ void Player::drop()
     assertBlockFits();
     
     // Move block down until it is resting on a block
-    while(board->blockFits(fallingBlock)) fallingBlock->moveDown();
-    fallingBlock->moveUp();
-    
-    board->addBlock(fallingBlock);
-    getBlock();
-    
-    if (!board->blockFits(fallingBlock))
+    while(board->blockFits(fallingBlock))
     {
-        // TO DO: Game over
-        throw not_implemented();
+        fallingBlock->moveDown();
     }
     
-    board->clearFilledRows();
+    fallingBlock->moveUp();
+    board->addBlock(fallingBlock);
+
+    if (board->blockFits(nextBlock))
+    {
+        getBlock();
+        board->clearFilledRows();
+    }
+    else
+    {
+        game->over();
+    }
 }
 
 void Player::levelUp(int mult)
