@@ -122,6 +122,7 @@ void Player::randomizeCurLevel()
 void Player::forceBlock(std::shared_ptr<Block> block)
 {
     fallingBlock = block;
+    block->setLevelGenerated(curLevel().getNumber());
 }
 
 bool Player::hasEffect(Effect effect) const

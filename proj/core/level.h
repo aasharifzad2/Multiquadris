@@ -26,7 +26,10 @@ public:
     // Setters
     void setBlockSequence(std::shared_ptr<std::ifstream>);
 
+    // Getters
+    int getNumber() const;
     std::shared_ptr<Block> getBlock() const;
+    
     bool hasEffect(Effect) const;
 
 private:

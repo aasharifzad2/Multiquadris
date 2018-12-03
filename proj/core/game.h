@@ -43,7 +43,6 @@ enum Command
     RemovePlayer
 };
 
-
 class Game
 {
     int playerIndex;

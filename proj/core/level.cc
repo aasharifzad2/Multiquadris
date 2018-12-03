@@ -124,9 +124,8 @@ void Level::setBlockSequence(std::shared_ptr<std::ifstream> in)
 
 
 // MARK: - Getters
+int Level::getNumber() const { return number; }
 
-
-// MARK: - Public Functions
 std::shared_ptr<Block> Level::getBlock() const
 {
     std::shared_ptr<Block> block = blockstream->getBlock();
@@ -134,6 +133,7 @@ std::shared_ptr<Block> Level::getBlock() const
     return block;
 }
 
+// MARK: - Public Functions
 bool Level::hasEffect(Effect e) const
 {
     for (Effect curEffect : activeEffects)
@@ -143,6 +143,5 @@ bool Level::hasEffect(Effect e) const
     
     return false;
 }
-
 
 // MARK: - Private Functions
