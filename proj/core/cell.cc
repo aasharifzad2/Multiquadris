@@ -59,7 +59,7 @@ void Cell::notifyCleared() const
     parent->cellCleared(this);
 }
 
-void Cell::display(Display &d)
+void Cell::display(BQDisplay &d)
 {
     d.accept(this);
 }

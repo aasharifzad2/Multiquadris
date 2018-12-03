@@ -92,9 +92,16 @@ int main(int argc, char* argv[])
 #ifdef DEBUG
     Game g;
     
+    
 #ifdef RICH
     g.setRichTextEnabled();
 #endif
+    
+#ifdef GRAPHICS
+    g.setGraphicsEnabled();
+#endif
+    
     g.play();
 #endif
+    
 }

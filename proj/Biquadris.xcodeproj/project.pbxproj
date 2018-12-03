@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D52855C21B4C431002DB60C /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3D52855B21B4C431002DB60C /* window.cc */; };
 		3DB923F021ABBA4C00A1AF56 /* player.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3DB923EE21ABBA4C00A1AF56 /* player.cc */; };
 		5D094A9921B1C5B800F1A4C6 /* richTextDisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D094A9821B1C5B800F1A4C6 /* richTextDisplay.cc */; };
 		5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */; };
@@ -47,6 +48,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3D52855A21B4C431002DB60C /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window.h; path = display/window.h; sourceTree = "<group>"; };
+		3D52855B21B4C431002DB60C /* window.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window.cc; path = display/window.cc; sourceTree = "<group>"; };
+		3D52855D21B4C77F002DB60C /* windowTemp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = windowTemp.h; path = display/windowTemp.h; sourceTree = "<group>"; };
 		3DB923EE21ABBA4C00A1AF56 /* player.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = player.cc; path = core/player.cc; sourceTree = "<group>"; };
 		3DB923EF21ABBA4C00A1AF56 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = core/player.h; sourceTree = "<group>"; };
 		5D094A9721B1C5B800F1A4C6 /* richTextDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = richTextDisplay.h; path = display/richTextDisplay.h; sourceTree = "<group>"; };
@@ -119,13 +123,16 @@
 		5D27C5E121AB654E00AE3C2B /* display */ = {
 			isa = PBXGroup;
 			children = (
+				3D52855B21B4C431002DB60C /* window.cc */,
+				3D52855A21B4C431002DB60C /* window.h */,
+				3D52855D21B4C77F002DB60C /* windowTemp.h */,
 				5D094A9821B1C5B800F1A4C6 /* richTextDisplay.cc */,
-				5D094A9721B1C5B800F1A4C6 /* richTextDisplay.h */,
-				5D27C5E721AB660900AE3C2B /* display.h */,
 				5D27C5E421AB660900AE3C2B /* graphicDisplay.cc */,
 				5D27C5E321AB660900AE3C2B /* textDisplay.cc */,
+				5D094A9721B1C5B800F1A4C6 /* richTextDisplay.h */,
 				5D27C5E221AB660900AE3C2B /* graphicDisplay.h */,
 				5D27C5E621AB660900AE3C2B /* textDisplay.h */,
+				5D27C5E721AB660900AE3C2B /* display.h */,
 			);
 			name = display;
 			sourceTree = "<group>";
@@ -315,6 +322,7 @@
 				5D5CDB2721A7852100CE28BD /* sBlock.cc in Sources */,
 				5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */,
 				5D5CDB7E21AA347F00CE28BD /* invalid_block_placement.cc in Sources */,
+				3D52855C21B4C431002DB60C /* window.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;

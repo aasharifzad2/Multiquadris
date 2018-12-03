@@ -66,7 +66,7 @@ public:
     void blockCleared(int lvlGenerated);
     
     // Visitor Pattern : Visit a display
-    void display(Display &);
+    void display(BQDisplay &);
     
 private:
     // Returns the current level

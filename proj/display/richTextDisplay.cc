@@ -82,6 +82,12 @@ const
         case Brown:
             styled += "30;43";
             break;
+        case White:
+            styled += "30;107";
+            break;
+        case DarkGreen:
+            styled += "30;42";
+            break;
     }
     
     styled += "m" + str + "\033[0m";

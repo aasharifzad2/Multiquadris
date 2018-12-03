@@ -1,8 +1,8 @@
 
 #include "textDisplay.h"
 #include <iomanip>
+#include <algorithm>
 #include "../core/game.h"
-#include "../excp/not_implemented.h"
 
 
 // Mark: - Static
@@ -75,7 +75,7 @@ void TextDisplay::accept(const Cell *cell) const
 }
 
 
-// MARK: - Protected Function
+// MARK: - Protected Functions
 void TextDisplay::printPlacedCell(const Cell *cell) const
 {
     out << cell->getSymbol();

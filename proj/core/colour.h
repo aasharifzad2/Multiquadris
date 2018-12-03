@@ -4,15 +4,17 @@
 
 enum Colour
 {
-    Cyan,
-    Blue,
-    Yellow,
-    Orange,
-    Green,
-    Magenta,
-    Red,
+    White = 0,
     Black,
-    Brown
+    Red,
+    Green,
+    Blue,
+    Cyan,
+    Yellow,
+    Magenta,
+    Orange,
+    Brown,
+    DarkGreen
 };
 
 

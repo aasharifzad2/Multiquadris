@@ -257,7 +257,7 @@ void Player::blockCleared(int lvlGenerated)
 }
 
 // MARK: Display Functions
-void Player::display(Display &d)
+void Player::display(BQDisplay &d)
 {
     d.accept(this);
 }

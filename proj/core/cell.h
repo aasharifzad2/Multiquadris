@@ -4,7 +4,7 @@
 
 #include "colour.h"
 class Block;
-class Display;
+class BQDisplay;
 
 class Cell
 {
@@ -33,8 +33,8 @@ public:
     //   the block's cells has been cleared
     void notifyCleared() const;
     
-    // Visitor Pattern : visit(Display)
-    void display(Display &);
+    // Visitor Pattern : visit(BQDisplay)
+    void display(BQDisplay &);
 };
 
 

@@ -9,7 +9,7 @@ const int
     BUFFER_WIDTH = 7,
     NEXT_BLOCK_NUM_ROWS = 3;
 
-class TextDisplay : public Display
+class TextDisplay : public BQDisplay
 {
 protected:
     std::ostream &out;

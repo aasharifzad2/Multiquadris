@@ -8,7 +8,7 @@
 
 class Game;
 
-class Display
+class BQDisplay
 {
 public:
     virtual void accept(const Game *) const = 0;
@@ -16,7 +16,7 @@ public:
     virtual void accept(const Board *) const = 0;
     virtual void accept(const Cell *) const = 0;
     
-    virtual ~Display() {};
+    virtual ~BQDisplay() {};
 };
 
 

@@ -154,7 +154,7 @@ void Board::clearFilledRows()
 
 
 // MARK: Visitor Pattern
-void Board::display(Display &d)
+void Board::display(BQDisplay &d)
 {
     d.accept(this);
 }

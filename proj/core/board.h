@@ -7,7 +7,7 @@
 #include "block/block.h"
 class Cell;
 class Block;
-class Display;
+class BQDisplay;
 class Player;
 
 const int
@@ -33,8 +33,8 @@ public:
     void addBlock(std::shared_ptr<Block>);
     void clearFilledRows();
     
-    // Visitor Pattern : visit(Display)
-    void display(Display &);
+    // Visitor Pattern : visit(BQDisplay)
+    void display(BQDisplay &);
     
 private:
     void fillBoard();

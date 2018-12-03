@@ -2,6 +2,7 @@
 #include "block.h"
 #include <vector>
 #include <memory>
+#include <climits>
 #include "../cell.h"
 #include "../../excp/not_implemented.h"
 
