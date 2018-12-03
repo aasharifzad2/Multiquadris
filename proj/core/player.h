@@ -44,8 +44,8 @@ public:
     void drop();
     void levelUp(int);
     void levelDown(int);
-    void noRandom(std::ifstream &);
-    void random();
+    void unrandomizeCurLevel(std::ifstream &);
+    void randomizeCurLevel();
     void forceBlock(std::shared_ptr<Block>);
     bool hasEffect(Effect) const;
     
@@ -65,6 +65,8 @@ public:
     void display(Display &);
     
 private:
+    // sets the falling block from level
+    void getBlock();
     void initLevels();
     // updates the levels that use the default filestream with block sequence
     void pushDefaultBlockSequence();

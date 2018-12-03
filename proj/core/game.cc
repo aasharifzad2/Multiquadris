@@ -254,11 +254,15 @@ bool Game::readCommand(std::istream &in)
         }
         case NoRandom:
         {
-            throw not_implemented();
+            std::string filename;
+            in >> filename;
+            std::ifstream fstream{filename};
+            curPlayer()->unrandomizeCurLevel(fstream);
+            break;
         }
         case Random:
         {
-            throw not_implemented();
+            curPlayer()->randomizeCurLevel();
             break;
         }
         case Sequence:

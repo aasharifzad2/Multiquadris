@@ -69,7 +69,7 @@ void Player::drop()
     fallingBlock->moveUp();
     
     board->addBlock(fallingBlock);
-    fallingBlock = levels[curLevel].getBlock();
+    getBlock();
     
     if (!board->blockFits(fallingBlock))
     {
@@ -90,14 +90,23 @@ void Player::levelDown(int mult)
     setLevel(curLevel - mult);
 }
 
-void Player::noRandom(std::ifstream &stream)
+void Player::unrandomizeCurLevel(std::ifstream &file)
 {
-    throw not_implemented();
+    auto fstreamptr = std::make_shared<std::ifstream>(std::move(file));
+    levels[curLevel].setBlockSequence(fstreamptr);
+    getBlock();
 }
 
-void Player::random()
+void Player::randomizeCurLevel()
 {
-    throw not_implemented();
+    if (curLevel == 0)
+    {
+        std::cerr << "Sorry! You can't randomize level 0." << std::endl;
+        return;
+    }
+    
+    levels[curLevel] = Level::initLevel(curLevel);
+    getBlock();
 }
 
 void Player::forceBlock(std::shared_ptr<Block> block)
@@ -230,12 +239,17 @@ void Player::display(Display &d)
 
 
 // MARK: - Private Functions
+void Player::getBlock()
+{
+    fallingBlock = levels[curLevel].getBlock();
+}
+
 void Player::initLevels()
 {
     levels = Level::initLevels();
     pushDefaultBlockSequence();
     
-    fallingBlock = levels[curLevel].getBlock();
+    getBlock();
 }
 
 void Player::pushDefaultBlockSequence()
