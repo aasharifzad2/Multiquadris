@@ -10,6 +10,11 @@
 		3D52855C21B4C431002DB60C /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3D52855B21B4C431002DB60C /* window.cc */; };
 		3DB923F021ABBA4C00A1AF56 /* player.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3DB923EE21ABBA4C00A1AF56 /* player.cc */; };
 		5D094A9921B1C5B800F1A4C6 /* richTextDisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D094A9821B1C5B800F1A4C6 /* richTextDisplay.cc */; };
+		5D0E32C521B5AB3C0079BE5C /* eof.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D0E32C321B5AB3C0079BE5C /* eof.cc */; };
+		5D0E32D021B5B7240079BE5C /* repeatableCommand.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D0E32C921B5B7230079BE5C /* repeatableCommand.cc */; };
+		5D0E32D121B5B7240079BE5C /* commandInterpreter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D0E32CA21B5B7230079BE5C /* commandInterpreter.cc */; };
+		5D0E32D221B5B7240079BE5C /* command.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D0E32CC21B5B7230079BE5C /* command.cc */; };
+		5D0E32D321B5B7240079BE5C /* singularCommand.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D0E32CF21B5B7230079BE5C /* singularCommand.cc */; };
 		5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */; };
 		5D27C5DF21AB262400AE3C2B /* cell.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5DD21AB262400AE3C2B /* cell.cc */; };
 		5D27C5E821AB660900AE3C2B /* textDisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D27C5E321AB660900AE3C2B /* textDisplay.cc */; };
@@ -55,6 +60,16 @@
 		3DB923EF21ABBA4C00A1AF56 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = core/player.h; sourceTree = "<group>"; };
 		5D094A9721B1C5B800F1A4C6 /* richTextDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = richTextDisplay.h; path = display/richTextDisplay.h; sourceTree = "<group>"; };
 		5D094A9821B1C5B800F1A4C6 /* richTextDisplay.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = richTextDisplay.cc; path = display/richTextDisplay.cc; sourceTree = "<group>"; };
+		5D0E32C321B5AB3C0079BE5C /* eof.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eof.cc; path = excp/eof.cc; sourceTree = "<group>"; };
+		5D0E32C421B5AB3C0079BE5C /* eof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eof.h; path = excp/eof.h; sourceTree = "<group>"; };
+		5D0E32C821B5B7230079BE5C /* commandInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commandInterpreter.h; path = cmd/commandInterpreter.h; sourceTree = "<group>"; };
+		5D0E32C921B5B7230079BE5C /* repeatableCommand.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = repeatableCommand.cc; path = cmd/repeatableCommand.cc; sourceTree = "<group>"; };
+		5D0E32CA21B5B7230079BE5C /* commandInterpreter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = commandInterpreter.cc; path = cmd/commandInterpreter.cc; sourceTree = "<group>"; };
+		5D0E32CB21B5B7230079BE5C /* repeatableCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = repeatableCommand.h; path = cmd/repeatableCommand.h; sourceTree = "<group>"; };
+		5D0E32CC21B5B7230079BE5C /* command.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = command.cc; path = cmd/command.cc; sourceTree = "<group>"; };
+		5D0E32CD21B5B7230079BE5C /* command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = command.h; path = cmd/command.h; sourceTree = "<group>"; };
+		5D0E32CE21B5B7230079BE5C /* singularCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = singularCommand.h; path = cmd/singularCommand.h; sourceTree = "<group>"; };
+		5D0E32CF21B5B7230079BE5C /* singularCommand.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = singularCommand.cc; path = cmd/singularCommand.cc; sourceTree = "<group>"; };
 		5D27C5D021AA5E7200AE3C2B /* no_parent_block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = no_parent_block.h; path = excp/no_parent_block.h; sourceTree = "<group>"; };
 		5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = no_parent_block.cc; path = excp/no_parent_block.cc; sourceTree = "<group>"; };
 		5D27C5DD21AB262400AE3C2B /* cell.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cell.cc; path = core/cell.cc; sourceTree = "<group>"; };
@@ -120,6 +135,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D0E32C721B5B6A20079BE5C /* cmd */ = {
+			isa = PBXGroup;
+			children = (
+				5D0E32CC21B5B7230079BE5C /* command.cc */,
+				5D0E32CA21B5B7230079BE5C /* commandInterpreter.cc */,
+				5D0E32C921B5B7230079BE5C /* repeatableCommand.cc */,
+				5D0E32CF21B5B7230079BE5C /* singularCommand.cc */,
+				5D0E32CD21B5B7230079BE5C /* command.h */,
+				5D0E32C821B5B7230079BE5C /* commandInterpreter.h */,
+				5D0E32CB21B5B7230079BE5C /* repeatableCommand.h */,
+				5D0E32CE21B5B7230079BE5C /* singularCommand.h */,
+			);
+			name = cmd;
+			sourceTree = "<group>";
+		};
 		5D27C5E121AB654E00AE3C2B /* display */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +245,8 @@
 		5DE0709621A680E5003D00BF /* excp */ = {
 			isa = PBXGroup;
 			children = (
+				5D0E32C321B5AB3C0079BE5C /* eof.cc */,
+				5D0E32C421B5AB3C0079BE5C /* eof.h */,
 				5DE0709921A68108003D00BF /* base_exception.h */,
 				5D5CDB5D21A897CB00CE28BD /* invalid_block_sequence.cc */,
 				5D5CDB2F21A7858300CE28BD /* not_implemented.cc */,
@@ -233,6 +265,7 @@
 		5DE070A021A6815A003D00BF /* Biquadris */ = {
 			isa = PBXGroup;
 			children = (
+				5D0E32C721B5B6A20079BE5C /* cmd */,
 				5DE0709321A680D9003D00BF /* main.cc */,
 				5D27C5E121AB654E00AE3C2B /* display */,
 				5DE0709621A680E5003D00BF /* excp */,
@@ -305,21 +338,26 @@
 				5D5CDB2421A7852100CE28BD /* oneByOneBlock.cc in Sources */,
 				5D27C5DF21AB262400AE3C2B /* cell.cc in Sources */,
 				5D094A9921B1C5B800F1A4C6 /* richTextDisplay.cc in Sources */,
+				5D0E32D121B5B7240079BE5C /* commandInterpreter.cc in Sources */,
 				5D5CDB5F21A897CB00CE28BD /* invalid_block_sequence.cc in Sources */,
 				5D5CDB5C21A896DF00CE28BD /* level.cc in Sources */,
+				5D0E32D021B5B7240079BE5C /* repeatableCommand.cc in Sources */,
 				5D27C5E921AB660900AE3C2B /* graphicDisplay.cc in Sources */,
 				5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */,
+				5D0E32D321B5B7240079BE5C /* singularCommand.cc in Sources */,
 				5D5CDB2521A7852100CE28BD /* zBlock.cc in Sources */,
 				5D5CDB2321A7852100CE28BD /* tBlock.cc in Sources */,
 				5D5CDB2921A7852100CE28BD /* lBlock.cc in Sources */,
 				5DE0709F21A6813B003D00BF /* game.cc in Sources */,
 				5D5CDB5821A7D39D00CE28BD /* definedBlockStream.cc in Sources */,
+				5D0E32D221B5B7240079BE5C /* command.cc in Sources */,
 				5D5CDB2621A7852100CE28BD /* oBlock.cc in Sources */,
 				5D5CDB3121A7858300CE28BD /* not_implemented.cc in Sources */,
 				5DE0709521A680D9003D00BF /* main.cc in Sources */,
 				5D5CDB6521A9C22B00CE28BD /* board.cc in Sources */,
 				3DB923F021ABBA4C00A1AF56 /* player.cc in Sources */,
 				5D5CDB2721A7852100CE28BD /* sBlock.cc in Sources */,
+				5D0E32C521B5AB3C0079BE5C /* eof.cc in Sources */,
 				5D27C5D221AA5E7200AE3C2B /* no_parent_block.cc in Sources */,
 				5D5CDB7E21AA347F00CE28BD /* invalid_block_placement.cc in Sources */,
 				3D52855C21B4C431002DB60C /* window.cc in Sources */,

@@ -2,17 +2,18 @@
 #define _invalid_command_h_
 
 
+#include "base_exception.h"
 #include <vector>
 #include <string>
-#include "base_exception.h"
+#include "../cmd/command.h"
 
 class invalid_command : public base_exception
 {
-    std::string command;
-    std::vector<std::string> matchingCommands;
+    std::string key;
+    std::vector<Command *> matchingCommands;
     
 public:
-    invalid_command(std::string command, std::vector<std::string> matchingCommands);
+    invalid_command(std::string key, std::vector<Command *> matchingCommands);
     std::string message() const noexcept override;
 };
 

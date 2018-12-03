@@ -7,41 +7,11 @@
 #include "player.h"
 #include "../display/textDisplay.h"
 #include "../display/graphicDisplay.h"
+#include "../cmd/commandInterpreter.h"
 
 const int
     MIN_NUM_PLAYERS = 1,
     MAX_NUM_PLAYERS = 5;
-
-enum Command
-{
-    Left,
-    Right,
-    Down,
-    RotateCW,
-    RotateCCW,
-    Drop,
-    LevelUp,
-    LevelDown,
-    NoRandom,
-    Random,
-    Sequence,
-    Restart,
-    ForceIBlock,
-    ForceJBlock,
-    ForceLBlock,
-    ForceOBlock,
-    ForceSBlock,
-    ForceZBlock,
-    ForceTBlock,
-    // Bonus:
-    PrintCommandInput,
-    EnableGraphics,
-    DisableGraphics,
-    EnableRichText,
-    DisableRichText,
-    AddPlayer,
-    RemovePlayer
-};
 
 class Game
 {
@@ -50,36 +20,7 @@ class Game
     std::unique_ptr<TextDisplay> tDisplay;
     std::unique_ptr<GraphicDisplay> gDisplay;
     std::vector<std::string> commandsRead;
-    
-    std::map<std::string, Command> commands =
-        {
-            {"left", Command::Left},
-            {"right", Command::Right},
-            {"down", Command::Down},
-            {"clockwise", Command::RotateCW},
-            {"counterclockwise", Command::RotateCCW},
-            {"drop", Command::Drop},
-            {"levelup", Command::LevelUp},
-            {"leveldown", Command::LevelDown},
-            {"norandom", Command::NoRandom},
-            {"random", Command::Random},
-            {"sequence", Command::Sequence},
-            {"restart", Command::Restart},
-            {"I", Command::ForceIBlock},
-            {"J", Command::ForceJBlock},
-            {"L", Command::ForceLBlock},
-            {"O", Command::ForceOBlock},
-            {"S", Command::ForceSBlock},
-            {"Z", Command::ForceZBlock},
-            {"T", Command::ForceTBlock},
-            {"precmd", Command::PrintCommandInput},
-            {"engraphics", Command::EnableGraphics},
-            {"disgraphics", Command::DisableGraphics},
-            {"enrichtext", Command::EnableRichText},
-            {"disrichtext", Command::DisableRichText},
-            {"addplayer", Command::AddPlayer},
-            {"removeplayer", Command::RemovePlayer}
-        };
+    CommandInterpreter cmd;
     
 public:
     Game();
@@ -96,22 +37,44 @@ public:
     
     void play();
     void over();
-    void addPlayer(std::ifstream &);
 
     // Visitor Pattern : visit()
     void display();
     
     
 private:
-    void restart();
     Player *curPlayer() const;
     Player *nextPlayer() const;
     void endTurn();
-    
+    void initCommands();
+
     // Command Functions
-    Command getCommand(std::string);
-    void printCommandInput() const;
-    bool readCommand(std::istream &);
+    void moveBlockLeft(int);
+    void moveBlockRight(int);
+    void moveBlockDown(int);
+    void rotateBlockCW(int);
+    void rotateBlockCCW(int);
+    void dropBlock();
+    void increaseCurPlayerLevel(int);
+    void decreaseCurPlayerLevel(int);
+    void randomizeCurPlayerLevel();
+    void unrandomizeCurPlayerLevel();
+    void readSequence();
+    void restart();
+    void forceIBlock();
+    void forceJBlock();
+    void forceLBlock();
+    void forceOBlock();
+    void forceSBlock();
+    void forceZBlock();
+    void forceTBlock();
+    void printCommandInput();
+    void enableGraphics();
+    void disableGraphics();
+    void enableRichText();
+    void disableRichText();
+    void addPlayer(int);
+    void removePlayer(int);
 };
 
 

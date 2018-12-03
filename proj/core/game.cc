@@ -27,8 +27,10 @@
 
 // MARK: - Constructors & Destructor
 Game::Game() :
-    playerIndex(0)
+    playerIndex(0),
+    cmd(this)
 {
+    initCommands();
     setNumPlayers(1);
     setRichTextEnabled(false);
     setGraphicsEnabled(false);
@@ -124,7 +126,7 @@ void Game::play()
 
     while (true)
     {
-        readCommand(std::cin);
+        cmd.readCommand();
     }
 }
 
@@ -203,16 +205,6 @@ void Game::over()
 
 
 // MARK: - Private Functions
-void Game::restart()
-{
-    for (auto &player : players)
-    {
-        player->restart();
-    }
-    
-    playerIndex = 0;
-}
-
 Player *Game::curPlayer() const
 {
     return players[playerIndex].get();
@@ -229,33 +221,153 @@ void Game::endTurn()
     playerIndex = (playerIndex + 1) % players.size();
 }
 
-// MARK: Command Functions
-Command Game::getCommand(std::string cmd)
+// Visitor Pattern : Visit a display
+void Game::display()
 {
-    // Find all of the commands that match
-    std::vector<std::string> matchingStrings;
-    std::vector<Command> matchingCommands;
-    for (auto cmdPair : commands)
-    {
-        if (cmd.length() > cmdPair.first.length()) continue;
-        if (cmdPair.first.compare(0, cmd.length(), cmd) == 0)
-        {
-            matchingStrings.emplace_back(cmdPair.first);
-            matchingCommands.emplace_back(cmdPair.second);
-        }
-    }
-    
-    // One matching command
-    if (matchingCommands.size() == 1)
-    {
-        return matchingCommands[0];
-    }
-    
-    // Zero or multiple matching commands
-    throw invalid_command(cmd, matchingStrings);
+    if (tDisplay) tDisplay->accept(this);
+    if (gDisplay) gDisplay->accept(this);
 }
 
-void Game::printCommandInput() const
+
+// MARK: - Command Functions
+void Game::initCommands()
+{
+    cmd.addCommand("left", &Game::moveBlockLeft);
+    cmd.addCommand("right", &Game::moveBlockRight);
+    cmd.addCommand("down", &Game::moveBlockDown);
+    cmd.addCommand("clockwise", &Game::rotateBlockCW);
+    cmd.addCommand("counterclockwise", &Game::rotateBlockCCW);
+    cmd.addCommand("drop", &Game::dropBlock);
+    cmd.addCommand("levelup", &Game::increaseCurPlayerLevel);
+    cmd.addCommand("leveldown", &Game::decreaseCurPlayerLevel);
+    cmd.addCommand("norandom", &Game::randomizeCurPlayerLevel);
+    cmd.addCommand("random", &Game::unrandomizeCurPlayerLevel);
+    cmd.addCommand("sequence", &Game::readSequence);
+    cmd.addCommand("restart", &Game::restart);
+    cmd.addCommand("I", &Game::forceIBlock);
+    cmd.addCommand("J", &Game::forceJBlock);
+    cmd.addCommand("L", &Game::forceLBlock);
+    cmd.addCommand("O", &Game::forceOBlock);
+    cmd.addCommand("S", &Game::forceSBlock);
+    cmd.addCommand("Z", &Game::forceZBlock);
+    cmd.addCommand("T", &Game::forceTBlock);
+    cmd.addCommand("precmd", &Game::printCommandInput);
+    cmd.addCommand("engraphics", &Game::enableGraphics);
+    cmd.addCommand("disgraphics", &Game::disableGraphics);
+    cmd.addCommand("enrichtext", &Game::enableRichText);
+    cmd.addCommand("disrichtext", &Game::disableRichText);
+    cmd.addCommand("addplayer", &Game::addPlayer);
+    cmd.addCommand("removeplayer", &Game::removePlayer);
+}
+
+void Game::moveBlockLeft(int multiplier)
+{
+    curPlayer()->moveLeft(multiplier);
+}
+
+void Game::moveBlockRight(int multiplier)
+{
+    curPlayer()->moveRight(multiplier);
+}
+
+void Game::moveBlockDown(int multiplier)
+{
+    curPlayer()->moveDown(multiplier);
+}
+
+void Game::rotateBlockCW(int multiplier)
+{
+    curPlayer()->rotateCW(multiplier);
+}
+
+void Game::rotateBlockCCW(int multiplier)
+{
+    curPlayer()->rotateCCW(multiplier);
+}
+
+void Game::dropBlock()
+{
+    curPlayer()->drop();
+    endTurn();
+}
+
+void Game::increaseCurPlayerLevel(int multiplier)
+{
+    curPlayer()->levelUp(multiplier);
+}
+
+void Game::decreaseCurPlayerLevel(int multiplier)
+{
+    curPlayer()->levelDown(multiplier);
+}
+
+void Game::randomizeCurPlayerLevel()
+{
+    curPlayer()->randomizeCurLevel();
+}
+
+void Game::unrandomizeCurPlayerLevel()
+{
+    std::string filename;
+    //in >> filename;
+    std::ifstream fstream{filename};
+    curPlayer()->unrandomizeCurLevel(fstream);
+}
+
+void Game::readSequence()
+{
+//    std::string filename;
+//    //in >> filename;
+//    std::ifstream file(filename);
+    //while (cmd.readCommand(file));
+}
+
+void Game::restart()
+{
+    for (auto &player : players)
+    {
+        player->restart();
+    }
+    
+    playerIndex = 0;
+}
+
+void Game::forceIBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<IBlock>());
+}
+
+void Game::forceJBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<JBlock>());
+}
+
+void Game::forceLBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<LBlock>());
+}
+
+void Game::forceOBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<OBlock>());
+}
+
+void Game::forceSBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<SBlock>());
+}
+
+void Game::forceZBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<ZBlock>());
+}
+
+void Game::forceTBlock()
+{
+    curPlayer()->forceBlock(std::make_shared<TBlock>());
+}
+
+void Game::printCommandInput()
 {
     for (auto cmd : commandsRead)
     {
@@ -263,190 +375,32 @@ void Game::printCommandInput() const
     }
 }
 
-bool Game::readCommand(std::istream &in)
+void Game::enableGraphics()
 {
-    int mult;
-    std::string input;
-    Command cmd;
-    
-    in >> mult;
-    if (in.eof())
-    {
-        return false;
-    }
-    if (!in)
-    {
-        mult = 1;
-        in.clear();
-    }
-    
-    in >> input;
-    
-    if (mult < 0)
-    {
-        std::cerr << "Multiplier of '" << mult << "' is invalid, must be at least 0" << std::endl;
-        return false;
-    }
-    
-    try
-    {
-        cmd = getCommand(input);
-    }
-    catch (invalid_command e)
-    {
-        std::cerr << e.message() << std::endl;
-        return false;
-    }
-
-    switch (cmd)
-    {
-        case Left:
-        {
-            curPlayer()->moveLeft(mult);
-            break;
-        }
-        case Right:
-        {
-            curPlayer()->moveRight(mult);
-            break;
-        }
-        case Down:
-        {
-            curPlayer()->moveDown(mult);
-            break;
-        }
-        case RotateCW:
-        {
-            curPlayer()->rotateCW(mult);
-            break;
-        }
-        case RotateCCW:
-        {
-            curPlayer()->rotateCCW(mult);
-            break;
-        }
-        case Drop:
-        {
-            curPlayer()->drop();
-            endTurn();
-            break;
-        }
-        case LevelUp:
-        {
-            curPlayer()->levelUp(mult);
-            break;
-        }
-        case LevelDown:
-        {
-            curPlayer()->levelDown(mult);
-            break;
-        }
-        case NoRandom:
-        {
-            std::string filename;
-            in >> filename;
-            std::ifstream fstream{filename};
-            curPlayer()->unrandomizeCurLevel(fstream);
-            break;
-        }
-        case Random:
-        {
-            curPlayer()->randomizeCurLevel();
-            break;
-        }
-        case Sequence:
-        {
-            std::string filename;
-            in >> filename;
-            std::ifstream file(filename);
-            while (readCommand(file));
-            break;
-        }
-        case Restart:
-        {
-            restart();
-            break;
-        }
-        case ForceIBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<IBlock>());
-            break;
-        }
-        case ForceJBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<JBlock>());
-            break;
-        }
-        case ForceLBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<LBlock>());
-            break;
-        }
-        case ForceOBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<OBlock>());
-            break;
-        }
-        case ForceSBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<SBlock>());
-            break;
-        }
-        case ForceZBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<ZBlock>());
-            break;
-        }
-        case ForceTBlock:
-        {
-            curPlayer()->forceBlock(std::make_shared<TBlock>());
-            break;
-        }
-        case PrintCommandInput:
-        {
-            printCommandInput();
-            break;
-        }
-        case EnableGraphics:
-        {
-            setGraphicsEnabled();
-            break;
-        }
-        case DisableGraphics:
-        {
-            setGraphicsEnabled(false);
-            break;
-        }
-        case EnableRichText:
-        {
-            setRichTextEnabled();
-            break;
-        }
-        case DisableRichText:
-        {
-            setRichTextEnabled(false);
-            break;
-        }
-        case AddPlayer:
-        {
-            setNumPlayers((int)players.size() + mult);
-            break;
-        }
-        case RemovePlayer: {
-            setNumPlayers((int)players.size() - mult);
-            break;
-        }
-    }
-    
-    commandsRead.emplace_back(std::to_string(mult) + input);
-    
-    display();
-    return true;
+    setGraphicsEnabled(true);
 }
 
-// Visitor Pattern : Visit a display
-void Game::display()
+void Game::disableGraphics()
 {
-    if (tDisplay) tDisplay->accept(this);
-    if (gDisplay) gDisplay->accept(this);
+    setGraphicsEnabled(false);
+}
+
+void Game::enableRichText()
+{
+    setRichTextEnabled(true);
+}
+
+void Game::disableRichText()
+{
+    setRichTextEnabled(false);
+}
+
+void Game::addPlayer(int multiplier)
+{
+    setNumPlayers((int)players.size() + multiplier);
+}
+
+void Game::removePlayer(int multiplier)
+{
+    setNumPlayers((int)players.size() - multiplier);
 }
