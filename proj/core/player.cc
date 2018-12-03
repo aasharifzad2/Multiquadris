@@ -245,7 +245,8 @@ void Player::display(Display &d)
 // MARK: - Private Functions
 void Player::getBlock()
 {
-    fallingBlock = levels[curLevel].getBlock();
+    fallingBlock = nextBlock;
+    nextBlock = levels[curLevel].getBlock();
 }
 
 void Player::initLevels()

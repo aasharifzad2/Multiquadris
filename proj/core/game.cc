@@ -40,19 +40,35 @@ void Game::setNumPlayers(int numPlayers)
 {
     if (numPlayers < MIN_NUM_PLAYERS)
     {
+        std::cerr
+            << "Sorry! You must have atleast one player"
+            << std::endl;
+        
         numPlayers = MIN_NUM_PLAYERS;
     }
     
     if (numPlayers > MAX_NUM_PLAYERS)
     {
+        std::cerr
+            << "Sorry! You can't have more than five players"
+            << std::endl;
+        
         numPlayers = MAX_NUM_PLAYERS;
     }
-    
-    players.clear();
     
     while (players.size() < numPlayers)
     {
         players.emplace_back(std::make_unique<Player>());
+    }
+    
+    while (players.size() > numPlayers)
+    {
+        players.pop_back();
+    }
+    
+    if (playerIndex > numPlayers - 1)
+    {
+        playerIndex = numPlayers - 1;
     }
 }
 
@@ -125,6 +141,8 @@ void Game::restart()
     {
         player->restart();
     }
+    
+    playerIndex = 0;
 }
 
 Player *Game::curPlayer() const
@@ -215,7 +233,8 @@ bool Game::readCommand(std::istream &in)
     switch (cmd)
     {
         case Left:
-        {    curPlayer()->moveLeft(mult);
+        {
+            curPlayer()->moveLeft(mult);
             break;
         }
         case Right:
@@ -338,6 +357,15 @@ bool Game::readCommand(std::istream &in)
         case DisableRichText:
         {
             setRichTextEnabled(false);
+            break;
+        }
+        case AddPlayer:
+        {
+            setNumPlayers((int)players.size() + mult);
+            break;
+        }
+        case RemovePlayer: {
+            setNumPlayers((int)players.size() - mult);
             break;
         }
     }

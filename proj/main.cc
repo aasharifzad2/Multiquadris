@@ -95,7 +95,6 @@ int main(int argc, char* argv[])
 #ifdef RICH
     g.setRichTextEnabled();
 #endif
-    
     g.play();
 #endif
 }

@@ -38,7 +38,9 @@ enum Command
     EnableGraphics,
     DisableGraphics,
     EnableRichText,
-    DisableRichText
+    DisableRichText,
+    AddPlayer,
+    RemovePlayer
 };
 
 
@@ -75,7 +77,9 @@ class Game
             {"engraphics", Command::EnableGraphics},
             {"disgraphics", Command::DisableGraphics},
             {"enrichtext", Command::EnableRichText},
-            {"disrichtext", Command::DisableRichText}
+            {"disrichtext", Command::DisableRichText},
+            {"addplayer", Command::AddPlayer},
+            {"removeplayer", Command::RemovePlayer}
         };
     
 public:
