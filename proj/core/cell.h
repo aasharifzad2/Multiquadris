@@ -17,6 +17,10 @@ protected:
 public:
     Cell(int row, int col, Block * = nullptr);
     
+    void setRow(int);
+    void setCol(int);
+    void setCoords(int, int);
+    
     int getRow() const;
     int getCol() const;
     bool isEmpty() const;
@@ -24,11 +28,9 @@ public:
     bool isInBlindZone() const;
     char getSymbol() const;
     Colour getColour() const;
-
-    void setRow(int);
-    void setCol(int);
-    void setCoords(int, int);
     
+    // Observer Pattern : Subject (Cell) notifying observer (Block) that one of
+    //   the block's cells has been cleared
     void notifyCleared() const;
     
     // Visitor Pattern : visit(Display)

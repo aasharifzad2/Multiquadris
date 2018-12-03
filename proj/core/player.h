@@ -20,7 +20,7 @@ class Player
     int curTurn, lastScoringTurn;
     std::shared_ptr<std::ifstream> defaultBlockSequence;
     std::unique_ptr<Board> board;
-    std::shared_ptr<Block> fallingBlock;
+    std::shared_ptr<Block> fallingBlock, nextBlock;
     std::vector<Level> levels;
     std::vector<Effect> effects;
     Game *game;
@@ -39,6 +39,7 @@ public:
     int getCurLevel() const;
     Board *getBoard() const;
     Block *getFallingBlock() const;
+    Block *getNextBlock() const;
     
     void restart();
     void drop();

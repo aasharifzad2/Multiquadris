@@ -98,6 +98,8 @@ std::vector<Player *> Game::getPlayers() const
     return playerPtrs;
 }
 
+int Game::getPlayerIndex() const { return playerIndex; }
+
 
 // MARK: - Public Functions
 void Game::play()

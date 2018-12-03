@@ -89,6 +89,7 @@ public:
     
     // Getters
     std::vector<Player *> getPlayers() const;
+    int getPlayerIndex() const;
     
     void play();
     void addPlayer(std::ifstream &);

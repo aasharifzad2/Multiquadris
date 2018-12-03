@@ -7,7 +7,11 @@
 #include "../excp/no_parent_block.h"
 #include "../display/display.h"
 
-// Constructor
+
+// MARK: Static
+
+
+// MARK: Constructors and Destructor
 Cell::Cell(int row, int col, Block *parent) :
     parent(parent),
     filled(parent),
@@ -15,7 +19,19 @@ Cell::Cell(int row, int col, Block *parent) :
     col(col)
 {}
 
-// Getter functions
+
+// MARK: - Setters
+void Cell::setCol(int col) { this->col = col; }
+void Cell::setRow(int row) { this->row = row; }
+
+void Cell::setCoords(int row, int col)
+{
+    setRow(row);
+    setCol(col);
+}
+
+
+// MARK: - Getters
 int Cell::getRow() const { return row; }
 int Cell::getCol() const { return col; }
 bool Cell::isEmpty() const { return !filled; }
@@ -36,25 +52,17 @@ Colour Cell::getColour() const
     return parent ? parent->getColour() : Colour::Black;
 }
 
-// Setter functions
-void Cell::setCol(int col) { this->col = col; }
-void Cell::setRow(int row) { this->row = row; }
 
-void Cell::setCoords(int row, int col)
-{
-    setRow(row);
-    setCol(col);
-}
-
-// Observer Pattern : Subject (Cell) notifying observer (Block) that one of
-//   the block's cells has been cleared
+// MARK: - Public Functions
 void Cell::notifyCleared() const
 {
     parent->cellCleared(this);
 }
 
-// Visitor Pattern : Visit a display
 void Cell::display(Display &d)
 {
     d.accept(this);
 }
+
+
+// MARK: - Private Functions

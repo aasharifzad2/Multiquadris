@@ -26,10 +26,10 @@ void RichTextDisplay::printPlacedCell(const Cell *cell) const
     out << output;
 }
 
-void RichTextDisplay::printFallingCell(const Cell *cell) const
+void RichTextDisplay::printFallingCell(const Cell *cell, bool curTurn) const
 {
     std::string output(1, cell->getSymbol());
-    stylize(output, cell->getColour(), false, true);
+    stylize(output, cell->getColour(), false, curTurn);
     out << output;
 }
 

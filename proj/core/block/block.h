@@ -32,7 +32,9 @@ public:
     int getNumCells() const;
     std::shared_ptr<Cell> getCell(int) const;
     std::vector<std::shared_ptr<Cell>> getCells() const;
-    Cell *getMatchingCell(Cell *);
+    Cell *getMatchingCell(const Cell *) const;
+    // Calculates the extreme row and col values of the block
+    void getBounds(int &, int &, int &, int &) const;
     
     // Observer Pattern : cell notifies block that the cell has been cleared
     void cellCleared(const Cell *);
@@ -46,8 +48,6 @@ public:
     void rotateCCW();
     
 private:
-    // Calculates the extreme row and col values of the block
-    void getBounds(int &, int &, int &, int &);
     void checkHeavyLevel();
     void checkHeavySpecial();
 };

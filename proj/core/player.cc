@@ -23,6 +23,8 @@ Player::Player() :
 {
     setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
     initLevels();
+    nextBlock = levels[curLevel].getBlock();
+    getBlock();
 }
 
 
@@ -49,6 +51,8 @@ int Player::getCurLevel() const { return curLevel; }
 Board *Player::getBoard() const { return board.get(); }
 
 Block *Player::getFallingBlock() const { return fallingBlock.get(); }
+
+Block *Player::getNextBlock() const { return nextBlock.get(); }
 
 
 // MARK: - Public Functions
@@ -275,7 +279,6 @@ void Player::setLevel(int lvl)
     if (lvl > LEVEL_MAX)
     {
         curLevel = (int)levels.size() - 1;
-        
     }
     else if (lvl < LEVEL_MIN)
     {

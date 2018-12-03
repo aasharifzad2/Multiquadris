@@ -46,7 +46,7 @@ std::vector<std::shared_ptr<Cell>> Block::getCells() const
     return cells;
 }
 
-Cell *Block::getMatchingCell(Cell *c)
+Cell *Block::getMatchingCell(const Cell *c) const
 {
     for (auto cell : cells)
     {
@@ -61,6 +61,33 @@ Cell *Block::getMatchingCell(Cell *c)
     }
     return nullptr;
 }
+
+void Block::getBounds
+(
+    int &leftest,
+    int &rightest,
+    int &highest,
+    int &lowest
+)
+const
+{
+    leftest = INT_MAX;
+    rightest = INT_MIN;
+    highest = INT_MAX;
+    lowest = INT_MIN;
+    
+    for (std::shared_ptr<Cell> c : cells)
+    {
+        int row = c->getRow();
+        int col = c->getCol();
+        
+        leftest = std::min(leftest, col);
+        rightest = std::max(rightest, col);
+        highest = std::min(highest, row);
+        lowest = std::max(lowest, row);
+    }
+}
+
 
 // MARK: - Public Functions
 void Block::cellCleared(const Cell * cellptr)
@@ -121,16 +148,16 @@ void Block::moveDown()
 
 void Block::rotateCW()
 {
-    int leftist, rightist, highest, lowest;
+    int leftest, rightest, highest, lowest;
     
-    getBounds(leftist, rightist, highest, lowest);
+    getBounds(leftest, rightest, highest, lowest);
     
     for (std::shared_ptr<Cell> c : cells)
     {
         int col = c->getCol();
         int row = c->getRow();
-        c->setCol(leftist + lowest - row);
-        c->setRow(lowest - rightist + col);
+        c->setCol(leftest + lowest - row);
+        c->setRow(lowest - rightest + col);
     }
     
     checkHeavyLevel();
@@ -138,16 +165,16 @@ void Block::rotateCW()
 
 void Block::rotateCCW()
 {
-    int leftist, rightist, highest, lowest;
+    int leftest, rightest, highest, lowest;
     
-    getBounds(leftist, rightist, highest, lowest);
+    getBounds(leftest, rightest, highest, lowest);
     
     for (std::shared_ptr<Cell> c : cells)
     {
         int col = c->getCol();
         int row = c->getRow();
-        c->setCol(leftist + row - highest);
-        c->setRow(lowest - col + leftist);
+        c->setCol(leftest + row - highest);
+        c->setRow(lowest - col + leftest);
     }
     
     checkHeavyLevel();
@@ -155,31 +182,6 @@ void Block::rotateCCW()
 
 
 // MARK: - Private Functions
-void Block::getBounds
-(
-    int &leftist,
-    int &rightest,
-    int &highest,
-    int &lowest
-)
-{
-    leftist = INT_MAX;
-    rightest = INT_MIN;
-    highest = INT_MAX;
-    lowest = INT_MIN;
-    
-    for (std::shared_ptr<Cell> c : cells)
-    {
-        int row = c->getRow();
-        int col = c->getCol();
-        
-        leftist = std::min(leftist, col);
-        rightest = std::max(rightest, col);
-        highest = std::min(highest, row);
-        lowest = std::max(lowest, row);
-    }
-}
-
 void Block::checkHeavyLevel()
 {
 #ifndef DEBUG

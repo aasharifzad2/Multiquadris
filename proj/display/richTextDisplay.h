@@ -16,7 +16,7 @@ public:
 
 private:
     void printPlacedCell(const Cell *) const override;
-    void printFallingCell(const Cell *) const override;
+    void printFallingCell(const Cell *, bool curTurn = false) const override;
     void printBlindCell() const override;
     void stylize(std::string &, Colour, bool = false, bool = false) const;
 };

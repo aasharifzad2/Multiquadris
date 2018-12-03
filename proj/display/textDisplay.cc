@@ -4,6 +4,7 @@
 #include "../core/game.h"
 #include "../excp/not_implemented.h"
 
+
 // Mark: - Static
 
 
@@ -18,12 +19,13 @@ void TextDisplay::accept(const Game *game) const
 {
     std::vector<int> widths = getWidths(game);
     
-    displayScores(game, widths);
-    displayHighScores(game, widths);
     displayLevels(game, widths);
+    displayHighScores(game, widths);
+    displayScores(game, widths);
     displayBorder(game, widths);
     displayBoards(game, widths);
     displayBorder(game, widths);
+    displayNextBlock(game, widths);
 }
 
 void TextDisplay::accept(const Player *player) const
@@ -46,6 +48,7 @@ void TextDisplay::accept(const Player *player) const
         (
             row,
             player->hasEffect(Effect::Blind),
+            true,
             player->getFallingBlock()
         );
         
@@ -78,7 +81,7 @@ void TextDisplay::printPlacedCell(const Cell *cell) const
     out << cell->getSymbol();
 }
 
-void TextDisplay::printFallingCell(const Cell *cell) const
+void TextDisplay::printFallingCell(const Cell *cell, bool curTurn) const
 {
     out << cell->getSymbol();
 }
@@ -92,9 +95,10 @@ void TextDisplay::printBlindCell() const
 // MARK: - Private Functions
 void TextDisplay::printRow
 (
-    std::vector<Cell *> row,
+    const std::vector<Cell *> row,
     bool playerIsBlind,
-    Block *fallingBlock
+    bool isTurn,
+    const Block *fallingBlock
 )
 const
 {
@@ -107,11 +111,27 @@ const
         }
         else if (fallingCell)
         {
-            printFallingCell(fallingCell);
+            printFallingCell(fallingCell, isTurn);
         }
         else
         {
             printPlacedCell(cell);
+        }
+    }
+}
+
+// Print rows for displaying the next Block
+void TextDisplay::printNextBlockRow(std::vector<Cell *> row, bool isTurn) const
+{
+    for (auto cell : row)
+    {
+        if (cell && isTurn)
+        {
+            printPlacedCell(cell);
+        }
+        else
+        {
+            out << ' ';
         }
     }
 }
@@ -131,7 +151,17 @@ std::string TextDisplay::getLevelText(const Player *player) const
     return "Level: " + std::to_string(player->getCurLevel());
 }
 
-void TextDisplay::displayScores(const Game * game, const std::vector<int> widths) const
+std::string TextDisplay::getNextBlockText() const
+{
+    return "Next: ";
+}
+
+void TextDisplay::displayScores
+(
+    const Game *game,
+    const std::vector<int> widths
+)
+const
 {
     int index = 0;
     for (auto player : game->getPlayers())
@@ -139,7 +169,7 @@ void TextDisplay::displayScores(const Game * game, const std::vector<int> widths
         std::string scoreText = getScoreText(player);
         
         out << scoreText
-            << std::setw(widths.at(index) - (int) scoreText.length())
+            << std::setw(widths.at(index) - (int)scoreText.length())
             << std::setfill(' ')
             << "";
         
@@ -149,7 +179,12 @@ void TextDisplay::displayScores(const Game * game, const std::vector<int> widths
     out << std::endl;
 }
 
-void TextDisplay::displayHighScores(const Game * game, const std::vector<int> widths) const
+void TextDisplay::displayHighScores
+(
+    const Game *game,
+    const std::vector<int> widths
+)
+const
 {
     int index = 0;
     for (auto player : game->getPlayers())
@@ -157,7 +192,7 @@ void TextDisplay::displayHighScores(const Game * game, const std::vector<int> wi
         std::string hScoreText = getHighScoreText(player);
         
         out << hScoreText
-            << std::setw(widths.at(index) - (int) hScoreText.length())
+            << std::setw(widths.at(index) - (int)hScoreText.length())
             << std::setfill(' ')
             << "";
         
@@ -167,7 +202,12 @@ void TextDisplay::displayHighScores(const Game * game, const std::vector<int> wi
     out << std::endl;
 }
 
-void TextDisplay::displayLevels(const Game * game, const std::vector<int> widths) const
+void TextDisplay::displayLevels
+(
+    const Game * game,
+    const std::vector<int> widths
+)
+const
 {
     int index = 0;
     
@@ -176,7 +216,7 @@ void TextDisplay::displayLevels(const Game * game, const std::vector<int> widths
         std::string levelText = getLevelText(player);
         
         out << levelText
-            << std::setw(widths.at(index) - (int) levelText.length())
+            << std::setw(widths.at(index) - (int)levelText.length())
             << std::setfill(' ')
             << "";
         
@@ -186,7 +226,12 @@ void TextDisplay::displayLevels(const Game * game, const std::vector<int> widths
     out << std::endl;
 }
 
-void TextDisplay::displayBorder(const Game * game, const std::vector<int> widths) const
+void TextDisplay::displayBorder
+(
+    const Game * game,
+    const std::vector<int> widths
+)
+const
 {
     int index = 0;
     
@@ -203,7 +248,12 @@ void TextDisplay::displayBorder(const Game * game, const std::vector<int> widths
     out << std::endl;
 }
 
-void TextDisplay::displayBoards(const Game * game, const std::vector<int> widths) const
+void TextDisplay::displayBoards
+(
+    const Game * game,
+    const std::vector<int> widths
+)
+const
 {
     int firstIndex = 0;
     int numRows = game->getPlayers().at(firstIndex)->getBoard()->getNumRows();
@@ -217,17 +267,98 @@ void TextDisplay::displayBoards(const Game * game, const std::vector<int> widths
         {
             printRow
             (
-                 player->getBoard()->getCells().at(i),
-                 player->hasEffect(Effect::Blind),
-                 player->getFallingBlock()
+                player->getBoard()->getCells().at(i),
+                player->hasEffect(Effect::Blind),
+                (game->getPlayerIndex() == index),
+                player->getFallingBlock()
             );
             
             out << std::setw(widths.at(index) - numCols) << std::setfill(' ') << "";
+            
+            index++;
         }
         
         out << std::endl;
     }
 }
+
+void TextDisplay::displayNextBlock(const Game *game, const std::vector<int> widths) const
+{
+    for (auto width : widths)
+    {
+        std::string nextBlockText = getNextBlockText();
+        
+        out << nextBlockText
+            << std::setw(width - (int)nextBlockText.length())
+            << std::setfill(' ')
+            << "";
+    }
+    
+    out << std::endl;
+    
+    std::vector<std::vector<std::vector<Cell *>>> blockBoards = getNextBlockCellGrids(game);
+    
+    for (int i = 0; i < NEXT_BLOCK_NUM_ROWS; i++)
+    {
+        int playerIndex = 0;
+
+        for (auto &board : blockBoards)
+        {
+            int numCols = (int)blockBoards.at(playerIndex).at(0).size();
+
+            printNextBlockRow(board.at(i), (game->getPlayerIndex() == playerIndex));
+
+            out << std::setw(widths.at(playerIndex) - numCols)
+                << std::setfill(' ')
+                << "";
+
+            playerIndex++;
+        }
+
+        out << std::endl;
+    }
+}
+
+std::vector<std::vector<std::vector<Cell *>>> TextDisplay::getNextBlockCellGrids(const Game *game) const
+{
+    std::vector<std::vector<std::vector<Cell *>>> blockBoards;
+    
+    for (auto player : game->getPlayers())
+    {
+        blockBoards.emplace_back(getNextBlockCellGrid(player->getNextBlock()));
+    }
+    
+    return blockBoards;
+}
+
+std::vector<std::vector<Cell *>> TextDisplay::getNextBlockCellGrid
+(
+    const Block *block
+)
+const
+{
+    int leftest, rightest, highest, lowest;
+    block->getBounds(leftest, rightest, highest, lowest);
+    
+    int numCols = rightest - leftest + 1;
+    
+    // Create 2D vector of nullptrs
+    std::vector<std::vector<Cell *>> blockBoard
+    (
+        NEXT_BLOCK_NUM_ROWS,
+        std::vector<Cell *>(numCols)
+    );
+
+    for (auto cell : block->getCells())
+    {
+        int x = cell->getRow() - highest;
+        int y = cell->getCol() - leftest;
+        blockBoard[x][y] = cell.get();
+    }
+    
+    return blockBoard;
+}
+
 
 std::vector<int> TextDisplay::getWidths(const Game *game) const
 {
@@ -242,9 +373,9 @@ std::vector<int> TextDisplay::getWidths(const Game *game) const
 
 int TextDisplay::getWidth(const Player *player) const
 {
-    int scoreLen = (int) (getScoreText(player)).length();
-    int highScoreLen = (int) (getHighScoreText(player)).length();
+    int scoreLen = (int)(getScoreText(player)).length();
+    int highScoreLen = (int)(getHighScoreText(player)).length();
     int numCols = player->getBoard()->getNumCols();
     
-    return std::max({scoreLen, highScoreLen, numCols}) + bufferWidth;
+    return std::max({scoreLen, highScoreLen, numCols}) + BUFFER_WIDTH;
 }
