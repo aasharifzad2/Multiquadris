@@ -287,7 +287,7 @@ void Game::restart()
     
     if (gDisplay)
     {
-        setGraphicsEnabled(true)
+        setGraphicsEnabled(true);
     }
     
     playerIndex = 0;

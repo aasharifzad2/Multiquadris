@@ -3,12 +3,7 @@
 
 
 #include "display.h"
-
-#ifdef GRAPHICS
 #include "window.h"
-#else
-#include "windowTemp.h"
-#endif
 
 const int
     NUM_ROWS = 18,

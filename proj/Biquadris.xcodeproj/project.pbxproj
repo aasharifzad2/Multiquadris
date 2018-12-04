@@ -56,7 +56,6 @@
 /* Begin PBXFileReference section */
 		3D52855A21B4C431002DB60C /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window.h; path = display/window.h; sourceTree = "<group>"; };
 		3D52855B21B4C431002DB60C /* window.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window.cc; path = display/window.cc; sourceTree = "<group>"; };
-		3D52855D21B4C77F002DB60C /* windowTemp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = windowTemp.h; path = display/windowTemp.h; sourceTree = "<group>"; };
 		3DB923EE21ABBA4C00A1AF56 /* player.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = player.cc; path = core/player.cc; sourceTree = "<group>"; };
 		3DB923EF21ABBA4C00A1AF56 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = core/player.h; sourceTree = "<group>"; };
 		5D094A9721B1C5B800F1A4C6 /* richTextDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = richTextDisplay.h; path = display/richTextDisplay.h; sourceTree = "<group>"; };
@@ -158,7 +157,6 @@
 			children = (
 				3D52855B21B4C431002DB60C /* window.cc */,
 				3D52855A21B4C431002DB60C /* window.h */,
-				3D52855D21B4C77F002DB60C /* windowTemp.h */,
 				5D094A9821B1C5B800F1A4C6 /* richTextDisplay.cc */,
 				5D27C5E421AB660900AE3C2B /* graphicDisplay.cc */,
 				5D27C5E321AB660900AE3C2B /* textDisplay.cc */,
