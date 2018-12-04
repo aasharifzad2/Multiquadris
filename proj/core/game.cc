@@ -342,6 +342,11 @@ void Game::restart()
         player->restart();
     }
     
+    if (gDisplay)
+    {
+        setGraphicsEnabled(true)
+    }
+    
     playerIndex = 0;
 }
 

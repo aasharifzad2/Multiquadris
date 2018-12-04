@@ -203,6 +203,8 @@ void CommandInterpreter::readSpecial()
             std::cout << " '" << cmd->getKey() << "'";
         }
         
+        std::cout << std::endl;
+        
         Command &cmd = readKeyFrom(specialCommands);
         
         cmd.execute();

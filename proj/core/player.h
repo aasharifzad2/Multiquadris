@@ -65,6 +65,7 @@ public:
     void rotateCW(int = 1);
     void rotateCCW(int = 1);
     
+    
     // Observer Pattern : Board notifies Player that they've scored
     void rowsCleared(int);
     void blockCleared(int lvlGenerated);
@@ -79,6 +80,7 @@ private:
     // Effects
     void applyHeavyLevel();
     void applyHeavySpecial();
+    void applyWallEffect();
     
     // If possible, the block moves down, otherwise it drops
     void moveDownOrDrop(int = 1);

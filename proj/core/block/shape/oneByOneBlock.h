@@ -8,7 +8,7 @@ class OneByOneBlock : public Block
 {
 public:
     ~OneByOneBlock() override;
-    OneByOneBlock(int, int);
+    OneByOneBlock(int row, int col);
 };
 
 

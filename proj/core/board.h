@@ -33,6 +33,9 @@ public:
     void addBlock(std::shared_ptr<Block>);
     void clearFilledRows();
     
+    // Add one block to the middle of the board
+    void addBrickToWall(int);
+    
     // Visitor Pattern : visit(BQDisplay)
     void display(BQDisplay &);
     

@@ -20,7 +20,10 @@ Player::Player(Game *game) :
     game(game),
     defaultBlockSequence
     (
-        std::make_unique<std::ifstream>(INITIAL_DEFAULT_BLOCK_SEQUENCE)
+        std::make_unique<std::ifstream>
+        (
+            INITIAL_DEFAULT_BLOCK_SEQUENCE
+        )
     )
 {
     setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
@@ -33,7 +36,8 @@ Player::Player(Game *game) :
 // MARK: - Setters
 void Player::setDefaultBlockSequence(std::ifstream blockInput)
 {
-    defaultBlockSequence = std::make_shared<std::ifstream>(std::move(blockInput));
+    defaultBlockSequence =
+        std::make_shared<std::ifstream>(std::move(blockInput));
     pushDefaultBlockSequence();
 }
 
@@ -61,6 +65,8 @@ Block *Player::getNextBlock() const { return nextBlock.get(); }
 void Player::restart()
 {
     score = 0;
+    curTurn = 0;
+    lastScoringTurn = 0;
     defaultBlockSequence->seekg(0, defaultBlockSequence->beg);
     setBoard(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
     initLevels();
@@ -88,6 +94,9 @@ void Player::drop()
     {
         game->triggerGameOver();
     }
+    
+    ++curTurn;
+    applyWallEffect();
 }
 
 void Player::levelUp(int mult)
@@ -125,6 +134,7 @@ void Player::forceBlock(std::shared_ptr<Block> block)
     block->setLevelGenerated(curLevel().getNumber());
 }
 
+// MARK: Effect Functions
 void Player::addEffect(Effect effect)
 {
     effects.emplace_back(effect);
@@ -258,6 +268,8 @@ void Player::rowsCleared(int numRows)
     score += points*points;
     updateHighscore();
     
+    lastScoringTurn = curTurn+1;
+    
     if (numRows >= 2)
     {
         game->triggerSpecialAction();
@@ -284,6 +296,7 @@ Level &Player::curLevel()
     return levels[levelIndex];
 }
 
+// MARK: Effects
 void Player::applyHeavyLevel()
 {
     if (curLevel().hasEffect(Effect::Heavy))
@@ -300,6 +313,17 @@ void Player::applyHeavySpecial()
     }
 }
 
+void Player::applyWallEffect()
+{
+    if (!curLevel().hasEffect(Effect::Wall)) return;
+    int dryStreak = curTurn - lastScoringTurn;
+    if (dryStreak != 0 && dryStreak % 5 == 0)
+    {
+        board->addBrickToWall(curLevel().getNumber());
+    }
+}
+
+// MARK: Other
 void Player::moveDownOrDrop(int mult)
 {
     for (int i = 0; i < mult; i++)

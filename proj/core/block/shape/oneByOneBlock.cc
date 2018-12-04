@@ -5,8 +5,8 @@
 
 OneByOneBlock::~OneByOneBlock() {}
 
-OneByOneBlock::OneByOneBlock(int x, int y) :
+OneByOneBlock::OneByOneBlock(int row, int col) :
     Block('*', Colour::Brown)
 {
-    cells.emplace_back(std::make_shared<Cell>(y, x, this));
+    cells.emplace_back(std::make_shared<Cell>(row, col, this));
 }

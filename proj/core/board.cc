@@ -6,6 +6,7 @@
 #include "block/block.h"
 #include "../display/display.h"
 #include "../excp/invalid_block_placement.h"
+#include "block/shape/oneByOneBlock.h"
 
 
 // MARK: - Static
@@ -147,9 +148,30 @@ void Board::clearFilledRows()
     {
         for (int colIndex = 0; colIndex < numCols; ++colIndex)
         {
-            cells.at(rowIndex).at(colIndex)->setCoords(rowIndex, colIndex);
+            cells
+                .at(rowIndex)
+                .at(colIndex)
+                ->setCoords(rowIndex, colIndex);
         }
     }
+}
+
+void Board::addBrickToWall(int levelGenerated)
+{
+    std::shared_ptr<OneByOneBlock> brick =
+        std::make_shared<OneByOneBlock>(0, numCols / 2);
+    
+    brick->setLevelGenerated(levelGenerated);
+    
+    if (!blockFits(brick)) return;
+    while (blockFits(brick))
+    {
+        brick->moveDown();
+    }
+    
+    brick->moveUp();
+    addBlock(brick);
+    clearFilledRows();
 }
 
 
