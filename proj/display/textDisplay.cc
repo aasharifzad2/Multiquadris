@@ -15,7 +15,7 @@ TextDisplay::TextDisplay(std::ostream &out) :
 
 
 // Mark: - Visitors
-void TextDisplay::accept(const Game *game) const
+void TextDisplay::accept(const Game *game)
 {
     std::vector<int> widths = getWidths(game);
     
@@ -378,4 +378,76 @@ int TextDisplay::getWidth(const Player *player) const
     int numCols = player->getBoard()->getNumCols();
     
     return std::max({scoreLen, highScoreLen, numCols}) + BUFFER_WIDTH;
+}
+
+void TextDisplay::gameIsOver(const Game *game)
+{
+    out
+    << "%%%%%%%%%%%%%%%%%%%" << std::endl
+    << "%%%  GAME OVER  %%%" << std::endl
+    << "%%%%%%%%%%%%%%%%%%%" << std::endl
+    << std::endl;
+    
+    std::vector<Player *> players = game->getPlayers();
+    int playerIndex = game->getPlayerIndex();
+    
+    if (players.size() == 1)
+    {
+        out
+        << "You ended with a highscore of: "
+        << players[playerIndex]->getHighScore()
+        << std::endl
+        << std::endl;
+    }
+    else if (players.size() == 2)
+    {
+        out
+        << "Player " << (2-playerIndex) << " won!" << std::endl
+        << "Player 1 highscore: "
+        << players[0]->getHighScore() << std::endl
+        << "Player 2 highscore: "
+        << players[1]->getHighScore() << std::endl
+        << std::endl;
+    }
+    else
+    {
+        // map for score and vectors of player numbers with that score
+        std::map<int, std::vector<int>> scores;
+        for (int i = 0; i < players.size(); i++)
+        {
+            // Add all the non-losing scorers to the score board
+            if (i != playerIndex)
+            {
+                scores[players[i]->getHighScore()].emplace_back(i+1);
+            }
+        }
+        
+        int place = 1;
+        for (auto itr = scores.rbegin(); itr != scores.rend(); ++itr)
+        {
+            for (auto playerNum : itr->second)
+            {
+                out
+                << place
+                << ". Player "
+                << playerNum
+                << "    "
+                << itr->first
+                << std::endl;
+            }
+            
+            place++;
+        }
+        
+        // Print Loser's Score
+        out
+        << place
+        << ". Player "
+        << playerIndex + 1
+        << "    "
+        << game->getPlayers()[game->getPlayerIndex()]->getHighScore()
+        << std::endl
+        << std::endl;
+        
+    }
 }

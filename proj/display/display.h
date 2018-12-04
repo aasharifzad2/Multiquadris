@@ -11,7 +11,7 @@ class Game;
 class BQDisplay
 {
 public:
-    virtual void accept(const Game *) const = 0;
+    virtual void accept(const Game *) = 0;
     virtual void accept(const Player *) const = 0;
     virtual void accept(const Board *) const = 0;
     virtual void accept(const Cell *) const = 0;

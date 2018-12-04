@@ -19,6 +19,8 @@ Cell::Cell(int row, int col, Block *parent) :
     col(col)
 {}
 
+Cell::Cell() {}
+
 
 // MARK: - Setters
 void Cell::setCol(int col) { this->col = col; }

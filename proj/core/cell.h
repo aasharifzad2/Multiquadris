@@ -16,6 +16,7 @@ protected:
     
 public:
     Cell(int row, int col, Block * = nullptr);
+    Cell();
     
     void setRow(int);
     void setCol(int);

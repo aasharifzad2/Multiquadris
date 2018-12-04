@@ -11,6 +11,9 @@ const int
 
 class TextDisplay : public BQDisplay
 {
+    std::vector<std::vector<std::vector<Cell *>>> prevState;
+    
+    
 protected:
     std::ostream &out;
     
@@ -19,11 +22,12 @@ public:
     ~TextDisplay() override {}
     
     // Visitor Pattern : Visit different classes
-    void accept(const Game *) const override;
+    void accept(const Game *) override;
     void accept(const Player *) const override;
     void accept(const Board *) const override;
     void accept(const Cell *) const override;
     
+    void gameIsOver(const Game *);
 
 protected:
     virtual void printPlacedCell(const Cell *) const;
