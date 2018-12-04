@@ -28,7 +28,7 @@ const std::string
 
 
 const int
-    DEFAULT_STARTLEVEL  = 1,
+    DEFAULT_STARTLEVEL  = 0,
     DEFAULT_SEED        = 19990113;
 
 void parseArgs
