@@ -128,4 +128,6 @@ int main(int argc, char* argv[])
     g.setSequence1(scriptFile1);
     g.setSequence1(scriptFile2);
     g.setGraphicsEnabled(!textOnly);
+    
+    g.play();
 }
