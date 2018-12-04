@@ -51,6 +51,10 @@ public:
     void unrandomizeCurLevel(std::ifstream &);
     void randomizeCurLevel();
     void forceBlock(std::shared_ptr<Block>);
+    
+    // Effects
+    void addEffect(Effect);
+    void clearEffects();
     bool hasEffect(Effect) const;
     
     // Movement and rotation functions
@@ -61,7 +65,7 @@ public:
     void rotateCW(int = 1);
     void rotateCCW(int = 1);
     
-    // Observer Pattern : Board notifies Player that they've scored points
+    // Observer Pattern : Board notifies Player that they've scored
     void rowsCleared(int);
     void blockCleared(int lvlGenerated);
     

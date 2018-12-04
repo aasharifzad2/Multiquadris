@@ -13,7 +13,7 @@ public:
     // Constructors
     SingularCommand(Game *, std::string, void(Game::*)());
     
-    void execute(int multiplier) override;
+    void execute(int multiplier = 1) override;
 };
 
 

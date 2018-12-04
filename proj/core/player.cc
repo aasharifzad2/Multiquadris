@@ -86,7 +86,7 @@ void Player::drop()
     }
     else
     {
-        game->over();
+        game->triggerGameOver();
     }
 }
 
@@ -123,6 +123,16 @@ void Player::forceBlock(std::shared_ptr<Block> block)
 {
     fallingBlock = block;
     block->setLevelGenerated(curLevel().getNumber());
+}
+
+void Player::addEffect(Effect effect)
+{
+    effects.emplace_back(effect);
+}
+
+void Player::clearEffects()
+{
+    effects.clear();
 }
 
 bool Player::hasEffect(Effect effect) const
@@ -241,12 +251,17 @@ void Player::rotateCCW(int mult)
     applyHeavyLevel();
 }
 
-// MARK: Points Functions
+// MARK: Scoring Functions
 void Player::rowsCleared(int numRows)
 {
     int points = levelIndex + numRows;
     score += points*points;
     updateHighscore();
+    
+    if (numRows >= 2)
+    {
+        game->triggerSpecialAction();
+    }
 }
 
 void Player::blockCleared(int lvlGenerated)

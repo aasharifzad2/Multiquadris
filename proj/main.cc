@@ -94,11 +94,11 @@ int main(int argc, char* argv[])
     
     
 #ifdef RICH
-    g.setRichTextEnabled();
+    g.setRichTextEnabled(true);
 #endif
     
 #ifdef GRAPHICS
-    g.setGraphicsEnabled();
+    g.setGraphicsEnabled(true);
 #endif
     
     g.play();

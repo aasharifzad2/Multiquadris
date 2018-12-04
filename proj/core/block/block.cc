@@ -5,11 +5,78 @@
 #include <climits>
 #include "../cell.h"
 #include "../../excp/not_implemented.h"
+#include "../../excp/invalid_block_char.h"
+#include "shape/iBlock.h"
+#include "shape/jBlock.h"
+#include "shape/lBlock.h"
+#include "shape/oBlock.h"
+#include "shape/sBlock.h"
+#include "shape/zBlock.h"
+#include "shape/tBlock.h"
 
 
 // MARK: - Static
 int Block::initialX = 0;
 int Block::initialY = 3;
+
+std::shared_ptr<Block> Block::makeBlock(BlockShape shape)
+{
+    switch (shape)
+    {
+        case IShape:
+            return std::make_shared<IBlock>();
+            break;
+        case JShape:
+            return std::make_shared<JBlock>();
+            break;
+        case LShape:
+            return std::make_shared<LBlock>();
+            break;
+        case OShape:
+            return std::make_shared<OBlock>();
+            break;
+        case SShape:
+            return std::make_shared<SBlock>();
+            break;
+        case ZShape:
+            return std::make_shared<ZBlock>();
+            break;
+        case TShape:
+            return std::make_shared<TBlock>();
+            break;
+    }
+}
+
+std::shared_ptr<Block> Block::makeBlock(char c)
+{
+    switch (std::toupper(c))
+    {
+        case 'I':
+            return std::make_shared<IBlock>();
+            break;
+        case 'J':
+            return std::make_shared<JBlock>();
+            break;
+        case 'L':
+            return std::make_shared<LBlock>();
+            break;
+        case 'O':
+            return std::make_shared<OBlock>();
+            break;
+        case 'S':
+            return std::make_shared<SBlock>();
+            break;
+        case 'Z':
+            return std::make_shared<ZBlock>();
+            break;
+        case 'T':
+            return std::make_shared<TBlock>();
+            break;
+        default:
+            throw invalid_block_char(c);
+    }
+}
+
 
 
 // MARK: - Constructors & Destructor

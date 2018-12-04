@@ -32,12 +32,13 @@
 		5D5CDB5621A7D39D00CE28BD /* randomBlockStream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5121A7D39D00CE28BD /* randomBlockStream.cc */; };
 		5D5CDB5821A7D39D00CE28BD /* definedBlockStream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5521A7D39D00CE28BD /* definedBlockStream.cc */; };
 		5D5CDB5C21A896DF00CE28BD /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5B21A896DF00CE28BD /* level.cc */; };
-		5D5CDB5F21A897CB00CE28BD /* invalid_block_sequence.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5D21A897CB00CE28BD /* invalid_block_sequence.cc */; };
+		5D5CDB5F21A897CB00CE28BD /* invalid_block_char.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB5D21A897CB00CE28BD /* invalid_block_char.cc */; };
 		5D5CDB6521A9C22B00CE28BD /* board.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB6421A9C22B00CE28BD /* board.cc */; };
 		5D5CDB7E21AA347F00CE28BD /* invalid_block_placement.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CDB7D21AA347F00CE28BD /* invalid_block_placement.cc */; };
 		5DE0709521A680D9003D00BF /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709321A680D9003D00BF /* main.cc */; };
 		5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709721A68108003D00BF /* invalid_command.cc */; };
 		5DE0709F21A6813B003D00BF /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0709E21A6813B003D00BF /* game.cc */; };
+		5DF5C90621B5C90A00BEACB4 /* invalid_argument.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DF5C90421B5C90A00BEACB4 /* invalid_argument.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -109,8 +110,8 @@
 		5D5CDB5521A7D39D00CE28BD /* definedBlockStream.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = definedBlockStream.cc; path = core/block/stream/definedBlockStream.cc; sourceTree = "<group>"; };
 		5D5CDB5A21A896DF00CE28BD /* level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = level.h; path = core/level.h; sourceTree = "<group>"; };
 		5D5CDB5B21A896DF00CE28BD /* level.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = level.cc; path = core/level.cc; sourceTree = "<group>"; };
-		5D5CDB5D21A897CB00CE28BD /* invalid_block_sequence.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = invalid_block_sequence.cc; path = excp/invalid_block_sequence.cc; sourceTree = "<group>"; };
-		5D5CDB5E21A897CB00CE28BD /* invalid_block_sequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = invalid_block_sequence.h; path = excp/invalid_block_sequence.h; sourceTree = "<group>"; };
+		5D5CDB5D21A897CB00CE28BD /* invalid_block_char.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = invalid_block_char.cc; path = excp/invalid_block_char.cc; sourceTree = "<group>"; };
+		5D5CDB5E21A897CB00CE28BD /* invalid_block_char.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = invalid_block_char.h; path = excp/invalid_block_char.h; sourceTree = "<group>"; };
 		5D5CDB6021A89DF200CE28BD /* blockShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = blockShape.h; path = core/block/blockShape.h; sourceTree = "<group>"; };
 		5D5CDB6221A9BD5600CE28BD /* board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = board.h; path = core/board.h; sourceTree = "<group>"; };
 		5D5CDB6421A9C22B00CE28BD /* board.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = board.cc; path = core/board.cc; sourceTree = "<group>"; };
@@ -122,6 +123,8 @@
 		5DE0709A21A68109003D00BF /* invalid_command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = invalid_command.h; path = excp/invalid_command.h; sourceTree = "<group>"; };
 		5DE0709D21A6813B003D00BF /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = core/game.h; sourceTree = "<group>"; };
 		5DE0709E21A6813B003D00BF /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = core/game.cc; sourceTree = "<group>"; };
+		5DF5C90421B5C90A00BEACB4 /* invalid_argument.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = invalid_argument.cc; path = excp/invalid_argument.cc; sourceTree = "<group>"; };
+		5DF5C90521B5C90A00BEACB4 /* invalid_argument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = invalid_argument.h; path = excp/invalid_argument.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,15 +248,17 @@
 		5DE0709621A680E5003D00BF /* excp */ = {
 			isa = PBXGroup;
 			children = (
+				5DF5C90421B5C90A00BEACB4 /* invalid_argument.cc */,
+				5DF5C90521B5C90A00BEACB4 /* invalid_argument.h */,
 				5D0E32C321B5AB3C0079BE5C /* eof.cc */,
 				5D0E32C421B5AB3C0079BE5C /* eof.h */,
 				5DE0709921A68108003D00BF /* base_exception.h */,
-				5D5CDB5D21A897CB00CE28BD /* invalid_block_sequence.cc */,
+				5D5CDB5D21A897CB00CE28BD /* invalid_block_char.cc */,
 				5D5CDB2F21A7858300CE28BD /* not_implemented.cc */,
 				5DE0709721A68108003D00BF /* invalid_command.cc */,
 				5D5CDB7D21AA347F00CE28BD /* invalid_block_placement.cc */,
 				5D27C5D121AA5E7200AE3C2B /* no_parent_block.cc */,
-				5D5CDB5E21A897CB00CE28BD /* invalid_block_sequence.h */,
+				5D5CDB5E21A897CB00CE28BD /* invalid_block_char.h */,
 				5D5CDB3021A7858300CE28BD /* not_implemented.h */,
 				5DE0709A21A68109003D00BF /* invalid_command.h */,
 				5D5CDB7C21AA347F00CE28BD /* invalid_block_placement.h */,
@@ -265,8 +270,8 @@
 		5DE070A021A6815A003D00BF /* Biquadris */ = {
 			isa = PBXGroup;
 			children = (
-				5D0E32C721B5B6A20079BE5C /* cmd */,
 				5DE0709321A680D9003D00BF /* main.cc */,
+				5D0E32C721B5B6A20079BE5C /* cmd */,
 				5D27C5E121AB654E00AE3C2B /* display */,
 				5DE0709621A680E5003D00BF /* excp */,
 				5DE0709021A680CB003D00BF /* core */,
@@ -339,13 +344,14 @@
 				5D27C5DF21AB262400AE3C2B /* cell.cc in Sources */,
 				5D094A9921B1C5B800F1A4C6 /* richTextDisplay.cc in Sources */,
 				5D0E32D121B5B7240079BE5C /* commandInterpreter.cc in Sources */,
-				5D5CDB5F21A897CB00CE28BD /* invalid_block_sequence.cc in Sources */,
+				5D5CDB5F21A897CB00CE28BD /* invalid_block_char.cc in Sources */,
 				5D5CDB5C21A896DF00CE28BD /* level.cc in Sources */,
 				5D0E32D021B5B7240079BE5C /* repeatableCommand.cc in Sources */,
 				5D27C5E921AB660900AE3C2B /* graphicDisplay.cc in Sources */,
 				5DE0709B21A68109003D00BF /* invalid_command.cc in Sources */,
 				5D0E32D321B5B7240079BE5C /* singularCommand.cc in Sources */,
 				5D5CDB2521A7852100CE28BD /* zBlock.cc in Sources */,
+				5DF5C90621B5C90A00BEACB4 /* invalid_argument.cc in Sources */,
 				5D5CDB2321A7852100CE28BD /* tBlock.cc in Sources */,
 				5D5CDB2921A7852100CE28BD /* lBlock.cc in Sources */,
 				5DE0709F21A6813B003D00BF /* game.cc in Sources */,

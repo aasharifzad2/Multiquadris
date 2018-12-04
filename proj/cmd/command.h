@@ -21,7 +21,7 @@ public:
     
     // returns true if the command starts with the key
     bool keyMatches(std::string &);
-    virtual void execute(int multiplier) = 0;
+    virtual void execute(int multiplier = 1) = 0;
 };
 
 

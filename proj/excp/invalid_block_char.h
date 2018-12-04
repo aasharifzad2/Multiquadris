@@ -4,12 +4,12 @@
 #include <string>
 #include "base_exception.h"
 
-class invalid_block_sequence : public base_exception
+class invalid_block_char : public base_exception
 {
     char invalidCharacter;
     
 public:
-    invalid_block_sequence(char);
+    invalid_block_char(char);
     std::string message() const noexcept override;
 };
 

@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include "../colour.h"
+#include "blockShape.h"
 class Cell;
 
 
@@ -22,6 +23,10 @@ public:
     Block(char, Colour);
     virtual ~Block() = 0;
 
+    // Static Factory
+    static std::shared_ptr<Block> makeBlock(BlockShape);
+    static std::shared_ptr<Block> makeBlock(char);
+    
     // Setters
     void setLevelGenerated(int);
     

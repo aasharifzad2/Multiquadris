@@ -27,6 +27,7 @@
 
 // MARK: - Constructors & Destructor
 Game::Game() :
+    turnDirection(1),
     playerIndex(0),
     cmd(this)
 {
@@ -124,13 +125,10 @@ void Game::play()
 {
     display();
 
-    while (true)
-    {
-        cmd.readCommand();
-    }
+    cmd.readCommandsUntilEOF(std::cin);
 }
 
-void Game::over()
+void Game::triggerGameOver()
 {
     display();
     
@@ -144,7 +142,7 @@ void Game::over()
     {
         std::cout
             << "You ended with a highscore of: "
-            << players[playerIndex]->getHighScore()
+            << curPlayer()->getHighScore()
             << std::endl
             << std::endl;
     }
@@ -203,6 +201,10 @@ void Game::over()
     exit(0);
 }
 
+void Game::triggerSpecialAction()
+{
+    cmd.readSpecial();
+}
 
 // MARK: - Private Functions
 Player *Game::curPlayer() const
@@ -210,15 +212,21 @@ Player *Game::curPlayer() const
     return players[playerIndex].get();
 }
 
+int Game::nextPlayerIndex() const
+{
+    return
+        (playerIndex + (int) players.size() + turnDirection) % players.size();
+}
+
 Player *Game::nextPlayer() const
 {
-    int index = (playerIndex + 1) % players.size();
-    return players[index].get();
+    return players[nextPlayerIndex()].get();
 }
 
 void Game::endTurn()
 {
-    playerIndex = (playerIndex + 1) % players.size();
+    curPlayer()->clearEffects();
+    playerIndex = nextPlayerIndex();
 }
 
 // Visitor Pattern : Visit a display
@@ -232,6 +240,7 @@ void Game::display()
 // MARK: - Command Functions
 void Game::initCommands()
 {
+    // Regular Commands
     cmd.addCommand("left", &Game::moveBlockLeft);
     cmd.addCommand("right", &Game::moveBlockRight);
     cmd.addCommand("down", &Game::moveBlockDown);
@@ -252,12 +261,16 @@ void Game::initCommands()
     cmd.addCommand("Z", &Game::forceZBlock);
     cmd.addCommand("T", &Game::forceTBlock);
     cmd.addCommand("precmd", &Game::printCommandInput);
-    cmd.addCommand("engraphics", &Game::enableGraphics);
-    cmd.addCommand("disgraphics", &Game::disableGraphics);
-    cmd.addCommand("enrichtext", &Game::enableRichText);
-    cmd.addCommand("disrichtext", &Game::disableRichText);
+    cmd.addCommand("graphics", &Game::setGraphicsEnabled);
+    cmd.addCommand("richtext", &Game::setRichTextEnabled);
     cmd.addCommand("addplayer", &Game::addPlayer);
     cmd.addCommand("removeplayer", &Game::removePlayer);
+    
+    // Special Commands
+    cmd.addSpecial("blind", &Game::blindAction);
+    cmd.addSpecial("force", &Game::forceAction);
+    cmd.addSpecial("heavy", &Game::heavyAction);
+    cmd.addSpecial("denzel", &Game::denzelAction);
 }
 
 void Game::moveBlockLeft(int multiplier)
@@ -308,18 +321,18 @@ void Game::randomizeCurPlayerLevel()
 
 void Game::unrandomizeCurPlayerLevel()
 {
-    std::string filename;
-    //in >> filename;
-    std::ifstream fstream{filename};
-    curPlayer()->unrandomizeCurLevel(fstream);
+    std::ifstream file;
+    if (!cmd.readFile(file)) return;
+    
+    curPlayer()->unrandomizeCurLevel(file);
 }
 
 void Game::readSequence()
 {
-//    std::string filename;
-//    //in >> filename;
-//    std::ifstream file(filename);
-    //while (cmd.readCommand(file));
+    std::ifstream file;
+    if (!cmd.readFile(file)) return;
+    
+    cmd.readCommandsUntilEOF(file);
 }
 
 void Game::restart()
@@ -375,24 +388,18 @@ void Game::printCommandInput()
     }
 }
 
-void Game::enableGraphics()
+void Game::setGraphicsEnabled()
 {
-    setGraphicsEnabled(true);
+    bool enabled;
+    if (!cmd.readBool(enabled)) return;
+    setGraphicsEnabled(enabled);
 }
 
-void Game::disableGraphics()
+void Game::setRichTextEnabled()
 {
-    setGraphicsEnabled(false);
-}
-
-void Game::enableRichText()
-{
-    setRichTextEnabled(true);
-}
-
-void Game::disableRichText()
-{
-    setRichTextEnabled(false);
+    bool enabled;
+    if (!cmd.readBool(enabled)) return;
+    setRichTextEnabled(enabled);
 }
 
 void Game::addPlayer(int multiplier)
@@ -403,4 +410,33 @@ void Game::addPlayer(int multiplier)
 void Game::removePlayer(int multiplier)
 {
     setNumPlayers((int)players.size() - multiplier);
+}
+
+void Game::blindAction()
+{
+    nextPlayer()->addEffect(Blind);
+}
+
+void Game::forceAction()
+{
+    std::shared_ptr<Block> block;
+    
+    // The elusive do-while makes an appearance
+    do
+    {
+        std::cout << "Choose a block: I J L O S Z T" << std::endl;
+    }
+    while (!cmd.readBlock(block));
+    
+    nextPlayer()->forceBlock(block);
+}
+
+void Game::heavyAction()
+{
+    nextPlayer()->addEffect(Heavy);
+}
+
+void Game::denzelAction()
+{
+    turnDirection *= -1;
 }

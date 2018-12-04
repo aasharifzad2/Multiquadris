@@ -27,7 +27,7 @@ RepeatableCommand::RepeatableCommand
 
 
 // MARK: - Public Functions
-void RepeatableCommand::execute(int multiplier)
+void RepeatableCommand::execute(int multiplier = 1)
 {
     (game->*func)(multiplier);
 }

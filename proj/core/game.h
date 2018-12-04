@@ -15,6 +15,8 @@ const int
 
 class Game
 {
+    // 1 or -1 depending on the direction the game travels
+    int turnDirection;
     int playerIndex;
     std::vector<std::unique_ptr<Player>> players;
     std::unique_ptr<TextDisplay> tDisplay;
@@ -28,15 +30,18 @@ public:
     // Setters
     void setNumPlayers(int);
     void setSequences();
-    void setGraphicsEnabled(bool = true);
-    void setRichTextEnabled(bool = true);
+    void setGraphicsEnabled(bool);
+    void setRichTextEnabled(bool);
     
     // Getters
     std::vector<Player *> getPlayers() const;
     int getPlayerIndex() const;
     
     void play();
-    void over();
+    
+    // Observer Patterns
+    void triggerGameOver();
+    void triggerSpecialAction();
 
     // Visitor Pattern : visit()
     void display();
@@ -44,6 +49,7 @@ public:
     
 private:
     Player *curPlayer() const;
+    int nextPlayerIndex() const;
     Player *nextPlayer() const;
     void endTurn();
     void initCommands();
@@ -69,12 +75,16 @@ private:
     void forceZBlock();
     void forceTBlock();
     void printCommandInput();
-    void enableGraphics();
-    void disableGraphics();
-    void enableRichText();
-    void disableRichText();
+    void setGraphicsEnabled();
+    void setRichTextEnabled();
     void addPlayer(int);
     void removePlayer(int);
+    
+    // Special Commands
+    void blindAction();
+    void forceAction();
+    void heavyAction();
+    void denzelAction();
 };
 
 

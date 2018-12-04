@@ -1,0 +1,8 @@
+9remove
+I drop
+I drop
+I 4right drop
+I 4right drop
+O 8right drop
+I clock 10right
+add
