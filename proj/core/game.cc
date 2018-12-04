@@ -75,9 +75,22 @@ void Game::setNumPlayers(int numPlayers)
     }
 }
 
-void Game::setSequences()
+void Game::setSequence1(std::ifstream &f)
 {
-    throw not_implemented();
+    players[0]->setDefaultBlockSequence(std::move(f));
+}
+
+void Game::setSequence2(std::ifstream &f)
+{
+    players[0]->setDefaultBlockSequence(std::move(f));
+}
+
+void Game::setLevel(int i)
+{
+    for (auto &player : players)
+    {
+        player->setLevel(i);
+    }
 }
 
 void Game::setGraphicsEnabled(bool enabled)

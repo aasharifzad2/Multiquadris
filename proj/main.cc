@@ -18,30 +18,41 @@
 
 
 const std::string
-    DEFAULT_SCRIPTFILE1 = "sequence1.txt",
-    DEFAULT_SCRIPTFILE2 = "sequence2.txt";
+    DEFAULT_SCRIPTFILE1 = "blocksq/sequence1.txt",
+    DEFAULT_SCRIPTFILE2 = "blocksq/sequence2.txt",
+    OPTION_TEXT = "-text",
+    OPTION_SEED = "-seed",
+    OPTION_SCRIPTFILE1 = "-scriptfile1",
+    OPTION_SCRIPTFILE2 = "-scriptfile2",
+    OPTION_LEVEL = "-startlevel";
+
 
 const int
     DEFAULT_STARTLEVEL  = 1,
     DEFAULT_SEED        = 19990113;
 
-
-
-int main(int argc, char* argv[])
+void parseArgs
+(
+    bool &textOnly,
+    int &seed,
+    std::ifstream &scriptFile1,
+    std::ifstream &scriptFile2,
+    int &startLevel,
+    int argc,
+    char *argv[]
+)
 {
     std::string execName = argv[0];
-    bool textOnly = false;
-    int seed = DEFAULT_SEED;
-    std::ifstream scriptFile1 = std::ifstream(DEFAULT_SCRIPTFILE1);
-    std::ifstream scriptFile2 = std::ifstream(DEFAULT_SCRIPTFILE2);
-    int startLevel = DEFAULT_STARTLEVEL;
-    
-    std::string usageMessage = "Usage: " + execName + " [-text] [-seed xxx] [-scriptfile1 xxx] [-scriptfile2 xxx] [-startlevel n]";
+    std::string usageMessage =
+        "Usage: "
+        + execName
+        + " [-text] [-seed xxx] [-scriptfile1 xxx] "
+        + "[-scriptfile2 xxx] [-startlevel n]";
     
     for (int i = 1; i < argc; ++i)
     {
         std::string option = argv[i];
-        if (option == "-text")
+        if (option == OPTION_TEXT)
         {
             textOnly = true;
             continue;
@@ -57,19 +68,19 @@ int main(int argc, char* argv[])
         std::string value = argv[i];
         
         // All these need a value
-        if (option == "-seed")
+        if (option == OPTION_SEED)
         {
             seed = std::stoi(value);
         }
-        else if (option == "-scriptfile1")
+        else if (option == OPTION_SCRIPTFILE1)
         {
             scriptFile1 = std::ifstream(value);
         }
-        else if (option == "-scriptfile2")
+        else if (option == OPTION_SCRIPTFILE2)
         {
             scriptFile2 = std::ifstream(value);
         }
-        else if (option == "-startlevel")
+        else if (option == OPTION_LEVEL)
         {
             try
             {
@@ -88,19 +99,33 @@ int main(int argc, char* argv[])
             }
         }
     }
+}
+ 
+
+int main(int argc, char* argv[])
+{
     
-#ifdef DEBUG
+    bool textOnly = false;
+    int seed = DEFAULT_SEED;
+    std::ifstream scriptFile1 = std::ifstream(DEFAULT_SCRIPTFILE1);
+    std::ifstream scriptFile2 = std::ifstream(DEFAULT_SCRIPTFILE2);
+    int startLevel = DEFAULT_STARTLEVEL;
+    
+    parseArgs
+    (
+        textOnly,
+        seed,
+        scriptFile1,
+        scriptFile2,
+        startLevel,
+        argc,
+        argv
+    );
+    
     Game g;
-    
-    #ifdef RICH
-    g.setRichTextEnabled(true);
-    #endif
-    
-    #ifdef GRAPHICS
-    g.setGraphicsEnabled(true);
-    #endif
-    
-    g.play();
-#endif
-    
+    g.setNumPlayers(2);
+    g.setLevel(startLevel);
+    g.setSequence1(scriptFile1);
+    g.setSequence1(scriptFile2);
+    g.setGraphicsEnabled(!textOnly);
 }

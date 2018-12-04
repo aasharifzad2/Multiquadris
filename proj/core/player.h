@@ -35,6 +35,8 @@ public:
     // Setters
     void setDefaultBlockSequence(std::ifstream);
     void setBoard(int numCols, int numRows);
+    // sets the level, going to the max/min level if trying to set out of bounds
+    void setLevel(int);
     
     // Getters
     int getScore() const;
@@ -66,6 +68,8 @@ public:
     void rotateCCW(int = 1);
     
     
+    
+    
     // Observer Pattern : Board notifies Player that they've scored
     void rowsCleared(int);
     void blockCleared(int lvlGenerated);
@@ -94,8 +98,6 @@ private:
     void updateHighscore();
     // throws an exception if fallingBlock does not fit the board
     void assertBlockFits();
-    // sets the level, going to the max/min level if trying to set out of bounds
-    void setLevel(int);
 };
 
 #endif

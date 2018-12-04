@@ -29,9 +29,11 @@ public:
     
     // Setters
     void setNumPlayers(int);
-    void setSequences();
+    void setSequence1(std::ifstream &);
+    void setSequence2(std::ifstream &);
     void setGraphicsEnabled(bool);
     void setRichTextEnabled(bool);
+    void setLevel(int);
     
     // Getters
     std::vector<Player *> getPlayers() const;

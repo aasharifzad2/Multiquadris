@@ -1,5 +1,6 @@
 
 #include "commandInterpreter.h"
+#include <algorithm>
 #include "singularCommand.h"
 #include "repeatableCommand.h"
 #include "../core/game.h"
