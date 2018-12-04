@@ -1,0 +1,7 @@
+T 2clock 9right drop
+J clock 6right drop
+L count 3right drop
+I count drop
+I count 10right drop
+L 2right drop
+J 6right drop
