@@ -1,7 +1,7 @@
 SHELL = bash
 EXEC = biquadris
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -MMD -Werror=vla -DDEBUG -DGRAPHICS
+CXXFLAGS = -std=c++14 -Wall -MMD -Werror=vla -DDEBUG
 CCFILES = $(shell find ./proj -type f -name '*.cc')
 OBJECTS = ${CCFILES:.cc=.o}
 DEPENDS = ${CCFILES:.cc=.d}
